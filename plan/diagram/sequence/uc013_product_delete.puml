@@ -1,0 +1,74 @@
+@startuml
+
+title UC013: 商品削除機能 シーケンス図
+skinparam shadowing false
+'hide footbox
+
+actor ユーザ
+
+activate ユーザ
+
+ユーザ -> ProductDeleteController : confirm(Integer no)
+activate ProductDeleteController
+
+ProductDeleteController -> ProductService : findById(Integer no)
+activate ProductService
+
+ProductService -> ProductRepository : findById(Integer no)
+activate ProductRepository
+
+database DB
+
+ProductRepository -> DB : SELECT文
+activate DB
+
+DB --> ProductRepository : Product
+deactivate DB
+
+ProductRepository --> ProductService : Product
+deactivate ProductRepository
+
+ProductService --> ProductDeleteController
+deactivate ProductService
+
+ProductDeleteController -> ProductDeleteController : Modelに追加
+note right: セッションには格納しない
+
+ProductDeleteController --> ユーザ : 確認画面
+deactivate ProductDeleteController
+
+ユーザ -> ProductDeleteController : execute()
+activate ProductDeleteController
+
+ProductDeleteController -> ProductService : delete(Integer no)
+activate ProductService
+
+ProductService -> ProductRepository : delete(Integer no)
+activate ProductRepository
+
+note right: 物理でなく論理削除
+ProductRepository -> DB : UPDATE文
+activate DB
+
+DB --> ProductRepository : void
+deactivate DB
+
+ProductRepository --> ProductService : void
+deactivate ProductRepository
+
+ProductService --> ProductDeleteController : void
+deactivate ProductService
+
+ProductDeleteController -> ProductDeleteController : Modelに追加（商品名）
+
+ProductDeleteController --> ユーザ : リダイレクト
+deactivate ProductDeleteController
+note right: PRGパターンにより二重投稿防止
+
+ユーザ -> ProductDeleteController : complete()
+activate ProductDeleteController
+
+ProductDeleteController --> ユーザ : 完了画面
+deactivate ProductDeleteController
+
+@enduml

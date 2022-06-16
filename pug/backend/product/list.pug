@@ -1,0 +1,45 @@
+extends ../../layout/_layout.pug
+
+block title
+    title 商品検索
+
+block content
+    h2 商品検索
+    form#category-search(method="get" th:action="@{/admin/product/search}")
+        select(name="category")
+            option(th:each="c : ${categories}" th:value="${c.id}" th:selected="${c.id} == ${category}" th:inline="text") [[${c.name}]]
+        input(type="submit" value="カテゴリ検索")
+    a(th:href="@{/admin/product-add}"): button 商品追加
+    #search-result(th:if="${products.empty}")
+        p 該当する商品情報がありません
+    #search-result(th:unless="${products.empty}")
+        table#product-list(border="1")
+            tr
+                th 商品画像
+                th 商品名
+                th 単価
+                th 修正
+                th 削除
+            tr(th:each="p : ${products}")
+                td: img(th:src="@{/img/__${p.imageUrl}__}" width="100")
+                td(th:text="${p.name}")
+                td(th:text="${#numbers.formatInteger(p.price, 3, 'COMMA')} + '円'")
+                td: a(th:href="@{/admin/product-update/__${p.id}__}"): button 修正
+                td: a(th:href="@{/admin/product-delete/__${p.id}__}"): button 削除
+        ul.pagination
+            li(th:class="${products.first} ? 'disabled':''" style='display:inline')
+                span(th:if='${products.first}') 最初
+                a(th:if='${not products.first}' th:href='@{__${pageUrl}__page=0}') 最初
+            li(th:class="${products.first} ? 'disabled':''" style='display:inline')
+                span(th:if='${products.first}') 前へ
+                a(th:if='${not products.first}' th:href='@{__${pageUrl}__page=__${prev}__}') 前へ
+            li(th:each='i : ${#numbers.sequence(0, products.totalPages-1)}' th:class="(${i}==${products.number})? 'active' : ''" style='display:inline')
+                span(th:if='${i}==${products.number}' th:text='${i+1}') 1
+                a(th:if='${i}!=${products.number}' th:href='@{__${pageUrl}__page=__${i+1}__}')
+                    span(th:text='${i+1}') 1
+            li(th:class="${products.last} ? 'disabled':''" style='display:inline')
+                span(th:if='${products.last}') 次へ
+                a(th:if='${not products.last}' th:href='@{__${pageUrl}__page=__${next}__}') 次へ
+            li(th:class="${products.last} ? 'disabled':''" style='display:inline')
+                span(th:if='${products.last}') 最後
+                a(th:if='${not products.last}' th:href='@{__${pageUrl}__page=__${products.totalPages}__}') 最後

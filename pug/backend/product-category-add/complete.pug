@@ -1,0 +1,10 @@
+extends ../../layout/_layout.pug
+
+block title
+    title 商品カテゴリ登録(完了)
+
+block content
+    h2 商品カテゴリ登録(完了)
+    .complete-message(th:text="|商品カテゴリ${category.name}を登録しました。|") 
+    a.botton(href="/admin"): button 業務終了
+    a.botton(href="/admin/product-category-add"): button 入力に戻る

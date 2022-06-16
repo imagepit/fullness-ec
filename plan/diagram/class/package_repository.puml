@@ -1,0 +1,37 @@
+@startuml
+
+skinparam shadowing false
+hide empty methods
+hide empty fields
+left to right direction
+
+package repository{
+    interface ProductRepository{
+        List<Product> findAll()
+        List<Product> findByCategoryId(int productCategoryId)
+        Product findById(Integer id)
+        void insert(Product product)
+        void update(Product product)
+        void delete(Integer id)
+    }
+    interface ProductCategoryRepository{
+        List<ProductCategory> findAll()
+        ProductCategory findById(Integer id)
+        void insert(ProductCategory productCategory)
+    }
+    interface ProductStockRepository{
+        void insert(ProductStock productStock)
+        void update(ProductStock productStock)
+    }
+    interface EmployeeAccountRepository{
+        List<EmployeeAccount> findAll()
+        EmployeeAccount findById(Integer id)
+        EmployeeAccount findByUsername(String Username)
+        boolean isExist(String userName)
+        void insert(EmployeeAccount employeeAccount)
+    }
+    interface EmployeeRepository{
+        List<Employee> findAll()
+    }
+}
+@enduml

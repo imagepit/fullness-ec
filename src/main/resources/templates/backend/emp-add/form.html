@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <script src="http://localhost:35729/livereload.js"></script>
+    <title>アカウント登録(入力) | Fullness Stationary社 文具/雑貨販売システム</title>
+  </head>
+  <body>
+    <header>
+      <h1><a href="/admin">文具/雑貨販売システム</a></h1>
+      <ul id="nav">
+        <li sec:authorize="hasRole('ADMIN')"><a href="/admin/product">商品情報メンテナンス</a></li>
+        <li sec:authorize="hasRole('ADMIN')"><a href="/admin/product-category-add">商品カテゴリ登録</a></li>
+        <li sec:authorize="hasRole('ADMIN')"><a href="/admin/emp-add">アカウント登録</a></li>
+        <li sec:authorize="!isAuthenticated()"><a href="/admin/login">ログイン</a></li>
+        <li sec:authorize="isAuthenticated()">
+          <form th:action="@{/admin/logout}" method="post">
+            <input type="submit" value="ログアウト"/>
+          </form>
+        </li>
+      </ul>
+    </header>
+    <div id="main">
+      <h2>アカウント登録(入力)</h2>
+      <form th:action="@{/admin/emp-add/confirm}" method="post" th:object="${employeeAccountForm}"><span th:each="error: ${#fields.detailedErrors()}"><span th:text="${error.message}"></span><br/></span>
+        <table>
+          <tr>
+            <td>社員名</td>
+            <td>
+              <select name="empName" th:field="*{empName}">
+                <option th:each="e : ${employees}" th:value="${e.id}" th:selected="${e.id == empName}" th:inline="text">[[${e.name}]]</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>アカウント名</td>
+            <td>
+              <input type="text" name="userName" th:field="*{userName}"/>
+              <div class="error" th:errors="*{userName}"></div>
+            </td>
+          </tr>
+          <tr>
+            <td>パスワード</td>
+            <td>
+              <input type="password" name="password" th:field="*{password}"/>
+              <div class="error" th:errors="*{password}"></div>
+            </td>
+          </tr>
+        </table><a class="cancel" href="/admin/emp-add/cancel">キャンセル</a>
+        <input type="submit" value="完了"/>
+      </form>
+    </div>
+    <footer>
+      <div id="footer">Fullness Stationary社</div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+extends ../../layout/_layout.pug
+
+block title
+    title 商品削除(確認)
+
+block content
+    h2 商品削除(確認)
+    form(th:action="@{/admin/product-delete/execute}" method="post" th:object="${product}")
+        table
+            tr
+                td 商品名
+                td(th:text="*{name}")
+            tr
+                td 単価
+                td(th:text="${#numbers.formatInteger(product.price, 3, 'COMMA')} + '円'")
+            tr
+                td 在庫数
+                td(th:text="*{stock.stock}")
+            tr
+                td 商品カテゴリ
+                td(th:text="*{productCategory.name}")
+            tr
+                td 画像
+                td: img(th:src="@{/img/__*{imageUrl}__}" width="150")
+        a.cancel(href="/admin/product-delete/cancel") キャンセル
+        span  
+        input(type="hidden" name="id" th:value="*{id}")
+        input(type="hidden" name="name" th:value="*{name}")
+        input(type="submit" value="完了")

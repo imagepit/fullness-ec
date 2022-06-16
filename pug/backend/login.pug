@@ -1,0 +1,19 @@
+extends ../layout/_layout.pug
+
+block title
+    title ログイン | Fullness Stationary社 文具/雑貨販売システム
+
+block content
+    h2 ログイン
+    form(th:action="@{/authenticate}" method="POST")
+        table
+            tr
+                td アカウント名
+                td: input(type="text" name="username")
+            tr
+                td パスワード
+                td: input(type="password" name="password")
+        input(type="submit" value="ログイン")
+    span(th:if="${session['SPRING_SECURITY_LAST_EXCEPTION'] != null}")
+        span.error(th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}")
+        

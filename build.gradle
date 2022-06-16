@@ -1,0 +1,86 @@
+plugins {
+	id 'org.springframework.boot' version '2.3.0.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+	id 'io.qameta.allure' version '2.9.6'
+}
+group = 'com.fullness'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// Spring Boot
+	implementation 'org.springframework.boot:spring-boot-starter'
+	// Devtools
+	implementation 'org.springframework.boot:spring-boot-devtools'
+	// Spring MVC関連の依存関係
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	// AOP関連の依存関係
+	implementation 'org.springframework.boot:spring-boot-starter-aop'
+	// Lombokの依存関係
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	// Mybatisの依存関係
+	implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.2"
+	// JDBC関連の依存関係
+	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+	runtimeOnly 'org.postgresql:postgresql'
+	// バリデーション関連の依存関係
+	implementation 'javax.validation:validation-api'
+	runtimeOnly 'org.hibernate.validator:hibernate-validator'
+	// FormからEntityに変換
+	implementation 'org.modelmapper:modelmapper:0.7.5'
+	// Spring Security
+	compile('org.springframework.security:spring-security-web')
+	compile('org.springframework.security:spring-security-config')
+	compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity5')
+	testImplementation 'org.springframework.security:spring-security-test'
+	// ページネーション
+	implementation 'org.springframework.data:spring-data-commons'
+	// JUnitの依存関係
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	// DBUnitの依存関係
+	testImplementation 'com.github.springtestdbunit:spring-test-dbunit:1.3.0'
+	testImplementation 'org.dbunit:dbunit:2.5.3'
+	// selenide
+//	testImplementation 'com.codeborne:selenide:6.6.0'
+//	testImplementation 'io.qameta.allure:allure-junit5:2.18.0'
+//	testImplementation 'io.qameta.allure:allure-selenide:2.18.0'
+//	testImplementation 'org.seleniumhq.selenium:selenium-java:4.2.2'
+//	testImplementation 'org.seleniumhq.selenium:selenium-api:4.2.2'
+//	testImplementation 'org.seleniumhq.selenium:selenium-chrome-driver:4.2.2'
+//	testImplementation 'org.seleniumhq.selenium:selenium-remote-driver:4.2.2'
+}
+
+test {
+	useJUnitPlatform()
+}
+
+bootRun {
+	sourceResources sourceSets.main
+}
+
+// reporting { baseDir = "$buildDir/reports" }
+
+allure {
+	version = '2.18.0'
+	//aspectjweaver = true
+	//autoconfigure = false
+	//aspectjVersion = '1.9.1'
+	useJUnit5 { version = '2.18.0' }
+	//report { reportDir.set(project.reporting.baseDirectory.dir("allure-report")) }
+}

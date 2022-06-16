@@ -1,0 +1,29 @@
+extends ../../layout/_layout.pug
+
+block title
+    title アカウント登録(入力) | Fullness Stationary社 文具/雑貨販売システム
+
+block content
+    h2 アカウント登録(入力)
+    form(th:action="@{/admin/emp-add/confirm}" method="post" th:object="${employeeAccountForm}")
+        span(th:each="error: ${#fields.detailedErrors()}")
+            span(th:text="${error.message}")
+            br
+        table
+            tr
+                td 社員名
+                td
+                    select(name="empName" th:field="*{empName}")
+                        option(th:each="e : ${employees}" th:value="${e.id}" th:selected="${e.id == empName}" th:inline="text") [[${e.name}]]
+            tr
+                td アカウント名
+                td
+                    input(type="text" name="userName" th:field="*{userName}")
+                    .error(th:errors="*{userName}")
+            tr
+                td パスワード
+                td
+                    input(type="password" name="password" th:field="*{password}")
+                    .error(th:errors="*{password}")
+        a.cancel(href="/admin/emp-add/cancel") キャンセル
+        input(type="submit" value="完了")

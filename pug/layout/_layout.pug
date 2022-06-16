@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+html(lang="ja" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="/css/style.css")
+        script(src="http://localhost:35729/livereload.js")
+        block title
+            title 文具/雑貨販売システム
+    body
+        header
+            include _header.pug
+        #main
+            block content
+        footer
+            include _footer.pug

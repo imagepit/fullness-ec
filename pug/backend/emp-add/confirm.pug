@@ -1,0 +1,22 @@
+extends ../../layout/_layout.pug
+
+block title
+    title アカウント登録(確認) | Fullness Stationary社 文具/雑貨販売システム
+
+block content
+    h2 アカウント登録(確認)
+    form(th:action="@{/admin/emp-add/complete}" method="post" th:object="${employeeAccountForm}")
+        table
+            tr
+                td 社員名
+                td(th:text="${employee.name}")
+            tr
+                td アカウント名
+                td(th:text="*{userName}")
+            tr
+                td パスワード
+                td *******
+        a.cancel(href="/admin/emp-add/cancel") キャンセル
+        span  
+        a.cancel(href="/admin/emp-add") 戻る
+        input(type="submit" value="登録")

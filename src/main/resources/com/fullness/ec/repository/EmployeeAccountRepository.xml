@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fullness.ec.repository.EmployeeAccountRepository">
+    <resultMap id="accountResult" type="com.fullness.ec.entity.EmployeeAccount">
+        <id property="id" column="emp_account_id" />
+        <result property="name" column="emp_account_name" />
+        <result property="password" column="emp_account_password" />
+        <association property="employee" javaType="com.fullness.ec.entity.Employee">
+            <id property="id" column="emp_id" />
+            <result property="name" column="emp_name" />
+            <result property="nameKana" column="emp_name_kana" />
+            <result property="departmentId" column="emp_dept_id" />
+        </association>
+    </resultMap>
+    <select id="findByUsername" resultMap="accountResult">
+        select
+            ea.id as emp_account_id,
+            ea.name as emp_account_name,
+            ea.password as emp_account_password,
+            e.id as emp_id,
+            e.name as emp_name,
+            e.name_kana as emp_name_kana,
+            e.department_id as emp_dept_id
+        from
+            employee e
+        join
+            employee_account ea
+        on
+            e.id = ea.employee_id
+        where
+            ea.name = #{userName}
+    </select>
+    <insert id="insert" parameterType="com.fullness.ec.entity.EmployeeAccount">
+        <selectKey keyProperty="id" resultType="int" order="BEFORE">
+            select nextval('employee_account_id_seq')
+        </selectKey>
+        insert into employee_account values(#{id},#{name},#{password},#{employee.id})
+    </insert>
+</mapper>

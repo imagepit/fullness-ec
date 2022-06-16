@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fullness.ec.repository.ProductStockRepository">
+    <insert id="insert" parameterType="com.fullness.ec.entity.ProductStock">
+        <selectKey keyProperty="id" resultType="int" order="BEFORE">
+            select nextval('product_stock_id_seq')
+        </selectKey>
+        insert into product_stock values(#{id},#{stock},#{productId})
+    </insert>
+    <update id="update" parameterType="com.fullness.ec.entity.ProductStock">
+        update
+            product_stock
+        set
+            quantity = #{stock}
+        where
+            product_id = #{productId}
+    </update>
+</mapper>

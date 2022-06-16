@@ -1,0 +1,109 @@
+@startuml
+skinparam shadowing false
+hide empty methods
+hide empty fields
+left to right direction
+
+package com.fullness.ec{
+    package repository{
+    	interface ProductRepository
+    	interface ProductCategoryRepository
+    	interface ProductStockRepository
+    	interface EmployeeAccountRepository
+    	interface EmployeeRepository
+    }
+
+    package entity{
+    	class Product
+    	class ProductCategory
+    	class ProductStock
+    	class EmployeeAccount
+    	class Employee
+    }
+
+    package service{
+        interface ProductService
+        class ProductServiceImpl
+        interface ProductCategoryService
+        class ProductCategoryServiceImpl
+        interface EmployeeAccountService
+        class EmployeeAccountServiceImpl
+    }
+
+    package controller{
+        class GlobalExceptionHandler
+        package backend{
+            class MenuController
+            class LoginController
+            class ProductSearchController
+            class ProductAddController
+            class ProductUpdateController
+            class ProductDeleteController
+            class ProductCategoryAddController
+            class EmployeeAccountAddController
+        }
+    }
+
+    package form {
+        class LoginForm
+        class ProductForm
+        class ProductFormValidator
+        class ProductCategoryForm
+        class EmployeeAccountForm
+    }
+    package security{
+        class EmployeeAccountUserDetails
+        class EmployeeAccountUserDetailsService
+        class EmployeeAccountSecurityConfig
+    }
+
+    package advice{
+        class AppAdvice
+    }
+
+    package exception{
+        class BusinessException
+    }
+
+    package config(){
+        class ApplicationConfig
+    }
+}
+
+' Contollerの関連
+LoginController --> LoginForm : use
+LoginController --> EmployeeAccountService : call
+LoginController --> EmployeeAccountForm : call
+ProductSearchController --> ProductService : call
+ProductAddController --> ProductService : call
+ProductUpdateController --> ProductService : call
+ProductDeleteController --> ProductService : call
+ProductAddController --> ProductForm : use
+ProductUpdateController --> ProductForm : use
+ProductAddController --> ProductFormValidator : use
+ProductUpdateController --> ProductFormValidator : use
+ProductCategoryAddController --> ProductCategoryService : call
+ProductCategoryAddController --> ProductCategoryForm : call
+EmployeeAccountAddController --> EmployeeAccountService : call
+
+' Serviceの関連
+EmployeeAccountServiceImpl --> EmployeeAccountRepository : call
+ProductServiceImpl -> ProductRepository : call
+ProductServiceImpl -> ProductStockRepository : call
+ProductCategoryServiceImpl --> ProductCategoryRepository : call
+EmployeeAccountService <|- EmployeeAccountServiceImpl
+ProductCategoryService <|- ProductCategoryServiceImpl
+ProductService <|- ProductServiceImpl
+
+' Repositoryの関連
+EmployeeAccountRepository --> EmployeeAccount : use
+EmployeeRepository --> Employee : use
+ProductRepository --> Product : use
+ProductCategoryRepository --> ProductCategory : use
+ProductStockRepository --> ProductStock
+
+' Spring Securityの関連
+EmployeeAccountUserDetailsService -> EmployeeAccountUserDetails : use
+EmployeeAccountUserDetailsService -> EmployeeAccountRepository : call
+
+@enduml

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <script src="http://localhost:35729/livereload.js"></script>
+    <title>システムエラー | Fullness Stationary社 文具/雑貨販売システム</title>
+  </head>
+  <body>
+    <header>
+      <h1><a href="/admin">文具/雑貨販売システム</a></h1>
+      <ul id="nav">
+        <li sec:authorize="hasRole('ADMIN')"><a href="/admin/product">商品情報メンテナンス</a></li>
+        <li sec:authorize="hasRole('ADMIN')"><a href="/admin/product-category-add">商品カテゴリ登録</a></li>
+        <li sec:authorize="hasRole('ADMIN')"><a href="/admin/emp-add">アカウント登録</a></li>
+        <li sec:authorize="!isAuthenticated()"><a href="/admin/login">ログイン</a></li>
+        <li sec:authorize="isAuthenticated()">
+          <form th:action="@{/admin/logout}" method="post">
+            <input type="submit" value="ログアウト"/>
+          </form>
+        </li>
+      </ul>
+    </header>
+    <div id="main">
+      <h2>システムエラー</h2>
+      <p th:text="${message}"></p>
+    </div>
+    <footer>
+      <div id="footer">Fullness Stationary社</div>
+    </footer>
+  </body>
+</html>

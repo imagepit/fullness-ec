@@ -1,0 +1,76 @@
+@startuml
+
+skinparam shadowing false
+hide empty methods
+hide empty fields
+left to right direction
+
+package controller{
+    class GlobalExceptionAspect{
+        ModelAndView exceptionCaught()
+    }
+    package backend{
+        class MenuController{
+            + String menu()
+        }
+        class LoginController{
+            - EmployeeAccountService service
+            + LoginForm setUpForm()
+            + String form()
+        }
+        class ProductSearchController{
+            - ProductService productService
+            - ProductCategoryService productCategoryService
+            + String index(Model model)
+            + String search(Model model)
+        }
+        class ProductAddController{
+            - ProductFormValidator validator
+            - ProductService productService
+            - ProductCategoryService productCategoryService
+            + ProductForm setUpForm()
+            + void bind(WebDataBinder binder)
+            + String form(Model model)
+            + String confirm(ProductForm form, BindingResult result, Model model)
+            + String complete(ProductForm form, SessionStatus session)
+            + String cancel()
+        }
+        class ProductUpdateController{
+            - ProductFormValidator validator
+            - ProductService productService
+            - ProductCategoryService productCategoryService
+            + ProductForm setUpForm()
+            + void bind(WebDataBinder binder)
+            + String form(Model model)
+            + String confirm(ProductForm form, BindingResult result, Model model)
+            + String complete(ProductForm form, SessionStatus session)
+            + String cancel(SessionStatus session)
+        }
+        class ProductDeleteController{
+            - ProductService productService
+            - ProductCategoryService productCategoryService
+            + String confirm(ProductForm form, BindingResult result, Model model)
+            + String complete(ProductForm form, SessionStatus session)
+            + String cancel(SessionStatus session)
+        }
+        class ProductCategoryAddController{
+            - ProductCategoryService productCategoryService
+            + String form()
+            + String confirm(ProductCategoryForm form, BindingResult result)
+            + String complete(ProductCategoryForm form, SessionStatus session)
+            + String cancel(SessionStatus session)
+        }
+        class EmployeeAccountAddController{
+            - EmployeeAccountService employeeAccountService
+            - EmployeeAccountFormValidator validator
+            + EmployeeAccountForm setUpForm()
+            + void bind(WebDataBinder binder)
+            + String form(Model model)
+            + String confirm(EmployeeAccountForm form, BindingResult result, Model model)
+            + String complete(EmployeeAccountForm form)
+            + String cancel(SessionStatus session)
+        }
+    }
+}
+
+@enduml

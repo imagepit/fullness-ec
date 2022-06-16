@@ -1,0 +1,38 @@
+extends ../../layout/_layout.pug
+
+block title
+    title 商品修正(入力)
+
+block content
+    h2 商品修正(入力)
+    form(th:action="@{/admin/product-update/confirm}" method="post" th:object="${productUpdateForm}" enctype="multipart/form-data")
+        table
+            tr
+                td 商品名
+                td
+                    input(type="text" name="name" th:field="*{name}")
+                    .error(th:errors="*{name}")
+            tr
+                td 単価
+                td
+                    input(type="text" name="price" th:field="*{price}")
+                    .error(th:errors="*{price}")
+            tr
+                td 在庫数
+                td
+                    input(type="text" name="stock" th:field="*{stock}")
+                    .error(th:errors="*{stock}")
+            tr
+                td 商品カテゴリ
+                td
+                    select(name="category" th:field="*{category}")
+                        option(th:each="c : ${categories}" th:value="${c.id}" th:selected="${c.id == category}" th:inline="text") [[${c.name}]]
+            tr
+                td 画像
+                td
+                    input(type="file" name="image" th:field="*{image}")
+                    .error(th:errors="*{image}")
+                    .img
+                        img(th:src="@{/img/__${originalImageUrl}__}" width="150")
+        a.cancel(href="/admin/product-update/cancel") キャンセル
+        input(type="submit" value="完了")

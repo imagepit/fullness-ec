@@ -1,0 +1,42 @@
+@startuml
+
+skinparam shadowing false
+hide empty methods
+hide empty fields
+'left to right direction
+
+package form {
+    class LoginForm{
+        - String name
+        - String password
+    }
+    class ProductForm{
+        - String name
+        - Integer price
+        - Integer stock
+        - Integer productCategoryId
+        - MultipartFile image
+    }
+    class ProductFormValidator{
+        + boolean supports(Class<?> clazz)
+        + void validate(Object target, Errors errors)
+    }
+    class ProductCategoryForm{
+        - String name
+    }
+    class ProductCategoryFormValidator{
+        + boolean supports(Class<?> clazz)
+        + void validate(Object target, Errors errors)
+    }
+    class EmployeeAccountForm{
+        - Integer employeeId
+        - String userName
+        - String password
+    }
+    class EmployeeAccountFormValidator{
+        + boolean supports(Class<?> clazz)
+        + void validate(Object target, Errors errors)
+    }
+}
+
+@enduml

@@ -1,0 +1,93 @@
+@startuml
+
+title UC009: 担当者アカウント登録機能 シーケンス図
+skinparam shadowing false
+'hide footbox
+
+actor ユーザ
+activate ユーザ
+
+ユーザ -> EmployeeAccountAddController : form()
+activate EmployeeAccountAddController
+
+EmployeeAccountAddController -> EmployeeAccountAddController : setUpForm()
+
+EmployeeAccountAddController -> EmployeeAccountAddController : bind()
+
+EmployeeAccountAddController -> EmployeeService : findAll()
+activate EmployeeService
+
+EmployeeService -> EmployeeRepository : findAll()
+activate EmployeeRepository
+
+participant EmployeeAccountService
+
+participant EmployeeAccountRepository
+
+database DB
+
+EmployeeRepository -> DB : SELECT文
+activate DB
+
+DB --> EmployeeRepository : List<Employee>
+deactivate DB
+
+EmployeeRepository -> EmployeeService : List<Employee>
+deactivate EmployeeRepository
+
+EmployeeService --> EmployeeAccountAddController : List<Employee>
+deactivate EmployeeService
+
+EmployeeAccountAddController -> ユーザ : 入力画面
+deactivate EmployeeAccountAddController
+
+ユーザ -> ユーザ : 商品情報入力
+
+ユーザ -> EmployeeAccountAddController : confirm()
+activate EmployeeAccountAddController
+
+EmployeeAccountAddController -> EmployeeAccountAddController : バリデート
+
+alt バリデート結果 エラーあり
+	EmployeeAccountAddController --> ユーザ : 入力画面
+else バリデート結果 エラーなし
+	EmployeeAccountAddController --> ユーザ : 確認画面
+	deactivate EmployeeAccountAddController
+
+	ユーザ -> ユーザ : 入力内容確認
+
+    ユーザ -> EmployeeAccountAddController : complete()
+    activate EmployeeAccountAddController
+
+    EmployeeAccountAddController -> EmployeeAccountAddController : セッション確認
+    note right: フォームデータが空ならシステムエラー
+
+    EmployeeAccountAddController -> EmployeeAccountAddController : フォームからエンティティに変換
+
+    EmployeeAccountAddController -> EmployeeAccountService : insert(EmpployeeAccount)
+    activate EmployeeAccountService
+
+    EmployeeAccountService -> EmployeeAccountRepository : insert(EmpployeeAccount)
+    activate EmployeeAccountRepository
+
+    EmployeeAccountRepository -> DB : INSERT文
+    activate DB
+
+    DB --> EmployeeAccountRepository : void
+    deactivate DB
+
+    EmployeeAccountRepository --> EmployeeAccountService : void
+    deactivate EmployeeAccountRepository
+
+    EmployeeAccountService -> EmployeeAccountAddController : void
+    deactivate EmployeeAccountService
+
+    EmployeeAccountAddController -> EmployeeAccountAddController : セッション破棄
+
+    EmployeeAccountAddController -> EmployeeAccountAddController : Model追加（アカウント名、名前）
+
+    EmployeeAccountAddController -> ユーザ : 完了画面
+    deactivate EmployeeAccountAddController
+end
+
+@enduml

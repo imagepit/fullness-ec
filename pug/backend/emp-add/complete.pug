@@ -1,0 +1,10 @@
+extends ../../layout/_layout.pug
+
+block title
+    title アカウント登録(完了) | Fullness Stationary社 文具/雑貨販売システム
+
+block content
+    h2 アカウント登録(完了)
+    .complete-message(th:text="|${employeeAccount.employee.name}さんのアカウントを${employeeAccount.name}で作成しました。|") 
+    a.botton(href="/admin"): button 業務終了
+    a.botton(href="/admin/emp-add"): button 入力に戻る

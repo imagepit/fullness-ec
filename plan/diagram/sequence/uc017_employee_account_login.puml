@@ -1,0 +1,69 @@
+@startuml
+
+title UC017: 社員アカウントログイン機能 シーケンス図
+
+'hide footbox
+skinparam shadowing false
+actor ユーザ
+
+activate ユーザ
+
+participant LoginController
+
+participant MenuController
+
+participant SpringSecurity本体
+
+participant EmployeeAccountUserDetailsService
+
+
+ユーザ -> LoginController : form()
+
+activate LoginController
+
+LoginController -> ユーザ : ログイン画面
+deactivate LoginController
+
+ユーザ -> SpringSecurity本体 : 認証(ユーザ名,パスワード)
+activate SpringSecurity本体
+
+SpringSecurity本体 -> EmployeeAccountUserDetailsService : loadUserByUsername()
+activate EmployeeAccountUserDetailsService
+
+EmployeeAccountUserDetailsService -> EmployeeAccountRepository : findByUserName()
+activate EmployeeAccountRepository
+
+participant EmployeeAccountUserDetails
+
+database DB
+
+EmployeeAccountRepository -> DB : SELECT文
+activate DB
+
+DB --> EmployeeAccountRepository : EmployeeAccount
+deactivate DB
+
+EmployeeAccountRepository -> EmployeeAccountUserDetailsService : EmployeeAccount
+deactivate EmployeeAccountRepository
+
+EmployeeAccountUserDetailsService -> EmployeeAccountUserDetails : new
+activate EmployeeAccountUserDetails
+
+EmployeeAccountUserDetails -> EmployeeAccountUserDetailsService : EmployeeAccountUserDetails
+deactivate EmployeeAccountUserDetails
+
+EmployeeAccountUserDetailsService -> SpringSecurity本体 : EmployeeAccountUserDetails
+deactivate EmployeeAccountUserDetailsService
+
+SpringSecurity本体 -> SpringSecurity本体 : セッションに格納
+
+SpringSecurity本体 -> ユーザ : リダイレクト要求
+deactivate SpringSecurity本体
+
+ユーザ -> MenuController : menu()
+activate MenuController
+
+MenuController -> ユーザ : メニュー画面
+deactivate MenuController
+
+@enduml

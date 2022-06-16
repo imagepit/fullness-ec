@@ -1,0 +1,102 @@
+@startuml
+
+title UC011: 商品検索機能 シーケンス図
+skinparam shadowing false
+'hide footbox
+
+actor ユーザ
+
+
+
+ユーザ -> ProductSearchController : index()
+activate ユーザ
+activate ProductSearchController
+
+ProductSearchController -> ProductSearchController : セッション破棄
+note right: 他コントローラで破棄していないセッションを一斉破棄
+
+ProductSearchController -> ProductSearchController : setUpForm()
+
+ProductSearchController -> ProductSearchController : bind()
+
+ProductSearchController -> ProductCategoryService : findAll()
+activate ProductCategoryService
+
+ProductCategoryService -> ProductCategoryRepository : findAll()
+activate ProductCategoryRepository
+
+participant ProductService
+
+participant ProductRepository
+
+database DB
+
+ProductCategoryRepository -> DB : SELECT文
+activate DB
+
+DB --> ProductCategoryRepository : List<ProductCategory>
+deactivate DB
+
+ProductCategoryRepository -> ProductCategoryService : List<ProductCategory>
+deactivate ProductCategoryRepository
+
+ProductCategoryService --> ProductSearchController : List<ProductCategory>
+deactivate ProductCategoryService
+
+ProductSearchController -> ProductService : findAll()
+activate ProductService
+
+ProductService -> ProductRepository : findAll()
+activate ProductRepository
+
+ProductRepository -> DB : SELECT文
+activate DB
+
+DB --> ProductRepository : List<Product>
+deactivate DB
+
+ProductRepository --> ProductService : List<Product>
+deactivate ProductRepository
+
+ProductService --> ProductSearchController : List<Product>
+deactivate ProductService
+
+ProductSearchController -> ProductSearchController : セッション追加（カテゴリリスト）
+
+ProductSearchController -> ProductSearchController : Model追加（商品リスト）
+
+ProductSearchController -> ユーザ : 検索初期画面
+deactivate ProductSearchController
+
+ユーザ -> ユーザ : カテゴリ選択
+
+ユーザ -> ProductSearchController : search()
+activate ProductSearchController
+
+ProductSearchController -> ProductService : findByCategoryId()
+activate ProductService
+
+ProductService -> ProductRepository : findByCategoryId()
+activate ProductRepository
+
+ProductRepository -> DB : SELECT文
+activate DB
+
+DB --> ProductRepository : List<Product>
+deactivate DB
+
+ProductRepository --> ProductService : List<Product>
+deactivate ProductRepository
+
+ProductService -> ProductSearchController : List<Product>
+deactivate ProductService
+
+ProductSearchController -> ProductSearchController : Model追加（選択カテゴリ）
+note right: 選択したカテゴリがセレクトボックスで選択されるように
+
+ProductSearchController -> ユーザ : 検索結果画面
+deactivate ProductSearchController
+
+deactivate ユーザ
+
+@enduml

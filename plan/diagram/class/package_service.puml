@@ -1,0 +1,46 @@
+@startuml
+
+skinparam shadowing false
+hide empty methods
+hide empty fields
+left to right direction
+
+package service{
+    interface ProductService{
+        List<Product> findAll()
+        List<Product> findByCategoryId(int productCategoryId)
+        Product findById(Integer id)
+        void insert(Product product)
+        void update(Product product)
+        void delete(Integer id)
+    }
+    class ProductServiceImpl
+
+    interface ProductCategoryService{
+        List<ProductCategory> findAll()
+        ProductCategory findById(Integer id)
+        void insert(ProductCategory productCategory)
+    }
+    class ProductCategoryServiceImpl
+
+
+    interface EmployeeAccountService{
+        List<EmployeeAccount> findAll()
+        EmployeeAccount findById(Integer id)
+        boolean isExist(String userName)
+        void insert(EmployeeAccount employeeAccount)
+    }
+    class EmployeeAccountServiceImpl
+
+    interface EmployeeService{
+        List<Employee> findAll()
+    }
+    class EmployeeServiceImpl
+}
+
+EmployeeAccountService <|.. EmployeeAccountServiceImpl
+EmployeeService <|.. EmployeeServiceImpl
+ProductService <|.. ProductServiceImpl
+ProductCategoryService <|.. ProductCategoryServiceImpl
+
+@enduml

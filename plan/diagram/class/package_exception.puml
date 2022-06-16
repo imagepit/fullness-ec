@@ -1,0 +1,14 @@
+@startuml
+
+skinparam shadowing false
+hide empty methods
+hide empty fields
+left to right direction
+
+package exception{
+    class BusinessException{
+        + BusinessException(String msg)
+    }
+}
+
+@enduml

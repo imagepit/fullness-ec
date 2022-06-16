@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fullness.ec.repository.ProductRepository">
+    <resultMap id="productResult" type="com.fullness.ec.entity.Product">
+        <id property="id" column="p_id" />
+        <result property="name" column="p_name" />
+        <result property="price" column="p_price" />
+        <result property="imageUrl" column="p_image_url" />
+        <result property="deleteFlag" column="p_delete_flag" />
+        <association property="productCategory" javaType="com.fullness.ec.entity.ProductCategory">
+            <id property="id" column="pc_id" />
+            <result property="name" column="pc_name" />
+        </association>
+        <association property="stock" javaType="com.fullness.ec.entity.ProductStock">
+            <id property="id" column="ps_id" />
+            <result property="productId" column="p_id" />
+            <result property="stock" column="ps_stock" />
+        </association>
+    </resultMap>
+    <select id="findAll" resultMap="productResult">
+        select
+            p.id as p_id,
+            p.name as p_name,
+            p.price as p_price,
+            p.image_url as p_image_url,
+            p.delete_flag as p_delete_flag,
+            pc.id as pc_id,
+            pc.name as pc_name,
+            ps.id as ps_id,
+            ps.quantity as ps_stock
+        from
+            product p
+        join
+            product_category pc
+        on
+            p.product_category_id = pc.id
+        join
+            product_stock ps
+        on
+            p.id = ps.product_id
+        where
+            p.delete_flag = 0
+    </select>
+    <select id="findPage" resultMap="productResult">
+        select
+            p.id as p_id,
+            p.name as p_name,
+            p.price as p_price,
+            p.image_url as p_image_url,
+            p.delete_flag as p_delete_flag,
+            pc.id as pc_id,
+            pc.name as pc_name,
+            ps.id as ps_id,
+            ps.quantity as ps_stock
+        from
+            product p
+        join
+            product_category pc
+        on
+            p.product_category_id = pc.id
+        join
+            product_stock ps
+        on
+            p.id = ps.product_id
+        where
+            p.delete_flag = 0
+        order by
+            p_id
+        limit
+            #{pageable.pageSize}
+        offset
+            #{pageable.offset}
+    </select>
+    <select id="countAll" resultType="int">
+        select count(*) from product where delete_flag = 0
+    </select>
+    <select id="findById" resultMap="productResult">
+        select
+            p.id as p_id,
+            p.name as p_name,
+            p.price as p_price,
+            p.image_url as p_image_url,
+            p.delete_flag as p_delete_flag,
+            pc.id as pc_id,
+            pc.name as pc_name,
+            ps.id as ps_id,
+            ps.quantity as ps_stock
+        from
+            product p
+        join
+            product_category pc
+        on
+            p.product_category_id = pc.id
+        join
+            product_stock ps
+        on
+            p.id = ps.product_id
+        where
+            p.id = #{id}
+    </select>
+    <select id="findByCategoryId" resultMap="productResult">
+        select
+            p.id as p_id,
+            p.name as p_name,
+            p.price as p_price,
+            p.image_url as p_image_url,
+            p.delete_flag as p_delete_flag,
+            pc.id as pc_id,
+            pc.name as pc_name,
+            ps.id as ps_id,
+            ps.quantity as ps_stock
+        from
+            product p
+        join
+            product_category pc
+        on
+            p.product_category_id = pc.id
+        join
+            product_stock ps
+        on
+            p.id = ps.product_id
+        where
+            p.delete_flag = 0
+        and
+            p.product_category_id = #{productCategoryId}
+    </select>
+    <select id="findPageByCategoryId" resultMap="productResult">
+        select
+            p.id as p_id,
+            p.name as p_name,
+            p.price as p_price,
+            p.image_url as p_image_url,
+            p.delete_flag as p_delete_flag,
+            pc.id as pc_id,
+            pc.name as pc_name,
+            ps.id as ps_id,
+            ps.quantity as ps_stock
+        from
+            product p
+        join
+            product_category pc
+        on
+            p.product_category_id = pc.id
+        join
+            product_stock ps
+        on
+            p.id = ps.product_id
+        where
+            p.delete_flag = 0
+        and
+            p.product_category_id = #{productCategoryId}
+        order by
+            p_id
+        limit
+            #{pageable.pageSize}
+        offset
+            #{pageable.offset}
+    </select>
+    <select id="countAllByCategoryId" resultType="int">
+        select count(*) from product where delete_flag = 0 and product_category_id = #{productCategoryId}
+    </select>
+    <insert id="insert" parameterType="com.fullness.ec.entity.Product" useGeneratedKeys="true" keyProperty="id">
+        <selectKey keyProperty="id" resultType="int" order="BEFORE">
+            select nextval('product_id_seq')
+        </selectKey>
+        insert into product values(#{id},#{name},#{price},#{imageUrl},#{productCategory.id},0)
+    </insert>
+    <update id="update" parameterType="com.fullness.ec.entity.Product">
+        update
+            product
+        set
+            name = #{name},
+            price = #{price},
+            image_url = #{imageUrl},
+            product_category_id = #{productCategory.id}
+        where
+            id = #{id}
+    </update>
+    <update id="delete">
+        update
+            product
+        set
+            delete_flag = 1
+        where
+            id = #{id}
+    </update>
+</mapper>

@@ -1,0 +1,16 @@
+extends ../../layout/_layout.pug
+
+block title
+    title 商品カテゴリ登録(確認)
+
+block content
+    h2 商品カテゴリ登録(確認)
+    form(th:action="@{/admin/product-category-add/complete}" method="post" th:object="${productCategoryAddForm}")
+        table
+            tr
+                td 商品カテゴリ名
+                td(th:text="*{name}")
+        a.cancel(href="/admin/product-category-add/cancel") キャンセル
+        span  
+        a.cancel(href="/admin/product-category-add") 戻る
+        input(type="submit" value="登録")

@@ -1,0 +1,10 @@
+extends ../../layout/_layout.pug
+
+block title
+    title 新商品登録(完了)
+
+block content
+    h2 新商品登録(完了)
+    .complete-message(th:text="|商品名${p.name}を登録しました。|")
+    a.botton(href="/admin/product"): button 商品検索へ戻る
+    a.botton(href="/admin/product-add"): button 入力に戻る

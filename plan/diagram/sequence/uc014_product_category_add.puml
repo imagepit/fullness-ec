@@ -1,0 +1,72 @@
+@startuml
+
+title UC014: カテゴリ登録機能 シーケンス図
+skinparam shadowing false
+'hide footbox
+
+actor ユーザ
+
+activate ユーザ
+
+ユーザ -> ProductCategoryAddController : form()
+activate ProductCategoryAddController
+
+ProductCategoryAddController -> ProductCategoryAddController : setUpForm()
+note right: セッション生成
+
+ProductCategoryAddController -> ProductCategoryAddController : bind()
+
+ProductCategoryAddController -> ユーザ : 入力画面
+deactivate ProductCategoryAddController
+
+ユーザ -> ユーザ : 商品情報入力
+
+ユーザ -> ProductCategoryAddController : confirm()
+activate ProductCategoryAddController
+
+ProductCategoryAddController -> ProductCategoryAddController : バリデート
+
+alt バリデート結果 エラーあり
+    ProductCategoryAddController --> ユーザ : 入力画面
+else バリデート結果 エラーなし
+    ProductCategoryAddController --> ユーザ : 確認画面
+    deactivate ProductCategoryAddController
+    ユーザ -> ユーザ : 入力内容確認
+
+    ユーザ -> ProductCategoryAddController : complete()
+    activate ProductCategoryAddController
+
+    ProductCategoryAddController -> ProductCategoryAddController : セッション確認
+    note right: セッションが空ならシステムエラー
+
+    ProductCategoryAddController -> ProductCategoryAddController : フォームをエンティティに変換
+
+    ProductCategoryAddController -> ProductCategoryService : insert(ProductCategory category)
+    activate ProductCategoryService
+
+    ProductCategoryService -> ProductCategoryRepository : insert(ProductCategory category)
+    activate ProductCategoryRepository
+
+    database DB
+
+    ProductCategoryRepository -> DB : INSERT文
+    activate DB
+
+    DB --> ProductCategoryRepository : void
+    deactivate DB
+
+    ProductCategoryRepository --> ProductCategoryService : void
+    deactivate ProductCategoryRepository
+
+    ProductCategoryService -> ProductCategoryAddController : void
+    deactivate ProductCategoryService
+
+    ProductCategoryAddController -> ProductCategoryAddController : セッション破棄
+
+    ProductCategoryAddController -> ProductCategoryAddController : Modelに追加（商品名）
+
+    ProductCategoryAddController -> ユーザ : 完了画面
+    deactivate ProductCategoryAddController
+end
+
+@enduml

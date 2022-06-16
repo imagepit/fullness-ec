@@ -1,0 +1,38 @@
+@startuml
+
+skinparam shadowing false
+hide empty methods
+hide empty fields
+left to right direction
+
+package entity{
+    class Product{
+        - Integer id
+        - String name
+        - Integer price
+        - String imageUrl
+        - ProductCategory productCategory
+        - Integer deleteFlag
+    }
+    class ProductCategory{
+        - Integer id
+        - String name
+    }
+    class ProductStock{
+        - Integer id
+        - Integer quantity
+    }
+    class EmployeeAccount{
+        - Integer id
+        - String name
+        - String password
+        - Integer employeeId
+    }
+    class Employee{
+        - Integer id
+        - String name
+        - String nameKana
+        - Integer departmentId
+    }
+}
+@enduml

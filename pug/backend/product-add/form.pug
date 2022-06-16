@@ -1,0 +1,36 @@
+extends ../../layout/_layout.pug
+
+block title
+    title 新商品登録(入力)
+
+block content
+    h2 新商品登録(入力)
+    form(th:action="@{/admin/product-add/confirm}" method="post" th:object="${productAddForm}" enctype="multipart/form-data")
+        table
+            tr
+                td 商品名
+                td
+                    input(type="text" name="name" th:field="*{name}")
+                    .error(th:errors="*{name}")
+            tr
+                td 単価
+                td
+                    input(type="number" name="price" th:field="*{price}")
+                    .error(th:errors="*{price}")
+            tr
+                td 在庫数
+                td
+                    input(type="number" name="stock" th:field="*{stock}")
+                    .error(th:errors="*{stock}")
+            tr
+                td 商品カテゴリ
+                td
+                    select(name="category" th:field="*{category}")
+                        option(th:each="c : ${categories}" th:value="${c.id}" th:selected="${c.id == category}" th:inline="text") [[${c.name}]]
+            tr
+                td 画像
+                td
+                    input(type="file" name="image" th:field="*{image}")
+                    .error(th:errors="*{image}")
+        a.cancel(href="/admin/product-add/cancel") キャンセル
+        input(type="submit" value="完了")

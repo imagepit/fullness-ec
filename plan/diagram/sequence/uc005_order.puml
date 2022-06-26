@@ -37,7 +37,8 @@ svc -> repo4 ++ : selectStockList(List<Product>)
 repo4 -> db ++ : SQL(SELECT)
 repo4 <-- db -- : List<ProductStock>
 svc <-- repo4 -- : List<ProductStock>
-svc -> svc : checkStock\n(Order,List<ProductStock>)
+svc -> od ++ : checkStock\n(List<ProductStock>)
+svc <-- od -- : boolean
 note right
     ・Orderの数量と在庫を
     　比較してチェック

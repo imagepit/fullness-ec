@@ -14,22 +14,22 @@ database "DB" as db
 
 ' 検索初期画面
 user -> controller ++ : list()
-controller -> controller : セッション破棄
-note right: 他コントローラで破棄していない\nセッションを一斉破棄
-controller -> controller : setUpForm()
-controller -> controller : bind()
-controller -> svc1 ++ : findAll()
-svc1 -> repo2 ++ : findAll()
-repo2 -> db ++ : SELECT文
-db --> repo2 -- : List<ProductCategory>
-repo2 --> svc1 -- : List<ProductCategory>
-svc1 --> controller -- : List<ProductCategory>
-controller -> svc2 ++ : findAll()
-svc2 -> repo1 ++ : findAll()
-repo1 -> db ++ : SELECT文
-db --> repo1 -- : List<Product>
-repo1 --> svc2 -- : List<Product>
-svc2 --> controller -- : List<Product>
+group 商品カテゴリリスト取得\n（検索プルダウン表示のため）
+    controller -> svc1 ++ : findAll()
+    svc1 -> repo2 ++ : findAll()
+    repo2 -> db ++ : SELECT文
+    db --> repo2 -- : List<ProductCategory>
+    repo2 --> svc1 -- : List<ProductCategory>
+    svc1 --> controller -- : List<ProductCategory>
+end 
+group 全商品リスト取得
+    controller -> svc2 ++ : findAll()
+    svc2 -> repo1 ++ : findAll()
+    repo1 -> db ++ : SELECT文
+    db --> repo1 -- : List<Product>
+    repo1 --> svc2 -- : List<Product>
+    svc2 --> controller -- : List<Product>
+end
 controller -> controller : Mpdel追加\n（カテゴリリスト）
 controller -> controller : Model追加\n（商品リスト）
 controller -> user -- : 検索初期画面
@@ -37,12 +37,14 @@ controller -> user -- : 検索初期画面
 ' 検索結果画面
 user -> user : カテゴリ選択
 user -> controller ++ : search()
+group 指定したカテゴリの商品リスト取得
 controller -> svc2 ++ : findbyCategoryId()
 svc2 -> repo1 ++ : findbyCategoryId()
 repo1 -> db ++ : SELECT文
 db --> repo1 -- : List<Product>
 repo1 --> svc2 -- : List<Product>
 svc2 --> controller -- : List<Product>
+end
 controller -> controller : Model追加\n（選択カテゴリ）
 note right: 選択したカテゴリが\nセレクトボックスで選択されるように
 controller -> user -- : 検索結果画面

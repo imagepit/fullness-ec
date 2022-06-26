@@ -2,101 +2,50 @@
 
 title UC011: 商品検索機能 シーケンス図
 skinparam shadowing false
-'hide footbox
 
-actor ユーザ
+actor ユーザ as user
+activate user
+participant "ProductSearch\nController" as controller
+participant "ProductCategory\nService" as svc1
+participant "Product\nService" as svc2
+participant "Product\nRepository" as repo1
+participant "ProductCategory\nRepository" as repo2
+database "DB" as db
 
+' 検索初期画面
+user -> controller ++ : list()
+controller -> controller : セッション破棄
+note right: 他コントローラで破棄していない\nセッションを一斉破棄
+controller -> controller : setUpForm()
+controller -> controller : bind()
+controller -> svc1 ++ : findAll()
+svc1 -> repo2 ++ : findAll()
+repo2 -> db ++ : SELECT文
+db --> repo2 -- : List<ProductCategory>
+repo2 --> svc1 -- : List<ProductCategory>
+svc1 --> controller -- : List<ProductCategory>
+controller -> svc2 ++ : findAll()
+svc2 -> repo1 ++ : findAll()
+repo1 -> db ++ : SELECT文
+db --> repo1 -- : List<Product>
+repo1 --> svc2 -- : List<Product>
+svc2 --> controller -- : List<Product>
+controller -> controller : Mpdel追加\n（カテゴリリスト）
+controller -> controller : Model追加\n（商品リスト）
+controller -> user -- : 検索初期画面
 
+' 検索結果画面
+user -> user : カテゴリ選択
+user -> controller ++ : search()
+controller -> svc2 ++ : findbyCategoryId()
+svc2 -> repo1 ++ : findbyCategoryId()
+repo1 -> db ++ : SELECT文
+db --> repo1 -- : List<Product>
+repo1 --> svc2 -- : List<Product>
+svc2 --> controller -- : List<Product>
+controller -> controller : Model追加\n（選択カテゴリ）
+note right: 選択したカテゴリが\nセレクトボックスで選択されるように
+controller -> user -- : 検索結果画面
 
-ユーザ -> ProductSearchController : index()
-activate ユーザ
-activate ProductSearchController
-
-ProductSearchController -> ProductSearchController : セッション破棄
-note right: 他コントローラで破棄していないセッションを一斉破棄
-
-ProductSearchController -> ProductSearchController : setUpForm()
-
-ProductSearchController -> ProductSearchController : bind()
-
-ProductSearchController -> ProductCategoryService : findAll()
-activate ProductCategoryService
-
-ProductCategoryService -> ProductCategoryRepository : findAll()
-activate ProductCategoryRepository
-
-participant ProductService
-
-participant ProductRepository
-
-database DB
-
-ProductCategoryRepository -> DB : SELECT文
-activate DB
-
-DB --> ProductCategoryRepository : List<ProductCategory>
-deactivate DB
-
-ProductCategoryRepository -> ProductCategoryService : List<ProductCategory>
-deactivate ProductCategoryRepository
-
-ProductCategoryService --> ProductSearchController : List<ProductCategory>
-deactivate ProductCategoryService
-
-ProductSearchController -> ProductService : findAll()
-activate ProductService
-
-ProductService -> ProductRepository : findAll()
-activate ProductRepository
-
-ProductRepository -> DB : SELECT文
-activate DB
-
-DB --> ProductRepository : List<Product>
-deactivate DB
-
-ProductRepository --> ProductService : List<Product>
-deactivate ProductRepository
-
-ProductService --> ProductSearchController : List<Product>
-deactivate ProductService
-
-ProductSearchController -> ProductSearchController : セッション追加（カテゴリリスト）
-
-ProductSearchController -> ProductSearchController : Model追加（商品リスト）
-
-ProductSearchController -> ユーザ : 検索初期画面
-deactivate ProductSearchController
-
-ユーザ -> ユーザ : カテゴリ選択
-
-ユーザ -> ProductSearchController : search()
-activate ProductSearchController
-
-ProductSearchController -> ProductService : findByCategoryId()
-activate ProductService
-
-ProductService -> ProductRepository : findByCategoryId()
-activate ProductRepository
-
-ProductRepository -> DB : SELECT文
-activate DB
-
-DB --> ProductRepository : List<Product>
-deactivate DB
-
-ProductRepository --> ProductService : List<Product>
-deactivate ProductRepository
-
-ProductService -> ProductSearchController : List<Product>
-deactivate ProductService
-
-ProductSearchController -> ProductSearchController : Model追加（選択カテゴリ）
-note right: 選択したカテゴリがセレクトボックスで選択されるように
-
-ProductSearchController -> ユーザ : 検索結果画面
-deactivate ProductSearchController
-
-deactivate ユーザ
-
+deactivate user
 @enduml

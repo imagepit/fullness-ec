@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="145px" preserveAspectRatio="none" style="width:515px;height:145px;background:#FFFFFF;" version="1.1" viewBox="0 0 515 145" width="515px" zoomAndPan="magnify"><defs/><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="144" x="179" y="17.4023">configパッケージ</text><!--MD5=[77140a42179fe8241cde5d77dd05aadc]
+cluster config--><polygon fill="#FFFFFF" points="16,27.1992,67,27.1992,74,49.6875,498,49.6875,498,138.1992,16,138.1992,16,27.1992" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="16" x2="74" y1="49.6875" y2="49.6875"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="45" x="20" y="42.7344">config</text><!--MD5=[2cfa5de1e9301cee7536fbd36131ba59]
+class AppConfig--><rect codeLine="6" fill="#FEFECE" height="59.2207" id="AppConfig" style="stroke:#A80036;stroke-width:1.5;" width="450" x="32" y="62.6992"/><ellipse cx="205.75" cy="81.832" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M208.2231,87.9751 Q207.6421,88.2739 207.0029,88.4233 Q206.3638,88.5728 205.6582,88.5728 Q203.1514,88.5728 201.8315,86.9209 Q200.5117,85.269 200.5117,82.1479 Q200.5117,79.0186 201.8315,77.3667 Q203.1514,75.7148 205.6582,75.7148 Q206.3638,75.7148 207.0112,75.8643 Q207.6587,76.0137 208.2231,76.3125 L208.2231,79.0352 Q207.5923,78.4541 206.9988,78.1843 Q206.4053,77.9146 205.7744,77.9146 Q204.4297,77.9146 203.7449,78.9812 Q203.0601,80.0479 203.0601,82.1479 Q203.0601,84.2397 203.7449,85.3064 Q204.4297,86.373 205.7744,86.373 Q206.4053,86.373 206.9988,86.1033 Q207.5923,85.8335 208.2231,85.2524 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="98" x="224.25" y="79.3008">«@Configuration»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="60" x="243.25" y="93.4336">AppConfig</text><line style="stroke:#A80036;stroke-width:1.5;" x1="33" x2="481" y1="100.9648" y2="100.9648"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="438" x="38" y="115.5996">addArgumentResolvers(List&lt;HandlerMethodArgumentResolver&gt; resolvers) : void</text><!--MD5=[c914605b916da77ddbf0b6b5ac9cccaf]
+@startuml
+skin rose
+skinparam shadowing false
+hide empty methods
+hide empty fields
+
+title configパッケージ
+left to right direction
+
+package config{
+    class AppConfig <<@Configuration>>{
+        addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) : void
+    }
+}
+
+@enduml
+
+PlantUML version 1.2022.0(Wed Jan 12 01:16:42 JST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: ja
+Country: JP
+--></g></svg>

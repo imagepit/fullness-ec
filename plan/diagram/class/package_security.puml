@@ -1,34 +1,57 @@
 @startuml
 
-skinparam shadowing false
-hide empty methods
-hide empty fields
+title securityパッケージ
 left to right direction
 
 package security{
     class EmployeeAccountUserDetails{
-        - Account account
-        - Collection<GrantedAuthority> authorites
-        + Collection<? extends GrantedAuthority> getAuthorities()
-        + String getPassword()
-        + String getUsername()
-        + boolean isAccountNonExpired()
-        + boolean isAccountNonLocked()
-        + boolean isCredentialsNonExpired()
-        + boolean isEnabled()
+        - account : EmployeeAccount
+        - authorites : Collection<GrantedAuthority>
+        + getAuthorities() : Collection<? extends GrantedAuthority>
+        + getPassword() : String
+        + getUsername() : String
+        + isAccountNonExpired() : boolean
+        + isAccountNonLocked() : boolean
+        + isCredentialsNonExpired() : boolean
+        + isEnabled() : boolean
     }
     class EmployeeAccountUserDetailsService{
-        - EmployeeAccountRepository employeeAccountRepository
-        + UserDetails loadUserByUsername(String username)
-        + Collection<GrantedAuthority> getAuthority(EmployeeAccount account)
+        - employeeAccountRepository : EmployeeAccountRepository
+        + loadUserByUsername(String username) : UserDetails
+'        + getAuthority(EmployeeAccount account) : Collection<GrantedAuthority>
     }
     class EmployeeAccountSecurityConfig{
-        - EmployeeAccountUserDetailsService accountDetailsService
-        + PasswordEncoder passwordEncoder()
-        + void configureAuthenticationManager(AuthenticationManagerBuilder auth)
-        + void configure(WebSecurity web)
-        + void configure(HttpSecurity http)
+        - accountDetailsService : EmployeeAccountUserDetailsService
+        + passwordEncoder() : PasswordEncoder
+        + configureAuthenticationManager(AuthenticationManagerBuilder auth) : void
+        + configure(WebSecurity web) : void
+        + configure(HttpSecurity http) : void
+    }
+    class CustomerAccountUserDetails{
+        - account : Customer
+        - authorites : Collection<GrantedAuthority>
+        + getAuthorities() : Collection<? extends GrantedAuthority>
+        + getPassword() : String
+        + getUsername() : String
+        + isAccountNonExpired() : boolean
+        + isAccountNonLocked() : boolean
+        + isCredentialsNonExpired() : boolean
+        + isEnabled() : boolean
+    }
+    class CustomerUserDetailsService{
+        - customerRepository : CustomerRepository
+        + loadUserByUsername(String username) : UserDetails
+'        + getAuthority(EmployeeAccount account) : Collection<GrantedAuthority>
+    }
+    class CustomerSecurityConfig{
+        - customerDetailsService : CustomerUserDetailsService
+        + passwordEncoder() : PasswordEncoder
+        + configureAuthenticationManager(AuthenticationManagerBuilder auth) : void
+        + configure(WebSecurity web) : void
+        + configure(HttpSecurity http) : void
     }
 }
 EmployeeAccountSecurityConfig --> EmployeeAccountUserDetailsService :use
+CustomerSecurityConfig --> CustomerUserDetailsService :use
+
 @enduml

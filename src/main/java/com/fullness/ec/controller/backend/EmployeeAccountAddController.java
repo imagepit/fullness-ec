@@ -13,43 +13,21 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
-/**
- * 担当者アカウント登録コントローラー
- */
-@SessionAttributes("employeeAccountForm")
-@RequestMapping("/admin/emp-add")
 @Controller
+@RequestMapping("/admin/emp-add")
+@SessionAttributes("employeeAccountForm")
 public class EmployeeAccountAddController {
 
-    /** テンプレートディレクトリパス */
     private static final String TEMPLATE_DIR = "backend/emp-add";
+    @Autowired private EmployeeAccountHelper helper;
+    @Autowired private EmployeeAccountService employeeAccountService;
+    @Autowired private EmployeeService employeeService;
 
-    /** 担当者アカウント登録関連ヘルパー */
-    @Autowired
-    private EmployeeAccountHelper helper;
-
-    /** 担当者アカウントサービス */
-    @Autowired
-    private EmployeeAccountService employeeAccountService;
-
-    /** 社員サービス */
-    @Autowired
-    private EmployeeService employeeService;
-
-    /**
-     * フォーム初期化処理
-     * @return 担当者アカウント登録用フォーム
-     */
     @ModelAttribute("employeeAccountForm")
     public EmployeeAccountForm setupForm(){
         return new EmployeeAccountForm();
     }
 
-    /**
-     * 
-     * @param model
-     * @return
-     */
     @GetMapping
     public String form(Model model){
         model.addAttribute("employees",employeeService.findAll());
@@ -64,11 +42,7 @@ public class EmployeeAccountAddController {
     }
 
     @PostMapping("/complete")
-    public String complete(
-            @ModelAttribute("employeeAccountForm") EmployeeAccountForm form,
-            Model model,
-            SessionStatus sessionStatus
-    ){
+    public String complete(@ModelAttribute("employeeAccountForm") EmployeeAccountForm form, Model model, SessionStatus sessionStatus){
         if(form.isEmpty()) throw new RuntimeException("フォームデータがありません");
         EmployeeAccount employeeAccount = helper.convertEmployeeAccount(form);
         employeeAccount.setEmployee(employeeService.findById(form.getEmpName()));

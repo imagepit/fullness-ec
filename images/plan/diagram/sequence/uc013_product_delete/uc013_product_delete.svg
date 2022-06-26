@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="831px" preserveAspectRatio="none" style="width:646px;height:831px;background:#FFFFFF;" version="1.1" viewBox="0 0 646 831" width="646px" zoomAndPan="magnify"><defs/><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="291" x="174" y="29.4023">UC013: 商品削除機能 シーケンス図</text><rect fill="#FFFFFF" height="609.9004" style="stroke:#A80036;stroke-width:1.0;" width="10" x="24" y="129.6875"/><rect fill="#FFFFFF" height="232.1738" style="stroke:#A80036;stroke-width:1.0;" width="10" x="171" y="150.998"/><rect fill="#FFFFFF" height="256.4844" style="stroke:#A80036;stroke-width:1.0;" width="10" x="171" y="412.4824"/><rect fill="#FFFFFF" height="29.3105" style="stroke:#A80036;stroke-width:1.0;" width="10" x="171" y="701.2773"/><rect fill="#FFFFFF" height="131.2422" style="stroke:#A80036;stroke-width:1.0;" width="10" x="337" y="180.3086"/><rect fill="#FFFFFF" height="152.5527" style="stroke:#A80036;stroke-width:1.0;" width="10" x="337" y="441.793"/><rect fill="#FFFFFF" height="87.9316" style="stroke:#A80036;stroke-width:1.0;" width="10" x="486" y="209.6191"/><rect fill="#FFFFFF" height="90.9316" style="stroke:#A80036;stroke-width:1.0;" width="10" x="486" y="474.1035"/><rect fill="#FFFFFF" height="29.3105" style="stroke:#A80036;stroke-width:1.0;" width="10" x="584" y="238.9297"/><rect fill="#FFFFFF" height="29.3105" style="stroke:#A80036;stroke-width:1.0;" width="10" x="584" y="506.4141"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="29" x2="29" y1="119.6875" y2="748.5879"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="176" x2="176" y1="119.6875" y2="748.5879"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="341.5" x2="341.5" y1="119.6875" y2="748.5879"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="491" x2="491" y1="119.6875" y2="748.5879"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="589" x2="589" y1="119.6875" y2="748.5879"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="42" x="5" y="116.7344">ユーザ</text><ellipse cx="29" cy="50.1992" fill="#FEFECE" rx="8" ry="8" style="stroke:#A80036;stroke-width:2.0;"/><path d="M29,58.1992 L29,85.1992 M16,66.1992 L42,66.1992 M29,85.1992 L16,100.1992 M29,85.1992 L42,100.1992 " fill="none" style="stroke:#A80036;stroke-width:2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="42" x="5" y="761.123">ユーザ</text><ellipse cx="29" cy="774.0762" fill="#FEFECE" rx="8" ry="8" style="stroke:#A80036;stroke-width:2.0;"/><path d="M29,782.0762 L29,809.0762 M16,790.0762 L42,790.0762 M29,809.0762 L16,824.0762 M29,809.0762 L42,824.0762 " fill="none" style="stroke:#A80036;stroke-width:2.0;"/><rect fill="#FEFECE" height="30.4883" style="stroke:#A80036;stroke-width:1.5;" width="180" x="86" y="88.1992"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="166" x="93" y="108.7344">ProductDeleteController</text><rect fill="#FEFECE" height="30.4883" style="stroke:#A80036;stroke-width:1.5;" width="180" x="86" y="747.5879"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="166" x="93" y="768.123">ProductDeleteController</text><rect fill="#FEFECE" height="30.4883" style="stroke:#A80036;stroke-width:1.5;" width="115" x="284.5" y="88.1992"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="101" x="291.5" y="108.7344">ProductService</text><rect fill="#FEFECE" height="30.4883" style="stroke:#A80036;stroke-width:1.5;" width="115" x="284.5" y="747.5879"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="101" x="291.5" y="768.123">ProductService</text><rect fill="#FEFECE" height="30.4883" style="stroke:#A80036;stroke-width:1.5;" width="140" x="421" y="88.1992"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="126" x="428" y="108.7344">ProductRepository</text><rect fill="#FEFECE" height="30.4883" style="stroke:#A80036;stroke-width:1.5;" width="140" x="421" y="747.5879"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="126" x="428" y="768.123">ProductRepository</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="18" x="577" y="116.7344">DB</text><path d="M571,67.1992 C571,57.1992 589,57.1992 589,57.1992 C589,57.1992 607,57.1992 607,67.1992 L607,93.1992 C607,103.1992 589,103.1992 589,103.1992 C589,103.1992 571,103.1992 571,93.1992 L571,67.1992 " fill="#FEFECE" style="stroke:#000000;stroke-width:1.5;"/><path d="M571,67.1992 C571,77.1992 589,77.1992 589,77.1992 C589,77.1992 607,77.1992 607,67.1992 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="18" x="577" y="761.123">DB</text><path d="M571,774.0762 C571,764.0762 589,764.0762 589,764.0762 C589,764.0762 607,764.0762 607,774.0762 L607,800.0762 C607,810.0762 589,810.0762 589,810.0762 C589,810.0762 571,810.0762 571,800.0762 L571,774.0762 " fill="#FEFECE" style="stroke:#000000;stroke-width:1.5;"/><path d="M571,774.0762 C571,784.0762 589,784.0762 589,784.0762 C589,784.0762 607,784.0762 607,774.0762 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><rect fill="#FFFFFF" height="609.9004" style="stroke:#A80036;stroke-width:1.0;" width="10" x="24" y="129.6875"/><rect fill="#FFFFFF" height="232.1738" style="stroke:#A80036;stroke-width:1.0;" width="10" x="171" y="150.998"/><rect fill="#FFFFFF" height="256.4844" style="stroke:#A80036;stroke-width:1.0;" width="10" x="171" y="412.4824"/><rect fill="#FFFFFF" height="29.3105" style="stroke:#A80036;stroke-width:1.0;" width="10" x="171" y="701.2773"/><rect fill="#FFFFFF" height="131.2422" style="stroke:#A80036;stroke-width:1.0;" width="10" x="337" y="180.3086"/><rect fill="#FFFFFF" height="152.5527" style="stroke:#A80036;stroke-width:1.0;" width="10" x="337" y="441.793"/><rect fill="#FFFFFF" height="87.9316" style="stroke:#A80036;stroke-width:1.0;" width="10" x="486" y="209.6191"/><rect fill="#FFFFFF" height="90.9316" style="stroke:#A80036;stroke-width:1.0;" width="10" x="486" y="474.1035"/><rect fill="#FFFFFF" height="29.3105" style="stroke:#A80036;stroke-width:1.0;" width="10" x="584" y="238.9297"/><rect fill="#FFFFFF" height="29.3105" style="stroke:#A80036;stroke-width:1.0;" width="10" x="584" y="506.4141"/><polygon fill="#A80036" points="159,146.998,169,150.998,159,154.998,163,150.998" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="34" x2="165" y1="150.998" y2="150.998"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="118" x="41" y="146.2559">confirm(productId)</text><polygon fill="#A80036" points="325,176.3086,335,180.3086,325,184.3086,329,180.3086" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="181" x2="331" y1="180.3086" y2="180.3086"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="120" x="188" y="175.5664">findById(productId)</text><polygon fill="#A80036" points="474,205.6191,484,209.6191,474,213.6191,478,209.6191" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="347" x2="480" y1="209.6191" y2="209.6191"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="120" x="354" y="204.877">findById(productId)</text><polygon fill="#A80036" points="572,234.9297,582,238.9297,572,242.9297,576,238.9297" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="496" x2="578" y1="238.9297" y2="238.9297"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="58" x="503" y="234.1875">SELECT文</text><polygon fill="#A80036" points="507,264.2402,497,268.2402,507,272.2402,503,268.2402" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="501" x2="588" y1="268.2402" y2="268.2402"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="48" x="513" y="263.498">Product</text><polygon fill="#A80036" points="358,293.5508,348,297.5508,358,301.5508,354,297.5508" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="352" x2="490" y1="297.5508" y2="297.5508"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="48" x="364" y="292.8086">Product</text><polygon fill="#A80036" points="192,307.5508,182,311.5508,192,315.5508,188,311.5508" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="186" x2="341" y1="311.5508" y2="311.5508"/><line style="stroke:#A80036;stroke-width:1.0;" x1="181" x2="223" y1="340.8613" y2="340.8613"/><line style="stroke:#A80036;stroke-width:1.0;" x1="223" x2="223" y1="340.8613" y2="353.8613"/><line style="stroke:#A80036;stroke-width:1.0;" x1="182" x2="223" y1="353.8613" y2="353.8613"/><polygon fill="#A80036" points="192,349.8613,182,353.8613,192,357.8613,188,353.8613" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="77" x="188" y="336.1191">Modelに追加</text><path d="M277,328.0508 L277,353.0508 L454,353.0508 L454,338.0508 L444,328.0508 L277,328.0508 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><path d="M444,328.0508 L444,338.0508 L454,338.0508 L444,328.0508 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="156" x="283" y="345.6191">セッションには格納しない</text><polygon fill="#A80036" points="45,379.1719,35,383.1719,45,387.1719,41,383.1719" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="39" x2="175" y1="383.1719" y2="383.1719"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="52" x="51" y="378.4297">確認画面</text><polygon fill="#A80036" points="159,408.4824,169,412.4824,159,416.4824,163,412.4824" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="34" x2="165" y1="412.4824" y2="412.4824"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="57" x="41" y="407.7402">execute()</text><polygon fill="#A80036" points="325,437.793,335,441.793,325,445.793,329,441.793" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="181" x2="331" y1="441.793" y2="441.793"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="110" x="188" y="437.0508">delete(Integer no)</text><polygon fill="#A80036" points="474,470.1035,484,474.1035,474,478.1035,478,474.1035" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="347" x2="480" y1="474.1035" y2="474.1035"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="110" x="354" y="469.3613">delete(Integer no)</text><path d="M501,454.793 L501,479.793 L639,479.793 L639,464.793 L629,454.793 L501,454.793 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><path d="M629,454.793 L629,464.793 L639,464.793 L629,454.793 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="117" x="507" y="472.3613">物理でなく論理削除</text><polygon fill="#A80036" points="572,502.4141,582,506.4141,572,510.4141,576,506.4141" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="496" x2="578" y1="506.4141" y2="506.4141"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="63" x="503" y="501.6719">UPDATE文</text><polygon fill="#A80036" points="507,531.7246,497,535.7246,507,539.7246,503,535.7246" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="501" x2="588" y1="535.7246" y2="535.7246"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="27" x="513" y="530.9824">void</text><polygon fill="#A80036" points="358,561.0352,348,565.0352,358,569.0352,354,565.0352" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="352" x2="490" y1="565.0352" y2="565.0352"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="27" x="364" y="560.293">void</text><polygon fill="#A80036" points="192,590.3457,182,594.3457,192,598.3457,188,594.3457" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="186" x2="341" y1="594.3457" y2="594.3457"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="27" x="198" y="589.6035">void</text><line style="stroke:#A80036;stroke-width:1.0;" x1="181" x2="223" y1="623.6563" y2="623.6563"/><line style="stroke:#A80036;stroke-width:1.0;" x1="223" x2="223" y1="623.6563" y2="636.6563"/><line style="stroke:#A80036;stroke-width:1.0;" x1="182" x2="223" y1="636.6563" y2="636.6563"/><polygon fill="#A80036" points="192,632.6563,182,636.6563,192,640.6563,188,636.6563" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="142" x="188" y="618.9141">Modelに追加（商品名）</text><polygon fill="#A80036" points="45,664.9668,35,668.9668,45,672.9668,41,668.9668" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="39" x2="175" y1="668.9668" y2="668.9668"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="78" x="51" y="664.2246">リダイレクト</text><path d="M186,649.6563 L186,674.6563 L400,674.6563 L400,659.6563 L390,649.6563 L186,649.6563 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><path d="M390,649.6563 L390,659.6563 L400,659.6563 L390,649.6563 " fill="#FBFB77" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="193" x="192" y="667.2246">PRGパターンにより二重投稿防止</text><polygon fill="#A80036" points="159,697.2773,169,701.2773,159,705.2773,163,701.2773" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="34" x2="165" y1="701.2773" y2="701.2773"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="66" x="41" y="696.5352">complete()</text><polygon fill="#A80036" points="45,726.5879,35,730.5879,45,734.5879,41,730.5879" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="39" x2="175" y1="730.5879" y2="730.5879"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="52" x="51" y="725.8457">完了画面</text><!--MD5=[c52c05ca4081ad437a4c8937ab2363ed]
+@startuml
+skin rose
+skinparam shadowing false
+hide empty methods
+hide empty fields
+
+title UC013: 商品削除機能 シーケンス図
+skinparam shadowing false
+'hide footbox
+
+actor ユーザ
+
+activate ユーザ
+
+ユーザ -> ProductDeleteController : confirm(productId)
+activate ProductDeleteController
+
+ProductDeleteController -> ProductService : findById(productId)
+activate ProductService
+
+ProductService -> ProductRepository : findById(productId)
+activate ProductRepository
+
+database DB
+
+ProductRepository -> DB : SELECT文
+activate DB
+
+DB - -> ProductRepository : Product
+deactivate DB
+
+ProductRepository - -> ProductService : Product
+deactivate ProductRepository
+
+ProductService - -> ProductDeleteController
+deactivate ProductService
+
+ProductDeleteController -> ProductDeleteController : Modelに追加
+note right: セッションには格納しない
+
+ProductDeleteController - -> ユーザ : 確認画面
+deactivate ProductDeleteController
+
+ユーザ -> ProductDeleteController : execute()
+activate ProductDeleteController
+
+ProductDeleteController -> ProductService : delete(Integer no)
+activate ProductService
+
+ProductService -> ProductRepository : delete(Integer no)
+activate ProductRepository
+
+note right: 物理でなく論理削除
+ProductRepository -> DB : UPDATE文
+activate DB
+
+DB - -> ProductRepository : void
+deactivate DB
+
+ProductRepository - -> ProductService : void
+deactivate ProductRepository
+
+ProductService - -> ProductDeleteController : void
+deactivate ProductService
+
+ProductDeleteController -> ProductDeleteController : Modelに追加（商品名）
+
+ProductDeleteController - -> ユーザ : リダイレクト
+deactivate ProductDeleteController
+note right: PRGパターンにより二重投稿防止
+
+ユーザ -> ProductDeleteController : complete()
+activate ProductDeleteController
+
+ProductDeleteController - -> ユーザ : 完了画面
+deactivate ProductDeleteController
+
+@enduml
+
+@startuml
+skin rose
+skinparam shadowing false
+hide empty methods
+hide empty fields
+
+title UC013: 商品削除機能 シーケンス図
+skinparam shadowing false
+
+actor ユーザ
+
+activate ユーザ
+
+ユーザ -> ProductDeleteController : confirm(productId)
+activate ProductDeleteController
+
+ProductDeleteController -> ProductService : findById(productId)
+activate ProductService
+
+ProductService -> ProductRepository : findById(productId)
+activate ProductRepository
+
+database DB
+
+ProductRepository -> DB : SELECT文
+activate DB
+
+DB - -> ProductRepository : Product
+deactivate DB
+
+ProductRepository - -> ProductService : Product
+deactivate ProductRepository
+
+ProductService - -> ProductDeleteController
+deactivate ProductService
+
+ProductDeleteController -> ProductDeleteController : Modelに追加
+note right: セッションには格納しない
+
+ProductDeleteController - -> ユーザ : 確認画面
+deactivate ProductDeleteController
+
+ユーザ -> ProductDeleteController : execute()
+activate ProductDeleteController
+
+ProductDeleteController -> ProductService : delete(Integer no)
+activate ProductService
+
+ProductService -> ProductRepository : delete(Integer no)
+activate ProductRepository
+
+note right: 物理でなく論理削除
+ProductRepository -> DB : UPDATE文
+activate DB
+
+DB - -> ProductRepository : void
+deactivate DB
+
+ProductRepository - -> ProductService : void
+deactivate ProductRepository
+
+ProductService - -> ProductDeleteController : void
+deactivate ProductService
+
+ProductDeleteController -> ProductDeleteController : Modelに追加（商品名）
+
+ProductDeleteController - -> ユーザ : リダイレクト
+deactivate ProductDeleteController
+note right: PRGパターンにより二重投稿防止
+
+ユーザ -> ProductDeleteController : complete()
+activate ProductDeleteController
+
+ProductDeleteController - -> ユーザ : 完了画面
+deactivate ProductDeleteController
+
+@enduml
+
+PlantUML version 1.2022.0(Wed Jan 12 01:16:42 JST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: ja
+Country: JP
+--></g></svg>

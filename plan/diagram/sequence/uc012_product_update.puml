@@ -2,140 +2,70 @@
 
 title UC012: 商品修正機能 シーケンス図
 skinparam shadowing false
-'hide footbox
+actor "ユーザ" as user
+activate user
+participant "ProductUpdate\nController" as ctrl
+participant "ProductCategory\nService" as svc1
+participant "ProductCategory\nRepository" as repo1
+participant "Product\nService" as svc2
+participant "Product\nRepository" as repo2
+participant "ProductStock\nRepository" as repo3
+database DB as db
 
-actor ユーザ
+' 入力画面
+user -> ctrl ++ : form(productId)
+ctrl -> ctrl : setUpForm()
+ctrl -> ctrl : bind()
+ctrl -> svc1 ++ : findAll()
+note right: 商品カテゴリリスト取得
+svc1 -> repo1 ++ : findAll()
+repo1 -> db ++ : SELECT文
+db --> repo1 -- : List<ProductCategory>
+repo1 -> svc1 -- : List<ProductCategory>
+svc1 --> ctrl -- : List<ProductCategory>
+ctrl -> svc2 ++ : findById(productId)
+note right: 商品情報取得
+svc2 -> repo2 ++ : findById\n(productId)
+repo2 -> db ++ : SELECT文
+db --> repo2 -- : Product
+repo2 --> svc2 -- : Product
+svc2 --> ctrl -- : Product
+ctrl -> ctrl : エンティティから\nフォームに変換
+ctrl -> ctrl : Model追加\n（フォーム）
+ctrl -> ctrl : Model追加\n（商品カテゴリリスト）
+ctrl -> ctrl : Model追加\n（商品）
+ctrl -> user -- : 入力画面
 
-activate ユーザ
-
-ユーザ -> ProductUpdateController : form()
-activate ProductUpdateController
-
-ProductUpdateController -> ProductUpdateController : setUpForm()
-'note right: セッション生成
-
-ProductUpdateController -> ProductUpdateController : bind()
-
-ProductUpdateController -> ProductCategoryService : findAll()
-activate ProductCategoryService
-
-ProductCategoryService -> ProductCategoryRepository : findAll()
-activate ProductCategoryRepository
-
-participant ProductService
-
-participant ProductRepository
-
-participant ProductStockRepository
-
-database DB
-
-ProductCategoryRepository -> DB : SELECT文
-activate DB
-
-DB --> ProductCategoryRepository : List<ProductCategory>
-deactivate DB
-
-ProductCategoryRepository -> ProductCategoryService : List<ProductCategory>
-deactivate ProductCategoryRepository
-
-ProductCategoryService --> ProductUpdateController : List<ProductCategory>
-deactivate ProductCategoryService
-
-ProductUpdateController -> ProductService : findById(int)
-activate ProductService
-
-ProductService -> ProductRepository : findById(int)
-activate ProductRepository
-
-ProductRepository -> DB : SELECT文
-activate DB
-
-DB --> ProductRepository : Product
-deactivate DB
-
-ProductRepository --> ProductService : Product
-deactivate ProductRepository
-
-ProductService --> ProductUpdateController : Product
-deactivate ProductService
-
-ProductUpdateController -> ProductUpdateController : エンティティから\nフォームに変換
-ProductUpdateController -> ProductUpdateController : Model追加\n（フォーム）
-ProductUpdateController -> ProductUpdateController : Model追加\n（商品カテゴリリスト）
-ProductUpdateController -> ProductUpdateController : Model追加\n（商品）
-
-ProductUpdateController -> ユーザ : 入力画面
-deactivate ProductUpdateController
-
-ユーザ -> ユーザ : 商品情報修正
-
-ユーザ -> ProductUpdateController : confirm()
-activate ProductUpdateController
-
-ProductUpdateController -> ProductUpdateController : バリデート
-
-alt バリデート結果 エラーあり
-    ProductUpdateController -> ユーザ : 入力画面
-else バリデート結果 エラーなし
-    alt 画像修正あり
-        ProductUpdateController -> ProductUpdateController : セッション追加\n（新画像Base64）
-        ProductUpdateController -> ProductUpdateController : セッション追加\n（新画像バイトデータ）
-    else 画像修正なし
-        ProductUpdateController -> ProductUpdateController : Model追加\n（"/img/"+元画像ファイル名）
-    end
-    ProductUpdateController -> ユーザ : 確認画面
-    deactivate ProductUpdateController
-
-    ユーザ -> ユーザ : 入力内容確認
-
-    ユーザ -> ProductUpdateController : complete()
-    activate ProductUpdateController
-
-    ProductUpdateController -> ProductUpdateController : セッション確認
-    note right: フォームが空の場合はシステムエラー
-
-    ProductUpdateController -> ProductUpdateController : フォームから\nエンティティに変換
-
-    ProductUpdateController -> ProductService : update(Product product)
-    activate ProductService
-
-    ProductService -> ProductRepository : update(Product product)
-    activate ProductRepository
-
-    ProductRepository -> DB : UPDATE文
-
-    activate DB
-
-    DB --> ProductRepository : void
-
-    deactivate DB
-
-    ProductRepository --> ProductService : void
-    deactivate ProductRepository
-
-    ProductService -> ProductStockRepository : update(ProductStock)
-    activate ProductStockRepository
-
-    ProductStockRepository -> DB : UPDATE文
-    activate DB
-
-    DB --> ProductStockRepository : void
-
-    deactivate DB
-
-    ProductStockRepository --> ProductService : void
-    deactivate ProductStockRepository
-
-    ProductService --> ProductUpdateController : void
-    deactivate ProductService
-
-    ProductUpdateController -> ProductUpdateController : セッション破棄
-
-    ProductUpdateController -> ProductUpdateController : Model追加（商品名）
-
-    ProductUpdateController -> ユーザ : 完了画面
-    deactivate ProductUpdateController
+' 確認画面
+user -> user : 商品情報修正
+user -> ctrl ++ : confirm()
+ctrl -> ctrl : バリデート
+alt 画像修正あり
+    ctrl -> ctrl : セッション追加\n（新画像Base64）
+    ctrl -> ctrl : セッション追加\n（新画像バイトデータ）
+else 画像修正なし
+    ctrl -> ctrl : Model追加\n（"/img/"+ファイル名）
 end
+ctrl -> user -- : 確認画面
+
+' 完了画面
+user -> user : 入力内容確認
+user -> ctrl ++ : complete()
+ctrl -> ctrl : セッション確認
+note right: フォームが空の場合はシステムエラー
+ctrl -> ctrl : フォームから\nエンティティに変換
+ctrl -> svc2 ++ : update(Product)
+svc2 -> repo2 ++ : update(Product)
+repo2 -> db ++ : UPDATE文
+db --> repo2 -- : void
+repo2 --> svc2 -- : void
+svc2 -> repo3 ++ : update(ProductStock)
+repo3 -> db ++ : UPDATE文
+db --> repo3 -- : void
+repo3 --> svc2 -- : void
+svc2 --> ctrl -- : void
+ctrl -> ctrl : セッション破棄
+ctrl -> ctrl : Model追加（商品名）
+ctrl -> user -- : 完了画面
 
 @enduml

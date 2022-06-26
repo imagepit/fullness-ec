@@ -1,38 +1,67 @@
 @startuml
 
-skinparam shadowing false
-hide empty methods
-hide empty fields
+title entityパッケージ
 left to right direction
 
 package entity{
-    class Product{
-        - Integer id
-        - String name
-        - Integer price
-        - String imageUrl
-        - ProductCategory productCategory
-        - Integer deleteFlag
+    class Product<<@Data>>{
+        - id:Integer 
+        - name:String 
+        - price:Integer
+        - imageUrl:String
+        - productCategory:ProductCategory 
+        - deleteFlag:Integer
     }
-    class ProductCategory{
-        - Integer id
-        - String name
+    class ProductCategory<<@Data>>{
+        - id:Integer
+        - name:String
     }
-    class ProductStock{
-        - Integer id
-        - Integer quantity
+    class ProductStock<<@Data>>{
+        - id:Integer
+        - quantity:Integer
+        - productId:Integer
     }
-    class EmployeeAccount{
-        - Integer id
-        - String name
-        - String password
-        - Integer employeeId
+    class EmployeeAccount<<@Data>>{
+        - id:Integer
+        - name:String
+        - password:String
+        - employeeId:Integer
     }
-    class Employee{
-        - Integer id
-        - String name
-        - String nameKana
-        - Integer departmentId
+    class Employee<<@Data>>{
+        - id:Integer
+        - name:String
+        - nameKana:String
+        - departmentId:Integer
+    }
+    class Customer<<@Data>>{
+        - id:Integer
+        - name:String
+        - nameKana:String
+        - address1:String
+        - address2:String
+        - phoneNumber:String
+        - mailAddress:String
+        - username:String
+        - password:String
+        - Date registerDate
+    }
+    class Order<<@Data>>{
+        - id:Integer
+        - customerId:Integer
+        - orderStatusId:Integer
+        - orderDate:Date
+        - amountTotal:Integer
+    }
+    class OrderStatus<<@Data>>{
+        - id:Integer
+        - name:String
+    }
+    class OrderDetail<<@Data>>{
+        - id:Integer
+        - orderId:Integer
+        - productId:Integer
+        - customerId:Integer
+        - count:Integer
     }
 }
 @enduml

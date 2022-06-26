@@ -1,13 +1,11 @@
 @startuml
 
-skinparam shadowing false
-hide empty methods
-hide empty fields
+title configパッケージ
 left to right direction
 
 package config{
-    class ApplicationConfig <<@Configuration>>{
-        void addResource(ResourceHandlerRegistry registry)
+    class AppConfig <<@Configuration>>{
+        addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) : void
     }
 }
 

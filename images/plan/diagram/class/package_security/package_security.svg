@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="747px" preserveAspectRatio="none" style="width:924px;height:747px;background:#FFFFFF;" version="1.1" viewBox="0 0 924 747" width="924px" zoomAndPan="magnify"><defs/><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="157" x="377" y="17.4023">securityパッケージ</text><!--MD5=[c1658959ae7efea6f1f166ee65b2b4aa]
+cluster security--><polygon fill="#FFFFFF" points="16,27.1992,79,27.1992,86,49.6875,907,49.6875,907,740.1992,16,740.1992,16,27.1992" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="16" x2="86" y1="49.6875" y2="49.6875"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="57" x="20" y="42.7344">security</text><!--MD5=[f041cc0e6980a2ec9e38a4d19d05ff1c]
+class EmployeeAccountUserDetails--><rect codeLine="6" fill="#FEFECE" height="164.5957" id="EmployeeAccountUserDetails" style="stroke:#A80036;stroke-width:1.5;" width="340" x="78" y="62.6992"/><ellipse cx="160.75" cy="78.6992" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M163.2231,84.8423 Q162.6421,85.1411 162.0029,85.2905 Q161.3638,85.4399 160.6582,85.4399 Q158.1514,85.4399 156.8315,83.7881 Q155.5117,82.1362 155.5117,79.0151 Q155.5117,75.8857 156.8315,74.2339 Q158.1514,72.582 160.6582,72.582 Q161.3638,72.582 162.0112,72.7314 Q162.6587,72.8809 163.2231,73.1797 L163.2231,75.9023 Q162.5923,75.3213 161.9988,75.0515 Q161.4053,74.7817 160.7744,74.7817 Q159.4297,74.7817 158.7449,75.8484 Q158.0601,76.915 158.0601,79.0151 Q158.0601,81.1069 158.7449,82.1736 Q159.4297,83.2402 160.7744,83.2402 Q161.4053,83.2402 161.9988,82.9705 Q162.5923,82.7007 163.2231,82.1196 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="166" x="181.25" y="83.2344">EmployeeAccountUserDetails</text><line style="stroke:#A80036;stroke-width:1.5;" x1="79" x2="417" y1="94.6992" y2="94.6992"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="86" y="102.6992"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="148" x="98" y="109.334">account : EmployeeAccount</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="86" y="115.6543"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="230" x="98" y="122.2891">authorites : Collection&lt;GrantedAuthority&gt;</text><line style="stroke:#A80036;stroke-width:1.5;" x1="79" x2="417" y1="128.6094" y2="128.6094"/><ellipse cx="89" cy="139.6094" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="314" x="98" y="143.2441">getAuthorities() : Collection&lt;? extends GrantedAuthority&gt;</text><ellipse cx="89" cy="152.5645" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="117" x="98" y="156.1992">getPassword() : String</text><ellipse cx="89" cy="165.5195" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="120" x="98" y="169.1543">getUsername() : String</text><ellipse cx="89" cy="178.4746" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="177" x="98" y="182.1094">isAccountNonExpired() : boolean</text><ellipse cx="89" cy="191.4297" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="174" x="98" y="195.0645">isAccountNonLocked() : boolean</text><ellipse cx="89" cy="204.3848" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="193" x="98" y="208.0195">isCredentialsNonExpired() : boolean</text><ellipse cx="89" cy="217.3398" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="111" x="98" y="220.9746">isEnabled() : boolean</text><!--MD5=[a6cf71837a01d26cf2dd86d57e2146b1]
+class EmployeeAccountUserDetailsService--><rect codeLine="17" fill="#FEFECE" height="73.9102" id="EmployeeAccountUserDetailsService" style="stroke:#A80036;stroke-width:1.5;" width="343" x="548" y="282.1992"/><ellipse cx="612.25" cy="298.1992" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M614.7231,304.3423 Q614.1421,304.6411 613.5029,304.7905 Q612.8638,304.9399 612.1582,304.9399 Q609.6514,304.9399 608.3315,303.2881 Q607.0117,301.6362 607.0117,298.5151 Q607.0117,295.3857 608.3315,293.7339 Q609.6514,292.082 612.1582,292.082 Q612.8638,292.082 613.5112,292.2314 Q614.1587,292.3809 614.7231,292.6797 L614.7231,295.4023 Q614.0923,294.8213 613.4988,294.5515 Q612.9053,294.2817 612.2744,294.2817 Q610.9297,294.2817 610.2449,295.3484 Q609.5601,296.415 609.5601,298.5151 Q609.5601,300.6069 610.2449,301.6736 Q610.9297,302.7402 612.2744,302.7402 Q612.9053,302.7402 613.4988,302.4705 Q614.0923,302.2007 614.7231,301.6196 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="206" x="632.75" y="302.7344">EmployeeAccountUserDetailsService</text><line style="stroke:#A80036;stroke-width:1.5;" x1="549" x2="890" y1="314.1992" y2="314.1992"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="556" y="322.1992"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="317" x="568" y="328.834">employeeAccountRepository : EmployeeAccountRepository</text><line style="stroke:#A80036;stroke-width:1.5;" x1="549" x2="890" y1="335.1543" y2="335.1543"/><ellipse cx="559" cy="346.1543" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="280" x="568" y="349.7891">loadUserByUsername(String username) : UserDetails</text><!--MD5=[04bc60c47ff5f2766d654f0df24eafe1]
+class EmployeeAccountSecurityConfig--><rect codeLine="22" fill="#FEFECE" height="112.7754" id="EmployeeAccountSecurityConfig" style="stroke:#A80036;stroke-width:1.5;" width="432" x="32" y="262.6992"/><ellipse cx="153.25" cy="278.6992" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M155.7231,284.8423 Q155.1421,285.1411 154.5029,285.2905 Q153.8638,285.4399 153.1582,285.4399 Q150.6514,285.4399 149.3315,283.7881 Q148.0117,282.1362 148.0117,279.0151 Q148.0117,275.8857 149.3315,274.2339 Q150.6514,272.582 153.1582,272.582 Q153.8638,272.582 154.5112,272.7314 Q155.1587,272.8809 155.7231,273.1797 L155.7231,275.9023 Q155.0923,275.3213 154.4988,275.0515 Q153.9053,274.7817 153.2744,274.7817 Q151.9297,274.7817 151.2449,275.8484 Q150.5601,276.915 150.5601,279.0151 Q150.5601,281.1069 151.2449,282.1736 Q151.9297,283.2402 153.2744,283.2402 Q153.9053,283.2402 154.4988,282.9705 Q155.0923,282.7007 155.7231,282.1196 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="181" x="173.75" y="283.2344">EmployeeAccountSecurityConfig</text><line style="stroke:#A80036;stroke-width:1.5;" x1="33" x2="463" y1="294.6992" y2="294.6992"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="40" y="302.6992"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="321" x="52" y="309.334">accountDetailsService : EmployeeAccountUserDetailsService</text><line style="stroke:#A80036;stroke-width:1.5;" x1="33" x2="463" y1="315.6543" y2="315.6543"/><ellipse cx="43" cy="326.6543" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="208" x="52" y="330.2891">passwordEncoder() : PasswordEncoder</text><ellipse cx="43" cy="339.6094" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="406" x="52" y="343.2441">configureAuthenticationManager(AuthenticationManagerBuilder auth) : void</text><ellipse cx="43" cy="352.5645" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="181" x="52" y="356.1992">configure(WebSecurity web) : void</text><ellipse cx="43" cy="365.5195" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="183" x="52" y="369.1543">configure(HttpSecurity http) : void</text><!--MD5=[07cead5c30481765d150f13f288401cc]
+class CustomerAccountUserDetails--><rect codeLine="29" fill="#FEFECE" height="164.5957" id="CustomerAccountUserDetails" style="stroke:#A80036;stroke-width:1.5;" width="340" x="78" y="410.6992"/><ellipse cx="161.25" cy="426.6992" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M163.7231,432.8423 Q163.1421,433.1411 162.5029,433.2905 Q161.8638,433.4399 161.1582,433.4399 Q158.6514,433.4399 157.3315,431.7881 Q156.0117,430.1362 156.0117,427.0151 Q156.0117,423.8857 157.3315,422.2339 Q158.6514,420.582 161.1582,420.582 Q161.8638,420.582 162.5112,420.7314 Q163.1587,420.8809 163.7231,421.1797 L163.7231,423.9023 Q163.0923,423.3213 162.4988,423.0515 Q161.9053,422.7817 161.2744,422.7817 Q159.9297,422.7817 159.2449,423.8484 Q158.5601,424.915 158.5601,427.0151 Q158.5601,429.1069 159.2449,430.1736 Q159.9297,431.2402 161.2744,431.2402 Q161.9053,431.2402 162.4988,430.9705 Q163.0923,430.7007 163.7231,430.1196 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="165" x="181.75" y="431.2344">CustomerAccountUserDetails</text><line style="stroke:#A80036;stroke-width:1.5;" x1="79" x2="417" y1="442.6992" y2="442.6992"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="86" y="450.6992"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="105" x="98" y="457.334">account : Customer</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="86" y="463.6543"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="230" x="98" y="470.2891">authorites : Collection&lt;GrantedAuthority&gt;</text><line style="stroke:#A80036;stroke-width:1.5;" x1="79" x2="417" y1="476.6094" y2="476.6094"/><ellipse cx="89" cy="487.6094" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="314" x="98" y="491.2441">getAuthorities() : Collection&lt;? extends GrantedAuthority&gt;</text><ellipse cx="89" cy="500.5645" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="117" x="98" y="504.1992">getPassword() : String</text><ellipse cx="89" cy="513.5195" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="120" x="98" y="517.1543">getUsername() : String</text><ellipse cx="89" cy="526.4746" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="177" x="98" y="530.1094">isAccountNonExpired() : boolean</text><ellipse cx="89" cy="539.4297" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="174" x="98" y="543.0645">isAccountNonLocked() : boolean</text><ellipse cx="89" cy="552.3848" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="193" x="98" y="556.0195">isCredentialsNonExpired() : boolean</text><ellipse cx="89" cy="565.3398" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="111" x="98" y="568.9746">isEnabled() : boolean</text><!--MD5=[de8ff5df62a666dfe57573f433cca166]
+class CustomerUserDetailsService--><rect codeLine="40" fill="#FEFECE" height="73.9102" id="CustomerUserDetailsService" style="stroke:#A80036;stroke-width:1.5;" width="306" x="566.5" y="630.1992"/><ellipse cx="635.25" cy="646.1992" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M637.7231,652.3423 Q637.1421,652.6411 636.5029,652.7905 Q635.8638,652.9399 635.1582,652.9399 Q632.6514,652.9399 631.3315,651.2881 Q630.0117,649.6362 630.0117,646.5151 Q630.0117,643.3857 631.3315,641.7339 Q632.6514,640.082 635.1582,640.082 Q635.8638,640.082 636.5112,640.2314 Q637.1587,640.3809 637.7231,640.6797 L637.7231,643.4023 Q637.0923,642.8213 636.4988,642.5515 Q635.9053,642.2817 635.2744,642.2817 Q633.9297,642.2817 633.2449,643.3484 Q632.5601,644.415 632.5601,646.5151 Q632.5601,648.6069 633.2449,649.6736 Q633.9297,650.7402 635.2744,650.7402 Q635.9053,650.7402 636.4988,650.4705 Q637.0923,650.2007 637.7231,649.6196 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="160" x="655.75" y="650.7344">CustomerUserDetailsService</text><line style="stroke:#A80036;stroke-width:1.5;" x1="567.5" x2="871.5" y1="662.1992" y2="662.1992"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="574.5" y="670.1992"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="229" x="586.5" y="676.834">customerRepository : CustomerRepository</text><line style="stroke:#A80036;stroke-width:1.5;" x1="567.5" x2="871.5" y1="683.1543" y2="683.1543"/><ellipse cx="577.5" cy="694.1543" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="280" x="586.5" y="697.7891">loadUserByUsername(String username) : UserDetails</text><!--MD5=[5025931cf95991b829f46483cdc88f3c]
+class CustomerSecurityConfig--><rect codeLine="45" fill="#FEFECE" height="112.7754" id="CustomerSecurityConfig" style="stroke:#A80036;stroke-width:1.5;" width="432" x="32" y="610.6992"/><ellipse cx="176.25" cy="626.6992" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M178.7231,632.8423 Q178.1421,633.1411 177.5029,633.2905 Q176.8638,633.4399 176.1582,633.4399 Q173.6514,633.4399 172.3315,631.7881 Q171.0117,630.1362 171.0117,627.0151 Q171.0117,623.8857 172.3315,622.2339 Q173.6514,620.582 176.1582,620.582 Q176.8638,620.582 177.5112,620.7314 Q178.1587,620.8809 178.7231,621.1797 L178.7231,623.9023 Q178.0923,623.3213 177.4988,623.0515 Q176.9053,622.7817 176.2744,622.7817 Q174.9297,622.7817 174.2449,623.8484 Q173.5601,624.915 173.5601,627.0151 Q173.5601,629.1069 174.2449,630.1736 Q174.9297,631.2402 176.2744,631.2402 Q176.9053,631.2402 177.4988,630.9705 Q178.0923,630.7007 178.7231,630.1196 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="135" x="196.75" y="631.2344">CustomerSecurityConfig</text><line style="stroke:#A80036;stroke-width:1.5;" x1="33" x2="463" y1="642.6992" y2="642.6992"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="40" y="650.6992"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="286" x="52" y="657.334">customerDetailsService : CustomerUserDetailsService</text><line style="stroke:#A80036;stroke-width:1.5;" x1="33" x2="463" y1="663.6543" y2="663.6543"/><ellipse cx="43" cy="674.6543" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="208" x="52" y="678.2891">passwordEncoder() : PasswordEncoder</text><ellipse cx="43" cy="687.6094" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="406" x="52" y="691.2441">configureAuthenticationManager(AuthenticationManagerBuilder auth) : void</text><ellipse cx="43" cy="700.5645" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="181" x="52" y="704.1992">configure(WebSecurity web) : void</text><ellipse cx="43" cy="713.5195" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="183" x="52" y="717.1543">configure(HttpSecurity http) : void</text><!--MD5=[7ae6f259b300faeb6aff337d7c92164c]
+link EmployeeAccountSecurityConfig to EmployeeAccountUserDetailsService--><path codeLine="53" d="M464.17,319.1992 C490.52,319.1992 517.2,319.1992 542.87,319.1992 " fill="none" id="EmployeeAccountSecurityConfig-to-EmployeeAccountUserDetailsService" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="547.99,319.1992,538.99,315.1992,542.99,319.1992,538.99,323.1992,547.99,319.1992" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="22" x="495" y="315.7676">use</text><!--MD5=[9c783afbc146b9b5e3e111d759f37ae8]
+link CustomerSecurityConfig to CustomerUserDetailsService--><path codeLine="54" d="M464.17,667.1992 C496.78,667.1992 529.9,667.1992 560.99,667.1992 " fill="none" id="CustomerSecurityConfig-to-CustomerUserDetailsService" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="566.37,667.1992,557.37,663.1992,561.37,667.1992,557.37,671.1992,566.37,667.1992" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="22" x="495" y="663.7676">use</text><!--MD5=[3c3744572c9659d5a1750c129f4b4e90]
+@startuml
+skin rose
+skinparam shadowing false
+hide empty methods
+hide empty fields
+
+title securityパッケージ
+left to right direction
+
+package security{
+    class EmployeeAccountUserDetails{
+        - account : EmployeeAccount
+        - authorites : Collection<GrantedAuthority>
+        + getAuthorities() : Collection<? extends GrantedAuthority>
+        + getPassword() : String
+        + getUsername() : String
+        + isAccountNonExpired() : boolean
+        + isAccountNonLocked() : boolean
+        + isCredentialsNonExpired() : boolean
+        + isEnabled() : boolean
+    }
+    class EmployeeAccountUserDetailsService{
+        - employeeAccountRepository : EmployeeAccountRepository
+        + loadUserByUsername(String username) : UserDetails
+'        + getAuthority(EmployeeAccount account) : Collection<GrantedAuthority>
+    }
+    class EmployeeAccountSecurityConfig{
+        - accountDetailsService : EmployeeAccountUserDetailsService
+        + passwordEncoder() : PasswordEncoder
+        + configureAuthenticationManager(AuthenticationManagerBuilder auth) : void
+        + configure(WebSecurity web) : void
+        + configure(HttpSecurity http) : void
+    }
+    class CustomerAccountUserDetails{
+        - account : Customer
+        - authorites : Collection<GrantedAuthority>
+        + getAuthorities() : Collection<? extends GrantedAuthority>
+        + getPassword() : String
+        + getUsername() : String
+        + isAccountNonExpired() : boolean
+        + isAccountNonLocked() : boolean
+        + isCredentialsNonExpired() : boolean
+        + isEnabled() : boolean
+    }
+    class CustomerUserDetailsService{
+        - customerRepository : CustomerRepository
+        + loadUserByUsername(String username) : UserDetails
+'        + getAuthority(EmployeeAccount account) : Collection<GrantedAuthority>
+    }
+    class CustomerSecurityConfig{
+        - customerDetailsService : CustomerUserDetailsService
+        + passwordEncoder() : PasswordEncoder
+        + configureAuthenticationManager(AuthenticationManagerBuilder auth) : void
+        + configure(WebSecurity web) : void
+        + configure(HttpSecurity http) : void
+    }
+}
+EmployeeAccountSecurityConfig - -> EmployeeAccountUserDetailsService :use
+CustomerSecurityConfig - -> CustomerUserDetailsService :use
+
+@enduml
+
+@startuml
+skin rose
+skinparam shadowing false
+hide empty methods
+hide empty fields
+
+title securityパッケージ
+left to right direction
+
+package security{
+    class EmployeeAccountUserDetails{
+        - account : EmployeeAccount
+        - authorites : Collection<GrantedAuthority>
+        + getAuthorities() : Collection<? extends GrantedAuthority>
+        + getPassword() : String
+        + getUsername() : String
+        + isAccountNonExpired() : boolean
+        + isAccountNonLocked() : boolean
+        + isCredentialsNonExpired() : boolean
+        + isEnabled() : boolean
+    }
+    class EmployeeAccountUserDetailsService{
+        - employeeAccountRepository : EmployeeAccountRepository
+        + loadUserByUsername(String username) : UserDetails
+    }
+    class EmployeeAccountSecurityConfig{
+        - accountDetailsService : EmployeeAccountUserDetailsService
+        + passwordEncoder() : PasswordEncoder
+        + configureAuthenticationManager(AuthenticationManagerBuilder auth) : void
+        + configure(WebSecurity web) : void
+        + configure(HttpSecurity http) : void
+    }
+    class CustomerAccountUserDetails{
+        - account : Customer
+        - authorites : Collection<GrantedAuthority>
+        + getAuthorities() : Collection<? extends GrantedAuthority>
+        + getPassword() : String
+        + getUsername() : String
+        + isAccountNonExpired() : boolean
+        + isAccountNonLocked() : boolean
+        + isCredentialsNonExpired() : boolean
+        + isEnabled() : boolean
+    }
+    class CustomerUserDetailsService{
+        - customerRepository : CustomerRepository
+        + loadUserByUsername(String username) : UserDetails
+    }
+    class CustomerSecurityConfig{
+        - customerDetailsService : CustomerUserDetailsService
+        + passwordEncoder() : PasswordEncoder
+        + configureAuthenticationManager(AuthenticationManagerBuilder auth) : void
+        + configure(WebSecurity web) : void
+        + configure(HttpSecurity http) : void
+    }
+}
+EmployeeAccountSecurityConfig - -> EmployeeAccountUserDetailsService :use
+CustomerSecurityConfig - -> CustomerUserDetailsService :use
+
+@enduml
+
+PlantUML version 1.2022.0(Wed Jan 12 01:16:42 JST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: ja
+Country: JP
+--></g></svg>

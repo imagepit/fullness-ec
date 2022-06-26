@@ -1,8 +1,6 @@
 @startuml
 
-skinparam shadowing false
-hide empty methods
-hide empty fields
+title controllerパッケージ
 left to right direction
 
 package controller{
@@ -11,47 +9,50 @@ package controller{
     }
     package backend{
         class MenuController{
-            + String menu()
+            + menu() : String
         }
         class LoginController{
-            - EmployeeAccountService service
-            + LoginForm setUpForm()
-            + String form()
+            - service : EmployeeAccountService
+            + setUpForm() : LoginForm
+            + form() : String
         }
         class ProductSearchController{
-            - ProductService productService
-            - ProductCategoryService productCategoryService
-            + String index(Model model)
-            + String search(Model model)
+            - productService : ProductService
+            - productCategoryService : ProductCategoryService
+            + list(Model model) : String
+            + search(Model model) : String
         }
         class ProductAddController{
-            - ProductFormValidator validator
-            - ProductService productService
-            - ProductCategoryService productCategoryService
-            + ProductForm setUpForm()
-            + void bind(WebDataBinder binder)
-            + String form(Model model)
-            + String confirm(ProductForm form, BindingResult result, Model model)
-            + String complete(ProductForm form, SessionStatus session)
-            + String cancel()
+            - validator : ProductFormValidator
+            - productService : ProductService
+            - productCategoryService : ProductCategoryService
+            + setUpForm() : ProductForm
+            + bind(WebDataBinder binder) : void
+            + form(Model model) : String
+            + confirm(ProductForm form, BindingResult result, Model model) : String
+            + execute(ProductForm form) : String
+            + complete(ProductForm form, SessionStatus session) : String
+            + cancel() : String
         }
         class ProductUpdateController{
-            - ProductFormValidator validator
-            - ProductService productService
-            - ProductCategoryService productCategoryService
-            + ProductForm setUpForm()
-            + void bind(WebDataBinder binder)
-            + String form(Model model)
-            + String confirm(ProductForm form, BindingResult result, Model model)
-            + String complete(ProductForm form, SessionStatus session)
-            + String cancel(SessionStatus session)
+            - validator : ProductFormValidator
+            - productService : ProductService
+            - productCategoryService : ProductCategoryService
+            + setUpForm() : ProductForm
+            + bind(WebDataBinder binder) : void
+            + form(Model model) : String
+            + confirm(ProductForm form, BindingResult result, Model model) : String
+            + execute(ProductForm form) : String
+            + complete(ProductForm form, SessionStatus session) : String
+            + cancel(SessionStatus session) : String
         }
         class ProductDeleteController{
-            - ProductService productService
-            - ProductCategoryService productCategoryService
-            + String confirm(ProductForm form, BindingResult result, Model model)
-            + String complete(ProductForm form, SessionStatus session)
-            + String cancel(SessionStatus session)
+            - productService : ProductService
+            - productCategoryService : ProductCategoryService
+            + confirm(ProductForm form, BindingResult result, Model model) : String
+            + complete(ProductForm form, SessionStatus session) : String
+            + execute(ProductForm form) : String
+            + cancel(SessionStatus session) : String
         }
         class ProductCategoryAddController{
             - ProductCategoryService productCategoryService
@@ -61,14 +62,15 @@ package controller{
             + String cancel(SessionStatus session)
         }
         class EmployeeAccountAddController{
-            - EmployeeAccountService employeeAccountService
-            - EmployeeAccountFormValidator validator
-            + EmployeeAccountForm setUpForm()
-            + void bind(WebDataBinder binder)
-            + String form(Model model)
-            + String confirm(EmployeeAccountForm form, BindingResult result, Model model)
-            + String complete(EmployeeAccountForm form)
-            + String cancel(SessionStatus session)
+            - employeeAccountService : EmployeeAccountService
+            - validator : EmployeeAccountFormValidator
+            + setUpForm() : EmployeeAccountForm
+            + bind(WebDataBinder binder) : void
+            + form(Model model) : String
+            + confirm(EmployeeAccountForm form, BindingResult result, Model model) : String
+            + execute(EmployeeAccountForm form) : String
+            + complete(EmployeeAccountForm form) : String
+            + cancel(SessionStatus session) : String
         }
     }
 }

@@ -1,5 +1,5 @@
 var gulp = require("gulp");
-var sass = require("gulp-sass");
+var sass = require('gulp-sass')(require('sass'));
 var plumber = require("gulp-plumber");
 var notify = require("gulp-notify");
 var pug = require("gulp-pug");
@@ -42,6 +42,6 @@ gulp.task("sass", () => {
         .pipe(gulp.dest("./src/main/resources/static/css/"))
 });
 
-gulp.task('default', gulp.series(gulp.parallel('sass', 'pug', 'watch'), function () {
-    // タスクの記述
+gulp.task('default', gulp.series(gulp.parallel('sass', 'pug', 'watch'), function (done) {
+    done();
 }));

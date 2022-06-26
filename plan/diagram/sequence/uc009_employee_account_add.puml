@@ -2,92 +2,50 @@
 
 title UC009: 担当者アカウント登録機能 シーケンス図
 skinparam shadowing false
-'hide footbox
 
-actor ユーザ
-activate ユーザ
+actor ユーザ as user
+activate user
+participant "EmployeeAccountAdd\nController" as controller
+participant "Employee\nService" as svc1
+participant "Employee\nRepository" as repo1
+participant "EmployeeAccount\nService" as svc2
+participant "EmployeeAccount\nRepository" as repo2
+database DB as db
 
-ユーザ -> EmployeeAccountAddController : form()
-activate EmployeeAccountAddController
+' 入力画面
+user -> controller ++ : form()
+controller -> controller : setUpForm()
+controller -> controller : bind()
+controller -> svc1 ++ : findAll()
+svc1 -> repo1 ++ : findAll()
+repo1 -> db ++ : SELECT文
+repo1 <-- db -- : List<Employee>
+svc1 <- repo1 -- : List<Employee>
+controller <-- svc1 --  : List<Employee>
+controller -> user -- : 入力画面
 
-EmployeeAccountAddController -> EmployeeAccountAddController : setUpForm()
+' 確認画面
+user -> user : 商品情報入力
+user -> controller ++ : confirm()
+controller -> controller : バリデート
+controller --> user -- : 確認画面
 
-EmployeeAccountAddController -> EmployeeAccountAddController : bind()
-
-EmployeeAccountAddController -> EmployeeService : findAll()
-activate EmployeeService
-
-EmployeeService -> EmployeeRepository : findAll()
-activate EmployeeRepository
-
-participant EmployeeAccountService
-
-participant EmployeeAccountRepository
-
-database DB
-
-EmployeeRepository -> DB : SELECT文
-activate DB
-
-DB --> EmployeeRepository : List<Employee>
-deactivate DB
-
-EmployeeRepository -> EmployeeService : List<Employee>
-deactivate EmployeeRepository
-
-EmployeeService --> EmployeeAccountAddController : List<Employee>
-deactivate EmployeeService
-
-EmployeeAccountAddController -> ユーザ : 入力画面
-deactivate EmployeeAccountAddController
-
-ユーザ -> ユーザ : 商品情報入力
-
-ユーザ -> EmployeeAccountAddController : confirm()
-activate EmployeeAccountAddController
-
-EmployeeAccountAddController -> EmployeeAccountAddController : バリデート
-
-alt バリデート結果 エラーあり
-	EmployeeAccountAddController --> ユーザ : 入力画面
-else バリデート結果 エラーなし
-	EmployeeAccountAddController --> ユーザ : 確認画面
-	deactivate EmployeeAccountAddController
-
-	ユーザ -> ユーザ : 入力内容確認
-
-    ユーザ -> EmployeeAccountAddController : complete()
-    activate EmployeeAccountAddController
-
-    EmployeeAccountAddController -> EmployeeAccountAddController : セッション確認
-    note right: フォームデータが空ならシステムエラー
-
-    EmployeeAccountAddController -> EmployeeAccountAddController : フォームからエンティティに変換
-
-    EmployeeAccountAddController -> EmployeeAccountService : insert(EmpployeeAccount)
-    activate EmployeeAccountService
-
-    EmployeeAccountService -> EmployeeAccountRepository : insert(EmpployeeAccount)
-    activate EmployeeAccountRepository
-
-    EmployeeAccountRepository -> DB : INSERT文
-    activate DB
-
-    DB --> EmployeeAccountRepository : void
-    deactivate DB
-
-    EmployeeAccountRepository --> EmployeeAccountService : void
-    deactivate EmployeeAccountRepository
-
-    EmployeeAccountService -> EmployeeAccountAddController : void
-    deactivate EmployeeAccountService
-
-    EmployeeAccountAddController -> EmployeeAccountAddController : セッション破棄
-
-    EmployeeAccountAddController -> EmployeeAccountAddController : Model追加（アカウント名、名前）
-
-    EmployeeAccountAddController -> ユーザ : 完了画面
-    deactivate EmployeeAccountAddController
-end
-
+' 完了画面
+user -> user : 入力内容確認
+user -> controller ++ : execute()
+controller -> controller : セッション確認
+' note right: フォームデータが\n空ならシステムエラー
+controller -> controller : フォームから\nエンティティに変換
+controller -> svc2 ++ : insert\n(EmpployeeAccount)
+svc2 -> repo2 ++ : insert\n(EmpployeeAccount)
+repo2 -> db ++ : INSERT文
+repo2 <-- db -- : void
+svc2 <-- repo2 -- : void
+svc2 -> controller -- : void
+user <-- controller : リダイレクト
+user -> controller : complete()
+controller -> controller : セッション破棄
+controller -> controller : Model追加
+controller -> user -- : 完了画面
+deactivate user
 @enduml

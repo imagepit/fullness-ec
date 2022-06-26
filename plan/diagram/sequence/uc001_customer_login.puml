@@ -1,0 +1,34 @@
+@startuml
+
+title UC002: 顧客ログイン機能 シーケンス図
+
+actor "ユーザ" as user
+activate user
+participant "CustomerLogin\nController" as ctrl1
+participant "Top\nController" as ctrl2
+participant "SpringSecurity" as sec
+participant "Customer\nUserDetailsService" as svc
+participant "Customer\nRepository" as repo
+participant "Customer\nUserDetails" as ud
+database DB as db
+
+user -> ctrl1 ++ : form()
+ctrl1 -> user -- : ログイン画面
+user -> sec ++ : 認証
+sec -> svc ++ : loadUserByUsername()
+svc -> repo ++ : findByUserName\n(userName)
+repo -> db ++ : SELECT文
+db --> repo -- : EmployeeAccount
+repo --> svc -- : EmployeeAccount
+svc -> ud ++ : new
+ud --> svc -- : EmployeeAccount\nUserDetails
+svc --> sec -- : EmployeeAccount\nUserDetails
+sec -> sec : 認証
+sec -> sec : セッションに格納
+sec --> user -- : リダイレクト要求
+user -> ctrl2 ++ : menu()
+ctrl2 --> user -- : トップ画面
+
+deactivate user
+
+@enduml

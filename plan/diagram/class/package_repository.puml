@@ -1,37 +1,48 @@
 @startuml
 
-skinparam shadowing false
-hide empty methods
-hide empty fields
+title repositoryパッケージ
 left to right direction
 
 package repository{
     interface ProductRepository{
-        List<Product> findAll()
-        List<Product> findByCategoryId(int productCategoryId)
-        Product findById(Integer id)
-        void insert(Product product)
-        void update(Product product)
-        void delete(Integer id)
+        + {abstract} findAll() : List<Product>
+        + {abstract} findByCategoryId(int productCategoryId) : List<Product>
+        + {abstract} findById(Integer id) : Product
+        + {abstract} insert(Product product) : void
+        + {abstract} update(Product product) : void
+        + {abstract} delete(Integer id) : void
     }
     interface ProductCategoryRepository{
-        List<ProductCategory> findAll()
-        ProductCategory findById(Integer id)
-        void insert(ProductCategory productCategory)
+        + {abstract} findAll() : List<ProductCategory>
+        + {abstract} findById(Integer id) : ProductCategory
+        + {abstract} insert(ProductCategory productCategory) : void
     }
     interface ProductStockRepository{
-        void insert(ProductStock productStock)
-        void update(ProductStock productStock)
+        + {abstract} insert(ProductStock productStock) : void
+        + {abstract} update(ProductStock productStock) : void
     }
     interface EmployeeAccountRepository{
-        List<EmployeeAccount> findAll()
-        EmployeeAccount findById(Integer id)
-        EmployeeAccount findByUsername(String Username)
-        boolean isExist(String userName)
-        void insert(EmployeeAccount employeeAccount)
+        + {abstract} findAll() : List<EmployeeAccount>
+        + {abstract} findById(Integer id) : EmployeeAccount
+        + {abstract} findByUsername(String Username) : EmployeeAccount
+        + {abstract} isExist(String userName): boolean
+        + {abstract} insert(EmployeeAccount employeeAccount) : void
     }
     interface EmployeeRepository{
-        List<Employee> findAll()
+        + {abstract} findAll() : List<Employee>
+    }
+    interface CustomerRepository{
+        + {abstract} insert(Customer customer) : void
+    }
+    interface OrderRepository{
+        + {abstract} insert(Order order) : void
+    }
+    interface OrderDetailRepository{
+        + {abstract} insert(OrderDetail orderDetail) : void
+    }
+    interface OrderStatusRepository{
+        + {abstract} insert(OrderStatus orderStatus) : void
+        + {abstract} update(OrderStatus orderStatus) : void
     }
 }
 @enduml

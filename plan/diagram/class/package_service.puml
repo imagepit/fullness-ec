@@ -1,46 +1,76 @@
 @startuml
 
-skinparam shadowing false
-hide empty methods
-hide empty fields
+title serviceパッケージ
 left to right direction
 
 package service{
     interface ProductService{
-        List<Product> findAll()
-        List<Product> findByCategoryId(int productCategoryId)
-        Product findById(Integer id)
-        void insert(Product product)
-        void update(Product product)
-        void delete(Integer id)
+        + {abstract} findAll() : List<Product>
+        + {abstract} findByCategoryId(int productCategoryId) : List<Product>
+        + {abstract} findById(Integer id) : Product
+        + {abstract} insert(Product product) : void
+        + {abstract} update(Product product) : void
+        + {abstract} delete(Integer id) : void
     }
-    class ProductServiceImpl
+    class ProductServiceImpl{
+        + findAll() : List<Product>
+        + findByCategoryId(int productCategoryId) : List<Product>
+        + findById(Integer id) : Product
+        + insert(Product product) : void
+        + update(Product product) : void
+        + delete(Integer id) : void
+    }
 
     interface ProductCategoryService{
-        List<ProductCategory> findAll()
-        ProductCategory findById(Integer id)
-        void insert(ProductCategory productCategory)
+        + {abstract} findAll() : List<ProductCategory>
+        + {abstract} findById(Integer id) : ProductCategory
+        + {abstract} insert(ProductCategory productCategory) : void
     }
-    class ProductCategoryServiceImpl
+    class ProductCategoryServiceImpl{
+        + findAll() : List<ProductCategory>
+        + findById(Integer id) : ProductCategory
+        + insert(ProductCategory productCategory) : void
+    }
 
 
     interface EmployeeAccountService{
-        List<EmployeeAccount> findAll()
-        EmployeeAccount findById(Integer id)
-        boolean isExist(String userName)
-        void insert(EmployeeAccount employeeAccount)
+        + {abstract} findAll() : List<EmployeeAccount>
+        + {abstract} findById(Integer id) : EmployeeAccount
+        + {abstract} isExist(String userName) : boolean
+        + {abstract} insert(EmployeeAccount employeeAccount) : void
     }
-    class EmployeeAccountServiceImpl
-
+    class EmployeeAccountServiceImpl{
+        + findAll() : List<EmployeeAccount>
+        + findById(Integer id) : EmployeeAccount
+        + isExist(String userName) : boolean
+        + insert(EmployeeAccount employeeAccount) : void
+    }
     interface EmployeeService{
-        List<Employee> findAll()
+        + {abstract} findAll() : List<Employee>
     }
-    class EmployeeServiceImpl
+    class EmployeeServiceImpl{
+         + findAll() : List<Employee>
+    }
+    interface CustomerService{
+        + {abstract} registerCustomer() : void
+    }
+    class CustomerServiceImpl{
+        + registerCustomer() : void
+    }
+    interface OrderService{
+        + {abstract} addOrder() : void
+        + {abstract} updateOrderStatus() : void
+    }
+    class OrderServiceImpl{
+        + addOrder() : void
+        + updateOrderStatus() : void
+    }
 }
 
 EmployeeAccountService <|.. EmployeeAccountServiceImpl
 EmployeeService <|.. EmployeeServiceImpl
 ProductService <|.. ProductServiceImpl
 ProductCategoryService <|.. ProductCategoryServiceImpl
-
+CustomerService <|.. CustomerServiceImpl
+OrderService <|.. OrderServiceImpl
 @enduml

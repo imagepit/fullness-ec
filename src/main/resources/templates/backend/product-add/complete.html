@@ -24,12 +24,10 @@
     </header>
     <div id="main">
       <h2>新商品登録(完了)</h2>
-      <div class="complete-message" th:text="|商品名${p.name}を登録しました。|"></div><a class="botton" href="/admin/product">
-      <button>業務終了</button>
-      <button>商品検索へ戻る</button>
-      </a><a class="botton" href="/admin/product-add">
-        <button>入力に戻る</button>
-      </a>
+      <div class="complete-message" th:text="|商品名${p.name}を登録しました。|"></div><a class="botton" href="/admin">
+        <button>業務終了</button></a><a class="botton" href="/admin/product">
+        <button>商品検索へ戻る</button></a><a class="botton" href="/admin/product-add">
+        <button>入力に戻る</button></a>
     </div>
     <footer>
       <div id="footer">Fullness Stationary社</div>

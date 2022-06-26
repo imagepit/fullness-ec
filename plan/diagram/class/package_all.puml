@@ -1,109 +1,109 @@
 @startuml
-skinparam shadowing false
-hide empty methods
-hide empty fields
+
+title 概要クラス図
 left to right direction
 
 package com.fullness.ec{
     package repository{
-    	interface ProductRepository
-    	interface ProductCategoryRepository
-    	interface ProductStockRepository
-    	interface EmployeeAccountRepository
-    	interface EmployeeRepository
+    	interface "Product\nRepository" as ProductRepository
+    	interface "ProductCategory\nRepository" as ProductCategoryRepository
+    	interface "ProductStock\nRepository" as ProductStockRepository
+    	interface "EmployeeAccount\nRepository" as EmployeeAccountRepository
+    	interface "Employee\nRepository" as EmployeeRepository
+    	interface "Customer\nRepository" as CustomerRepository
+    	interface "Order\nRepository" as OrderRepository
+    	interface "OrderDetail\nRepository" as OrderDetailRepository
     }
-
     package entity{
     	class Product
     	class ProductCategory
     	class ProductStock
     	class EmployeeAccount
     	class Employee
+    	class Customer
+    	class Order
+    	class OrderDetail
     }
 
     package service{
-        interface ProductService
-        class ProductServiceImpl
-        interface ProductCategoryService
-        class ProductCategoryServiceImpl
-        interface EmployeeAccountService
-        class EmployeeAccountServiceImpl
+        interface "Product\nService" as ProductService
+        class "Product\nServiceImpl" as ProductServiceImpl
+        interface "ProductCategory\nService" as ProductCategoryService
+        class "ProductCategory\nServiceImpl" as ProductCategoryServiceImpl
+        interface "EmployeeAccount\nService" as EmployeeAccountService
+        class "EmployeeAccount\nServiceImpl" as EmployeeAccountServiceImpl
+        interface "Order\nService" as OrderService
+        class "Order\nServiceImpl" as OrderServiceImpl
+        interface "Customer\nService" as CustomerService
+        class "Customer\nServiceImpl" as CustomerServiceImpl
+        OrderService <|.. OrderServiceImpl
+        ProductService <|.. ProductServiceImpl
+        CustomerService <|.. CustomerServiceImpl
+        ProductCategoryService <|.. ProductCategoryServiceImpl
+        EmployeeAccountService <|.. EmployeeAccountServiceImpl
     }
 
     package controller{
-        class GlobalExceptionHandler
+        class "GlobalException\nHandler" as GlobalExceptionHandler
         package backend{
-            class MenuController
-            class LoginController
-            class ProductSearchController
-            class ProductAddController
-            class ProductUpdateController
-            class ProductDeleteController
-            class ProductCategoryAddController
-            class EmployeeAccountAddController
+            class "Menu\nController" as MenuController
+            class "Login\nController" as LoginController
+            class "ProductSearch\nController" as ProductSearchController
+            class "ProductAdd\nController" as ProductAddController
+            class "ProductUpdate\nController" as ProductUpdateController
+            class "ProductDelete\nController" as ProductDeleteController
+            class "ProductCategoryAdd\nController" as ProductCategoryAddController
+            class "EmployeeAccountAdd\nController" as EmployeeAccountAddController
+        }
+        package frontend{
+            class "Top\nController" as TopController
+            class "CustomerResigter\nController" as CustomerResigterController
+            class "CustomerLogin\nController" as CustomerLoginController
+            class "ProductList\nController" as ProductListController
+            class "Purchase\nController" as PurchaseController
+            class "Order\nController" as OrderController
+            class "OrderCancelAdd\nController" as OrderCancelAddController
+            class "OrderHistory\nController" as OrderHistoryController
+            class "Logout\nController" as LogoutController
         }
     }
 
     package form {
-        class LoginForm
-        class ProductForm
-        class ProductFormValidator
-        class ProductCategoryForm
-        class EmployeeAccountForm
+        class "Login\nForm" as LoginForm
+        class "Product\nForm" as ProductForm
+        class "Product\nFormValidator" as ProductFormValidator
+        class "ProductCategory\nForm" as ProductCategoryForm
+        class "EmployeeAccount\nForm" as EmployeeAccountForm
+        class "CustomerResigter\nForm" as CustomerResigterForm
+        class "CustomerLogin\nForm" as CustomerLoginForm
+        class "Order\nForm" as OrderForm
     }
     package security{
-        class EmployeeAccountUserDetails
-        class EmployeeAccountUserDetailsService
-        class EmployeeAccountSecurityConfig
+        class "EmployeeAccount\nUserDetails" as EmployeeAccountUserDetails
+        class "EmployeeAccount\nUserDetailsService" as EmployeeAccountUserDetailsService
+        class "EmployeeAccount\nSecurityConfig" as EmployeeAccountSecurityConfig
+        class "Customer\nUserDetails" as CustomerUserDetails
+        class "Customer\nUserDetailsService" as CustomerUserDetailsService
+        class "Customer\nSecurityConfig" as CustomerSecurityConfig
     }
 
     package advice{
-        class AppAdvice
+        class "AppAdvice" as AppAdvice
     }
 
     package exception{
-        class BusinessException
+        class "BusinessException" as BusinessException
     }
 
     package config(){
-        class ApplicationConfig
+        class "ApplicationConfig" as ApplicationConfig
     }
 }
 
-' Contollerの関連
-LoginController --> LoginForm : use
-LoginController --> EmployeeAccountService : call
-LoginController --> EmployeeAccountForm : call
-ProductSearchController --> ProductService : call
-ProductAddController --> ProductService : call
-ProductUpdateController --> ProductService : call
-ProductDeleteController --> ProductService : call
-ProductAddController --> ProductForm : use
-ProductUpdateController --> ProductForm : use
-ProductAddController --> ProductFormValidator : use
-ProductUpdateController --> ProductFormValidator : use
-ProductCategoryAddController --> ProductCategoryService : call
-ProductCategoryAddController --> ProductCategoryForm : call
-EmployeeAccountAddController --> EmployeeAccountService : call
 
-' Serviceの関連
-EmployeeAccountServiceImpl --> EmployeeAccountRepository : call
-ProductServiceImpl -> ProductRepository : call
-ProductServiceImpl -> ProductStockRepository : call
-ProductCategoryServiceImpl --> ProductCategoryRepository : call
-EmployeeAccountService <|- EmployeeAccountServiceImpl
-ProductCategoryService <|- ProductCategoryServiceImpl
-ProductService <|- ProductServiceImpl
-
-' Repositoryの関連
-EmployeeAccountRepository --> EmployeeAccount : use
-EmployeeRepository --> Employee : use
-ProductRepository --> Product : use
-ProductCategoryRepository --> ProductCategory : use
-ProductStockRepository --> ProductStock
-
-' Spring Securityの関連
-EmployeeAccountUserDetailsService -> EmployeeAccountUserDetails : use
-EmployeeAccountUserDetailsService -> EmployeeAccountRepository : call
+' controller -> service : use
+' controller --> form : use
+' service --> repository : call
+' repository --> entity : use
 
 @enduml

@@ -1,69 +1,33 @@
 @startuml
 
 title UC017: 社員アカウントログイン機能 シーケンス図
-
-'hide footbox
 skinparam shadowing false
-actor ユーザ
+actor "user" as user
+activate user
+participant "Login\nController" as ctrl1
+participant "Menu\nController" as ctrl2
+participant "SpringSecurity" as sec
+participant "EmployeeAccount\nUserDetailsService" as svc
+participant "EmployeeAccount\nRepository" as repo
+participant "EmployeeAccount\nUserDetails" as ud
+database DB as db
 
-activate ユーザ
+user -> ctrl1 ++ : form()
+ctrl1 -> user -- : ログイン画面
+user -> sec ++ : 認証
+sec -> svc ++ : loadUserByUsername\n(userName)
+svc -> repo ++ : findByUserName\n(userName)
+repo -> db ++ : SELECT文
+db --> repo -- : EmployeeAccount
+repo --> svc -- : EmployeeAccount
+svc -> ud ++ : new
+ud --> svc -- : EmployeeAccount\nUserDetails
+svc --> sec -- : EmployeeAccount\nUserDetails
+sec -> sec : セッションに格納
+sec --> user -- : リダイレクト
+user -> ctrl2 ++ : menu()
+ctrl2 --> user -- : メニュー画面
 
-participant LoginController
-
-participant MenuController
-
-participant SpringSecurity本体
-
-participant EmployeeAccountUserDetailsService
-
-
-ユーザ -> LoginController : form()
-
-activate LoginController
-
-LoginController -> ユーザ : ログイン画面
-deactivate LoginController
-
-ユーザ -> SpringSecurity本体 : 認証(ユーザ名,パスワード)
-activate SpringSecurity本体
-
-SpringSecurity本体 -> EmployeeAccountUserDetailsService : loadUserByUsername()
-activate EmployeeAccountUserDetailsService
-
-EmployeeAccountUserDetailsService -> EmployeeAccountRepository : findByUserName()
-activate EmployeeAccountRepository
-
-participant EmployeeAccountUserDetails
-
-database DB
-
-EmployeeAccountRepository -> DB : SELECT文
-activate DB
-
-DB --> EmployeeAccountRepository : EmployeeAccount
-deactivate DB
-
-EmployeeAccountRepository -> EmployeeAccountUserDetailsService : EmployeeAccount
-deactivate EmployeeAccountRepository
-
-EmployeeAccountUserDetailsService -> EmployeeAccountUserDetails : new
-activate EmployeeAccountUserDetails
-
-EmployeeAccountUserDetails -> EmployeeAccountUserDetailsService : EmployeeAccountUserDetails
-deactivate EmployeeAccountUserDetails
-
-EmployeeAccountUserDetailsService -> SpringSecurity本体 : EmployeeAccountUserDetails
-deactivate EmployeeAccountUserDetailsService
-
-SpringSecurity本体 -> SpringSecurity本体 : セッションに格納
-
-SpringSecurity本体 -> ユーザ : リダイレクト要求
-deactivate SpringSecurity本体
-
-ユーザ -> MenuController : menu()
-activate MenuController
-
-MenuController -> ユーザ : メニュー画面
-deactivate MenuController
+deactivate user
 
 @enduml

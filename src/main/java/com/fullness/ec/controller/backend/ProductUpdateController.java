@@ -17,18 +17,14 @@ import org.springframework.web.bind.support.SessionStatus;
 import java.io.IOException;
 import java.util.List;
 
-@SessionAttributes({"productUpdateForm","categories","originalImageUrl","newImageBytes","product"})
-@RequestMapping("/admin/product-update")
 @Controller
+@RequestMapping("/admin/product-update")
+@SessionAttributes({"productUpdateForm","categories","originalImageUrl","newImageBytes","product"})
 public class ProductUpdateController {
 
     private static final String TEMPLATE_DIR = "backend/product-update";
-
-    @Autowired
-    private ProductCategoryService productCategoryService;
-
-    @Autowired
-    private ProductService productService;
+    @Autowired private ProductCategoryService productCategoryService;
+    @Autowired private ProductService productService;
 
     @ModelAttribute("productUpdateForm")
     public ProductForm setupForm(){
@@ -36,11 +32,7 @@ public class ProductUpdateController {
     }
 
     @GetMapping("{no}")
-    public String form(
-            @PathVariable Integer no,
-            Model model,
-            @ModelAttribute("productUpdateForm") ProductForm form
-    ) throws IOException {
+    public String form(@PathVariable Integer no, Model model, @ModelAttribute("productUpdateForm") ProductForm form) throws IOException {
         if(form.isEmpty()){
             List<ProductCategory> categories = productCategoryService.findAll();
             Product product = productService.findById(no);
@@ -53,11 +45,7 @@ public class ProductUpdateController {
     }
 
     @PostMapping("/confirm")
-    public String confirm(
-            @Validated @ModelAttribute("productUpdateForm") ProductForm form,
-            BindingResult result,
-            Model model
-    ) throws IOException {
+    public String confirm(@Validated @ModelAttribute("productUpdateForm") ProductForm form, BindingResult result, Model model) throws IOException {
         if(result.hasErrors()) return "backend/product-update/form";
         model.addAttribute("category",productCategoryService.findById(form.getCategory()));
         if(isImageUpdated(form)){
@@ -70,18 +58,9 @@ public class ProductUpdateController {
     }
 
     @PostMapping("/complete")
-    public String complete(
-            @ModelAttribute("productUpdateForm") ProductForm form,
-            @ModelAttribute("product") Product product,
-            SessionStatus sessionStatus,
-            Model model
-    ) throws Exception {
+    public String complete(@ModelAttribute("productUpdateForm") ProductForm form, @ModelAttribute("product") Product product, SessionStatus sessionStatus, Model model) throws Exception {
         if(form.isEmpty()) throw new RuntimeException("フォームのデータがありません");
-        Product updateProduct = ProductHelper.convertEntity(
-                form,
-                productCategoryService.findById(form.getCategory()),
-                product.getId()
-        );
+        Product updateProduct = ProductHelper.convertEntity(form, productCategoryService.findById(form.getCategory()), product.getId());
         updateProduct.setImageUrl(getImageUrl(form,model));
         productService.update(updateProduct);
         sessionStatus.setComplete();
@@ -102,14 +81,11 @@ public class ProductUpdateController {
      * @param form 商品修正用フォームオブジェクト
      * @param model SpringMVCモデルオブジェクト
      * @return 画像のファイル名
-     * @throws Exception
+     * @throws Exception ファイルアップロード時の例外
      */
     private String getImageUrl(ProductForm form, Model model) throws Exception {
         if(isImageUpdated(form)){
-            return ProductHelper.uploadFile(
-                    form.getImage().getOriginalFilename(),
-                    (byte[])model.getAttribute("newImageBytes")
-            );
+            return ProductHelper.uploadFile(form.getImage().getOriginalFilename(), (byte[])model.getAttribute("newImageBytes"));
         } else {
             return model.getAttribute("originalImageUrl").toString();
         }
@@ -118,8 +94,8 @@ public class ProductUpdateController {
     /**
      * 画像を更新したかどうかをチェックする
      * フォームで画像用ファイルが入力されたかどうかで判断
-     * @param form
-     * @return
+     * @param form フォーム
+     * @return true:アップロード済み、false:未アップロード
      */
     private boolean isImageUpdated(ProductForm form){
         return !(form.getImage().getOriginalFilename().equals(""));

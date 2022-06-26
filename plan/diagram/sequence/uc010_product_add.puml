@@ -3,119 +3,63 @@
 title UC010: 新商品登録機能 シーケンス図
 
 skinparam shadowing false
-'hide footbox
-actor ユーザ
-
-activate ユーザ
-
-ユーザ -> ProductAddController : form()
-activate ProductAddController
-
-ProductAddController -> ProductAddController : setUpForm()
-note right: セッション生成
-
-ProductAddController -> ProductAddController : bind()
-note right: バリデータをバインド
-
-ProductAddController -> ProductCategoryService : findAll()
-activate ProductCategoryService
-
-ProductCategoryService -> ProductCategoryRepository : findAll()
-activate ProductCategoryRepository
-
-participant ProductService
-participant ProductRepository
-participant ProductStockRepository
-
+actor ユーザ as user
+activate user
+participant "ProductAdd\nController" as controller
+participant "ProductCategory\nService" as svc1
+participant "Product\nService" as svc2
+participant "ProductCategory\nRepository" as repo3
+participant "Product\nRepository" as repo1
+participant "ProductStock\nRepository" as repo2
 database DB
 
-ProductCategoryRepository -> DB : SELECT文
-activate DB
+' 入力画面
+user -> controller ++ : form()
+controller -> controller : setUpForm()
+controller -> controller : bind()
+controller -> svc1 ++ : findAll()
+svc1 -> repo3 ++ : findAll()
+repo3 -> DB ++ : SELECT文
+DB --> repo3 -- : List<ProductCategory>
+repo3 --> svc1 -- : List<ProductCategory>
+svc1 --> controller -- : List<ProductCategory>
+controller -> controller : Model追加\n（商品カテゴリリスト）
+controller --> user -- : 入力画面
 
-DB --> ProductCategoryRepository : List<ProductCategory>
-deactivate DB
+' 確認画面
+user -> user : 商品情報入力
+user -> controller ++ : confirm()
+controller -> controller : バリデート
+controller -> controller : Model追加\n（選択した商品カテゴリ）
+controller -> controller : Model追加\n（商品画像Base64）
+controller -> controller : Model追加\n（商品画像バイトデータ）
+note right: 画像データを完了画面で使うのでセッション格納
+controller --> user -- : 確認画面
 
-ProductCategoryRepository -> ProductCategoryService : List<ProductCategory>
-deactivate ProductCategoryRepository
+' 完了画面
+user -> user : 入力内容確認
+user -> controller ++ : execute()
+controller -> controller : セッション確認
+note right: セッション情報がない場合はシステムエラー
+controller -> controller : 画像保存ファイル名\nをModelに追加
+controller -> controller : フォームを\nエンティティに変換
+controller -> svc2 ++ : insert(Product product)
+note right: トランザクション処理
+svc2 -> repo1 ++ : insert(Product product)
+repo1 -> DB ++ : INSERT文
+DB --> repo1 -- : void
+repo1 --> svc2 -- : void
+svc2 -> repo2 ++ : insert(ProductStock)
+repo2 -> DB ++ : INSERT文
+DB --> repo2 -- : void
+repo2 --> svc2 -- : void
+svc2 --> controller -- : void
+user <-- controller -- : リダイレクト
+user -> controller ++ : complete()
+controller -> controller : セッション破棄
+controller -> controller : Modelに追加\n（商品名）
+controller --> user -- : 完了画面
 
-ProductCategoryService --> ProductAddController : List<ProductCategory>
-deactivate ProductCategoryService
-
-ProductAddController -> ProductAddController : Modelにカテゴリリストを追加
-
-ProductAddController -> ユーザ : 入力画面
-deactivate ProductAddController
-
-ユーザ -> ユーザ : 商品情報入力
-
-ユーザ -> ProductAddController : confirm()
-activate ProductAddController
-
-ProductAddController -> ProductAddController : バリデート
-
-alt バリデート結果 エラーあり
-    ProductAddController -> ユーザ : 入力画面
-else バリデート結果 エラーなし
-
-    ProductAddController -> ProductAddController : Model追加（選択した商品カテゴリ）
-    ProductAddController -> ProductAddController : Model追加（商品イメージBase64）
-    ProductAddController -> ProductAddController : Model追加（商品イメージバイトデータ）
-    note right: 画像データを完了画面で使うのでセッション格納
-
-    ProductAddController -> ユーザ : 確認画面
-    deactivate ProductAddController
-
-    ユーザ -> ユーザ : 入力内容確認
-
-    ユーザ -> ProductAddController : complete()
-    activate ProductAddController
-
-    ProductAddController -> ProductAddController : セッション確認
-    note right: セッション情報がない場合はシステムエラー
-
-    ProductAddController -> ProductAddController : 画像ファイルを保存・ファイル名をModelに追加
-
-    ProductAddController -> ProductAddController : フォームをエンティティに変換
-
-    ProductAddController -> ProductService : insert(Product product)
-    activate ProductService
-
-    ProductService -> ProductRepository : insert(Product product)
-    activate ProductRepository
-
-    ProductRepository -> DB : INSERT文
-
-    activate DB
-
-    DB --> ProductRepository : void
-
-    deactivate DB
-
-    ProductRepository --> ProductService : void
-    deactivate ProductRepository
-
-    ProductService -> ProductStockRepository : insert(ProductStock)
-    activate ProductStockRepository
-
-    ProductStockRepository -> DB : INSERT文
-    activate DB
-
-    DB --> ProductStockRepository : void
-
-    deactivate DB
-
-    ProductStockRepository --> ProductService : void
-    deactivate ProductStockRepository
-
-    ProductService --> ProductAddController : void
-    deactivate ProductService
-
-    ProductAddController -> ProductAddController : セッション破棄
-
-    ProductAddController -> ProductAddController : Modelに追加（商品名）
-
-    ProductAddController -> ユーザ : 完了画面
-    deactivate ProductAddController
-end
+deactivate user
 
 @enduml

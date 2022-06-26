@@ -2,29 +2,16 @@
 
 title UC017: 社員アカウントログアウト機能 シーケンス図
 skinparam shadowing false
-hide footbox
 
-actor ユーザ
+actor "ユーザ" as user
+participant "LoginController" as ctrl
+participant "SpringSecurity本体" as sec
+activate user
 
-participant LoginController
-
-participant SpringSecurity本体
-
-activate ユーザ
-
-
-ユーザ -> SpringSecurity本体 : ログアウト
-activate SpringSecurity本体
-
-SpringSecurity本体 -> SpringSecurity本体 : セッション破棄
-
-SpringSecurity本体 -> ユーザ : ログイン画面にリダイレクト
-deactivate SpringSecurity本体
-
-ユーザ -> LoginController : login()
-activate LoginController
-
-LoginController --> ユーザ : ログイン画面
-deactivate LoginController
+user -> sec ++ : ログアウト
+sec -> sec : セッション破棄
+sec -> user -- : ログイン画面にリダイレクト
+user -> ctrl ++ : login()
+ctrl --> user -- : ログイン画面
 
 @enduml

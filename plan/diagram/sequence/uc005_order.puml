@@ -1,0 +1,68 @@
+@startuml
+skin rose
+title UC005: 購入確定 シーケンス図
+skinparam shadowing false
+actor "ユーザ" as user
+activate user
+participant "Order\nController" as ctrl
+participant "Order\nService" as svc
+participant "Order" as od
+participant "Order\nRepository" as repo1
+participant "OrderDetail\nRepository" as repo2
+' participant "OrderStatus\nRepository" as repo3
+participant "ProductStock\nRepository" as repo4
+database DB as db
+
+' 確認画面
+user -> ctrl ++ : confirm(productId)
+ctrl -> ctrl : カートの中身を表示
+ctrl -> user -- : 確認画面
+
+' 完了画面
+user -> ctrl ++ : execute()
+note right
+    未ログインだったら
+    ログイン画面を出す
+end note
+ctrl -> od : new(カート内容をエンティティに変換)
+ctrl <-- od : Order
+ctrl -> svc ++ : addOrder(Order)
+note right
+    ・在庫数を取得して
+    　購入できるか確認
+    　（悲観的ロック）
+    ・トランザクション処理
+end note
+svc -> repo4 ++ : selectStockList(List<Product>)
+repo4 -> db ++ : SQL(SELECT)
+repo4 <-- db -- : List<ProductStock>
+svc <-- repo4 -- : List<ProductStock>
+svc -> svc : checkStock\n(Order,List<ProductStock>)
+note right
+    ・Orderの数量と在庫を
+    　比較してチェック
+end note
+svc -> repo1 ++ : insert(Order)
+repo1 -> db ++ : SQL(INSERT)
+repo1 <-- db -- : viod
+svc <-- repo1 -- : viod
+svc -> repo2 ++ : insert(OrderDetail)
+repo2 -> db ++ : SQL(INSERT)
+repo2 <-- db -- : viod
+svc <-- repo2 -- : viod
+svc -> repo4 ++ : update(ProductStock)
+repo4 -> db ++ : SQL(UPDATE)
+repo4 <-- db -- : viod
+svc <-- repo4 -- : viod 
+svc -> svc : メール送信\nsendMail(Order)
+note right
+    ・顧客メールアドレス宛にメール送信
+    ・注文内容と振込先を送信
+end note
+ctrl <-- svc -- : viod
+user <-- ctrl -- : リダイレクト
+user -> ctrl ++ : complete()
+ctrl -> ctrl : セッション解除
+ctrl --> user -- : 完了画面
+
+@enduml

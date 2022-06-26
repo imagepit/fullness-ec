@@ -1,41 +1,55 @@
 @startuml
 
-skinparam shadowing false
-hide empty methods
-hide empty fields
-'left to right direction
+title formパッケージ
+left to right direction
 
 package form {
-    class LoginForm{
-        - String name
-        - String password
+    class "LoginForm" as LoginForm{
+        - name : String
+        - password : String
     }
-    class ProductForm{
-        - String name
-        - Integer price
-        - Integer stock
-        - Integer productCategoryId
-        - MultipartFile image
+    class "ProductForm" as ProductForm{
+        - name : String
+        - price : Integer
+        - stock : Integer
+        - productCategoryId : Integer
+        - image : MultipartFile
     }
-    class ProductFormValidator{
-        + boolean supports(Class<?> clazz)
-        + void validate(Object target, Errors errors)
+    class "ProductFormValidator" as ProductFormValidator{
+        + supports(Class<?> clazz) : boolean 
+        + validate(Object target, Errors errors) : void 
     }
-    class ProductCategoryForm{
-        - String name
+    class "ProductCategoryForm" as ProductCategoryForm{
+        - name : String
     }
-    class ProductCategoryFormValidator{
-        + boolean supports(Class<?> clazz)
-        + void validate(Object target, Errors errors)
+    class "ProductCategoryFormValidator" as ProductCategoryFormValidator{
+        + supports(Class<?> clazz) : boolean 
+        + validate(Object target, Errors errors) : void
     }
-    class EmployeeAccountForm{
-        - Integer employeeId
-        - String userName
-        - String password
+    class "EmployeeAccountForm" as EmployeeAccountForm{
+        - employeeId : Integer
+        - userName : String
+        - password : String
     }
-    class EmployeeAccountFormValidator{
-        + boolean supports(Class<?> clazz)
-        + void validate(Object target, Errors errors)
+    class "EmployeeAccountFormValidator" as EmployeeAccountFormValidator{
+        + supports(Class<?> clazz) : boolean 
+        + validate(Object target, Errors errors) : void 
+    }
+    class "CustomerResigterForm" as CustomerResigterForm{
+        - name : String
+        - nameKana : String
+        - address1 : String
+        - address2 : String
+        - phoneNumber : String
+        - mailAddress : String
+        - username : String
+        - password : String
+    }
+    class "CustomerLoginForm" as CustomerLoginForm{
+        - name : String
+        - password : String
+    }
+    class "OrderForm" as OrderForm{
     }
 }
 

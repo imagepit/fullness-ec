@@ -1,11 +1,9 @@
 @startuml
 
-skinparam shadowing false
-hide empty methods
-hide empty fields
+title aopパッケージ
 left to right direction
 
-package advice{
+package aop{
     class AppAdvice{
         aroundAdvice(ProceedingJoinPoint joinPoint)
     }

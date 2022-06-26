@@ -8,36 +8,16 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionStatus;
 
-//@SessionAttributes(
-//        {
-//            "employeeAccountForm",
-//            "productAddForm",
-//            "categories",
-//            "imageBytes",
-//            "productCategoryAddForm",
-//            "productUpdateForm",
-//            "originalImageUrl",
-//            "newImageBytes",
-//            "product"
-//        }
-//)
-@RequestMapping("/admin/product")
 @Controller
+@RequestMapping("/admin/product")
 public class ProductSearchController {
-    @Autowired
-    private ProductService productService;
+    @Autowired private ProductService productService;
 
-    @Autowired
-    private ProductCategoryService productCategoryService;
+    @Autowired private ProductCategoryService productCategoryService;
 
     @GetMapping
-    public String list(
-            Model model,
-            //SessionStatus sessionStatus,
-            @PageableDefault(page=0,size=3) Pageable pageable
-    ){
+    public String list(Model model, @PageableDefault(page=0,size=3) Pageable pageable){
         //sessionStatus.setComplete();
         model.addAttribute("categories",productCategoryService.findAll());
         model.addAttribute("products",productService.findPage(pageable));
@@ -48,11 +28,7 @@ public class ProductSearchController {
     }
 
     @GetMapping("search")
-    public String search(
-            @RequestParam("category") String category,
-            Model model,
-            @PageableDefault(page=0,size=3) Pageable pageable
-    ){
+    public String search(@RequestParam("category") String category, Model model, @PageableDefault(page=0,size=3) Pageable pageable){
         model.addAttribute("category", category);
         model.addAttribute("categories",productCategoryService.findAll());
         model.addAttribute("products",productService.findPageByCategoryId(Integer.parseInt(category),pageable));

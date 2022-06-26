@@ -12,15 +12,13 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
-@SessionAttributes("productCategoryAddForm")
-@RequestMapping("/admin/product-category-add")
 @Controller
+@RequestMapping("/admin/product-category-add")
+@SessionAttributes("productCategoryAddForm")
 public class ProductCategoryAddController {
 
     private static final String TEMPLATE_DIR = "backend/product-category-add";
-
-    @Autowired
-    private ProductCategoryService service;
+    @Autowired private ProductCategoryService service;
 
     @ModelAttribute("productCategoryAddForm")
     public ProductCategoryForm setupForm(){
@@ -39,11 +37,7 @@ public class ProductCategoryAddController {
     }
 
     @PostMapping("/complete")
-    public String complete(
-            @ModelAttribute("productCategoryAddForm") ProductCategoryForm form,
-            SessionStatus sessionStatus,
-            Model model
-    ){
+    public String complete(@ModelAttribute("productCategoryAddForm") ProductCategoryForm form, SessionStatus sessionStatus, Model model){
         if(form.isEmpty()) throw new RuntimeException();
         ModelMapper modelMapper = new ModelMapper();
         ProductCategory category = modelMapper.map(form, ProductCategory.class);

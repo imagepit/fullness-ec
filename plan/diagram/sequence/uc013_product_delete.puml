@@ -8,13 +8,13 @@ actor ユーザ
 
 activate ユーザ
 
-ユーザ -> ProductDeleteController : confirm(Integer no)
+ユーザ -> ProductDeleteController : confirm(productId)
 activate ProductDeleteController
 
-ProductDeleteController -> ProductService : findById(Integer no)
+ProductDeleteController -> ProductService : findById(productId)
 activate ProductService
 
-ProductService -> ProductRepository : findById(Integer no)
+ProductService -> ProductRepository : findById(productId)
 activate ProductRepository
 
 database DB

@@ -2,71 +2,43 @@
 
 title UC014: カテゴリ登録機能 シーケンス図
 skinparam shadowing false
-'hide footbox
 
-actor ユーザ
+actor "ユーザ" as user
+activate user
+participant "ProductCategoryAddController" as ctrl
+participant "ProductCategoryService" as svc
+participant "ProductCategoryRepository" as repo
+database DB as db
 
-activate ユーザ
-
-ユーザ -> ProductCategoryAddController : form()
-activate ProductCategoryAddController
-
-ProductCategoryAddController -> ProductCategoryAddController : setUpForm()
+' 入力画面
+user -> ctrl ++ : form()
+ctrl -> ctrl : setUpForm()
 note right: セッション生成
+ctrl -> ctrl : bind()
+ctrl -> user -- : 入力画面
 
-ProductCategoryAddController -> ProductCategoryAddController : bind()
+' 確認画面
+user -> user : 商品情報入力
+user -> ctrl ++ : confirm()
+ctrl -> ctrl : バリデート
+ctrl --> user -- : 確認画面
 
-ProductCategoryAddController -> ユーザ : 入力画面
-deactivate ProductCategoryAddController
-
-ユーザ -> ユーザ : 商品情報入力
-
-ユーザ -> ProductCategoryAddController : confirm()
-activate ProductCategoryAddController
-
-ProductCategoryAddController -> ProductCategoryAddController : バリデート
-
-alt バリデート結果 エラーあり
-    ProductCategoryAddController --> ユーザ : 入力画面
-else バリデート結果 エラーなし
-    ProductCategoryAddController --> ユーザ : 確認画面
-    deactivate ProductCategoryAddController
-    ユーザ -> ユーザ : 入力内容確認
-
-    ユーザ -> ProductCategoryAddController : complete()
-    activate ProductCategoryAddController
-
-    ProductCategoryAddController -> ProductCategoryAddController : セッション確認
-    note right: セッションが空ならシステムエラー
-
-    ProductCategoryAddController -> ProductCategoryAddController : フォームをエンティティに変換
-
-    ProductCategoryAddController -> ProductCategoryService : insert(ProductCategory category)
-    activate ProductCategoryService
-
-    ProductCategoryService -> ProductCategoryRepository : insert(ProductCategory category)
-    activate ProductCategoryRepository
-
-    database DB
-
-    ProductCategoryRepository -> DB : INSERT文
-    activate DB
-
-    DB --> ProductCategoryRepository : void
-    deactivate DB
-
-    ProductCategoryRepository --> ProductCategoryService : void
-    deactivate ProductCategoryRepository
-
-    ProductCategoryService -> ProductCategoryAddController : void
-    deactivate ProductCategoryService
-
-    ProductCategoryAddController -> ProductCategoryAddController : セッション破棄
-
-    ProductCategoryAddController -> ProductCategoryAddController : Modelに追加（商品名）
-
-    ProductCategoryAddController -> ユーザ : 完了画面
-    deactivate ProductCategoryAddController
-end
+' 完了画面
+user -> user : 入力内容確認
+user -> ctrl ++ : execute()
+ctrl -> ctrl : セッション確認
+note right: セッションが空なら\nシステムエラー
+ctrl -> ctrl : フォームを\nエンティティに変換
+ctrl -> svc ++ : insert\n(ProductCategory)
+svc -> repo ++ : insert\n(ProductCategory)
+repo -> db ++ : INSERT文
+db --> repo -- : void
+repo --> svc -- : void
+svc -> ctrl -- : void
+user <-- ctrl -- : リダイレクト
+user -> ctrl ++ : complete()
+ctrl -> ctrl : セッション破棄
+ctrl -> ctrl : Modelに追加（商品名）
+ctrl -> user -- : 完了画面
 
 @enduml

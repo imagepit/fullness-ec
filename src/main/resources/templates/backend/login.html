@@ -40,11 +40,7 @@
           </tr>
         </table>
         <input type="submit" value="ログイン"/>
-      </form>
-      <span th:if="${session['SPRING_SECURITY_LAST_EXCEPTION'] != null}">
-        <span class="error" th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">
-        </span>
-      </span>
+      </form><span th:if="${session['SPRING_SECURITY_LAST_EXCEPTION'] != null}"><span class="error" th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}"></span></span>
     </div>
     <footer>
       <div id="footer">Fullness Stationary社</div>

@@ -1,0 +1,44 @@
+@startuml
+skin rose
+title UC004: 購入確認機能 シーケンス図
+skinparam shadowing false
+actor "ユーザ" as user
+activate user
+participant "PurchaseController" as ctrl
+' participant "PurchaseForm" as form
+participant "Cart" as cart
+participant "ProductService" as svc
+participant "ProductRepository" as repo
+database DB as db
+
+' 入力画面
+user -> ctrl ++ : form(productId)
+note right: 商品情報取得
+ctrl -> svc ++ : findById(productId)
+svc -> repo ++ : findById(productId)
+repo -> db ++ : SELECT文
+db --> repo -- : Product
+repo --> svc -- : Product
+svc --> ctrl -- : Product
+' ctrl -> form : エンティティから\nフォームに変換
+' ctrl <-- form : PurchaseForm
+ctrl -> ctrl : Model追加(Product)
+ctrl -> user -- : 入力画面
+
+' 確認画面
+user -> user : 個数入力
+user -> ctrl ++ : confirm()
+note right: カートに入れた商品の在庫数を\n取得してプルダウン項目を生成
+ctrl -> cart ++ : add(Product)
+cart -> cart : カートに商品追加
+ctrl <-- cart -- : void
+ctrl -> svc ++ : selectByProductList\n(List<Product>)
+svc -> repo ++ : selectByProductList\n(List<Product>)
+repo -> db ++ : SQL(SELECT)
+repo <-- db -- : List<Product>
+svc <-- repo -- : List<Product> 
+ctrl <-- svc -- : List<Product>
+ctrl -> ctrl : 個数のプルダウン生成
+ctrl -> user -- : カート画面
+
+@enduml

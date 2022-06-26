@@ -30,18 +30,18 @@ public class AppAdvice {
     @Around("execution(* com.fullness.ec..*.*(..))")
     public Object debug(ProceedingJoinPoint joinPoint) throws Throwable{
         // ($className.kt:$line)$mthd
-        String className = joinPoint.getSignature().getDeclaringType().getSimpleName();
+        //String className = joinPoint.getSignature().getDeclaringType().getSimpleName();
         //logger.info(joinPoint.getStaticPart().getSourceLocation().getLine()+"");
         //StackTraceElement[] trace = Thread.currentThread().getStackTrace();
         //int line = trace[trace.length-1].getLineNumber();
         //String link = String.format("(%s.java:%d)",className,line);
         //logger.info(link);
-        logger.info("▼▼▼▼▼▼▼▼▼▼"+getClassAndMethod(joinPoint)+"▼▼▼▼▼▼▼▼▼▼");
-        Arrays.stream(joinPoint.getArgs()).forEach( arg -> logger.info("引数の値:" + arg) );
+        System.out.println("▼▼▼▼▼▼▼▼▼▼"+getClassAndMethod(joinPoint)+"▼▼▼▼▼▼▼▼▼▼");
+        Arrays.stream(joinPoint.getArgs()).forEach( arg -> System.out.println("引数の値:" + arg) );
         //for (Object o : joinPoint.getArgs()){ logger.info("引数の値:" + o); }
         Object result = joinPoint.proceed();
-        logger.info("戻り値:"+result);
-        logger.info("▲▲▲▲▲▲▲▲▲▲"+getClassAndMethod(joinPoint)+"▲▲▲▲▲▲▲▲▲▲");
+        System.out.println("戻り値:"+result);
+        System.out.println("▲▲▲▲▲▲▲▲▲▲"+getClassAndMethod(joinPoint)+"▲▲▲▲▲▲▲▲▲▲");
         return result;
     }
 

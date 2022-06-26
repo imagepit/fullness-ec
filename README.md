@@ -228,65 +228,93 @@ P021 | 商品カテゴリ登録(完了)
 
 ### パッケージ全体
 
-![](plan/diagram/class/package_all.png)
+![](images/plan/diagram/class/package_all/package_all.svg)
+
+### AOPパッケージ
+
+![](images/plan/diagram/class/package_advice/package_advice.svg)
 
 ### コンフィグパッケージ
 
-![](plan/diagram/class/package_config.png)
+![](images/plan/diagram/class/package_config/package_config.svg)
 
 ### コントローラーパッケージ
 
-![](plan/diagram/class/package_controller.png)
+![](images/plan/diagram/class/package_controller/package_controller.svg)
 
 ### フォームパッケージ
 
-![](plan/diagram/class/package_form.png)
+![](images/plan/diagram/class/package_form/package_form.svg)
 
 ### サービスパッケージ
 
-![](plan/diagram/class/package_service.png)
+![](images/plan/diagram/class/package_service/package_service.svg)
 
 ### リポジトリパッケージ
 
-![](plan/diagram/class/package_repository.png)
+![](images/plan/diagram/class/package_repository/package_repository.svg)
 
 ### エンティティパッケージ
 
-![](plan/diagram/class/package_entity.png)
+![](images/plan/diagram/class/package_entity/package_entity.svg)
 
 ## シーケンス図
 
+### UC001
+
+![](images/plan/diagram/sequence/uc001_customer_login/uc001_customer_login.svg)
+
+### UC002
+
+![](images/plan/diagram/sequence/uc002_customer_register/uc002_customer_register.svg)
+
+### UC003
+
+![](images/plan/diagram/sequence/uc003_product_search/uc003_product_search.svg)
+
+### UC004
+
+### UC005
+
+![](images/plan/diagram/sequence/uc005_order/uc005_order.svg)
+
+### UC006
+
+### UC007
+
+### UC008
+
 ### UC009 社員アカウント登録機能
 
-![](plan/diagram/sequence/uc009_employee_account_add.png)
+![](images/plan/diagram/sequence/uc009_employee_account_add/uc009_employee_account_add.svg)
 
 ### UC010 新商品登録機能
 
-![](plan/diagram/sequence/uc010_product_add.png)
+![](images/plan/diagram/sequence/uc010_product_add/uc010_product_add.svg)
 
 ### UC011 商品検索機能
 
-![](plan/diagram/sequence/uc011_product_search.png)
+![](images/plan/diagram/sequence/uc011_product_search/uc011_product_search.svg)
 
 ### UC012 商品修正機能
 
-![](plan/diagram/sequence/uc012_product_update.png)
+![](images/plan/diagram/sequence/uc012_product_update/uc012_product_update.svg)
 
 ### UC013 商品削除機能
 
-![](plan/diagram/sequence/uc013_product_delete.png)
+![](images/plan/diagram/sequence/uc013_product_delete/uc013_product_delete.svg)
 
 ### UC014 商品カテゴリ登録機能
 
-![](plan/diagram/sequence/uc014_product_category_add.png)
+![](images/plan/diagram/sequence/uc014_product_category_add/uc014_product_category_add.svg)
 
 ### UC017 社員アカウントログイン機能
 
-![](plan/diagram/sequence/uc017_employee_account_login.png)
+![](images/plan/diagram/sequence/uc017_employee_account_login/uc017_employee_account_login.svg)
 
 ### UC018 社員アカウントログアウト機能
 
-![](plan/diagram/sequence/uc018_employee_account_logout.png)
+![](images/plan/diagram/sequence/uc018_employee_account_logout/uc018_employee_account_logout.svg)
 
 ## 設計・開発・納品の流れ
 
@@ -337,10 +365,12 @@ P021 | 商品カテゴリ登録(完了)
 gulp関連をグローバルインストールしてリンクを追加する
 
 ```
-npm link gulp
-npm link gulp-sass
-npm link gulp-plumber
-npm link gulp-notify
-npm link gulp-pug
-npm link gulp-autoprefixer
+npm i -g gulp gulp-sass sass gulp-plumber gulp-notify gulp-pug gulp-autoprefixer
+npm link gulp gulp-sass sass gulp-plumber gulp-notify gulp-pug gulp-autoprefixer
+```
+
+下記コマンドを実行したらgulpによる監視が開始される
+
+```
+gulp
 ```

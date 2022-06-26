@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1043px" preserveAspectRatio="none" style="width:653px;height:1043px;background:#FFFFFF;" version="1.1" viewBox="0 0 653 1043" width="653px" zoomAndPan="magnify"><defs/><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="291" x="180" y="29.4023">UC009: 顧客登録機能 シーケンス図</text><rect fill="#FFFFFF" height="813.7637" style="stroke:#A80036;stroke-width:1.0;" width="10" x="24" y="129.6875"/><rect fill="#FFFFFF" height="113.9316" style="stroke:#A80036;stroke-width:1.0;" width="10" x="147.5" y="150.998"/><rect fill="#FFFFFF" height="71.6211" style="stroke:#A80036;stroke-width:1.0;" width="10" x="147.5" y="336.5508"/><rect fill="#FFFFFF" height="320.416" style="stroke:#A80036;stroke-width:1.0;" width="10" x="147.5" y="479.793"/><rect fill="#FFFFFF" height="113.9316" style="stroke:#A80036;stroke-width:1.0;" width="10" x="147.5" y="829.5195"/><rect fill="#FFFFFF" height="161.8633" style="stroke:#A80036;stroke-width:1.0;" width="10" x="366.5" y="609.0352"/><rect fill="#FFFFFF" height="87.9316" style="stroke:#A80036;stroke-width:1.0;" width="10" x="518" y="653.6563"/><rect fill="#FFFFFF" height="29.3105" style="stroke:#A80036;stroke-width:1.0;" width="10" x="623" y="682.9668"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="29" x2="29" y1="119.6875" y2="961.4512"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="152" x2="152" y1="119.6875" y2="961.4512"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="371" x2="371" y1="119.6875" y2="961.4512"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="523" x2="523" y1="119.6875" y2="961.4512"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="628" x2="628" y1="119.6875" y2="961.4512"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="42" x="5" y="116.7344">ユーザ</text><ellipse cx="29" cy="50.1992" fill="#FEFECE" rx="8" ry="8" style="stroke:#A80036;stroke-width:2.0;"/><path d="M29,58.1992 L29,85.1992 M16,66.1992 L42,66.1992 M29,85.1992 L16,100.1992 M29,85.1992 L42,100.1992 " fill="none" style="stroke:#A80036;stroke-width:2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="42" x="5" y="973.9863">ユーザ</text><ellipse cx="29" cy="986.9395" fill="#FEFECE" rx="8" ry="8" style="stroke:#A80036;stroke-width:2.0;"/><path d="M29,994.9395 L29,1021.9395 M16,1002.9395 L42,1002.9395 M29,1021.9395 L16,1036.9395 M29,1021.9395 L42,1036.9395 " fill="none" style="stroke:#A80036;stroke-width:2.0;"/><rect fill="#FEFECE" height="30.4883" style="stroke:#A80036;stroke-width:1.5;" width="179" x="63" y="88.1992"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="165" x="70" y="108.7344">CustomerAddController</text><rect fill="#FEFECE" height="30.4883" style="stroke:#A80036;stroke-width:1.5;" width="179" x="63" y="960.4512"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="165" x="70" y="980.9863">CustomerAddController</text><rect fill="#FEFECE" height="30.4883" style="stroke:#A80036;stroke-width:1.5;" width="129" x="307" y="88.1992"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="115" x="314" y="108.7344">CustomerService</text><rect fill="#FEFECE" height="30.4883" style="stroke:#A80036;stroke-width:1.5;" width="129" x="307" y="960.4512"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="115" x="314" y="980.9863">CustomerService</text><rect fill="#FEFECE" height="30.4883" style="stroke:#A80036;stroke-width:1.5;" width="154" x="446" y="88.1992"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="140" x="453" y="108.7344">CustomerRepository</text><rect fill="#FEFECE" height="30.4883" style="stroke:#A80036;stroke-width:1.5;" width="154" x="446" y="960.4512"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="140" x="453" y="980.9863">CustomerRepository</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="18" x="616" y="116.7344">DB</text><path d="M610,67.1992 C610,57.1992 628,57.1992 628,57.1992 C628,57.1992 646,57.1992 646,67.1992 L646,93.1992 C646,103.1992 628,103.1992 628,103.1992 C628,103.1992 610,103.1992 610,93.1992 L610,67.1992 " fill="#FEFECE" style="stroke:#000000;stroke-width:1.5;"/><path d="M610,67.1992 C610,77.1992 628,77.1992 628,77.1992 C628,77.1992 646,77.1992 646,67.1992 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="18" x="616" y="973.9863">DB</text><path d="M610,986.9395 C610,976.9395 628,976.9395 628,976.9395 C628,976.9395 646,976.9395 646,986.9395 L646,1012.9395 C646,1022.9395 628,1022.9395 628,1022.9395 C628,1022.9395 610,1022.9395 610,1012.9395 L610,986.9395 " fill="#FEFECE" style="stroke:#000000;stroke-width:1.5;"/><path d="M610,986.9395 C610,996.9395 628,996.9395 628,996.9395 C628,996.9395 646,996.9395 646,986.9395 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><rect fill="#FFFFFF" height="813.7637" style="stroke:#A80036;stroke-width:1.0;" width="10" x="24" y="129.6875"/><rect fill="#FFFFFF" height="113.9316" style="stroke:#A80036;stroke-width:1.0;" width="10" x="147.5" y="150.998"/><rect fill="#FFFFFF" height="71.6211" style="stroke:#A80036;stroke-width:1.0;" width="10" x="147.5" y="336.5508"/><rect fill="#FFFFFF" height="320.416" style="stroke:#A80036;stroke-width:1.0;" width="10" x="147.5" y="479.793"/><rect fill="#FFFFFF" height="113.9316" style="stroke:#A80036;stroke-width:1.0;" width="10" x="147.5" y="829.5195"/><rect fill="#FFFFFF" height="161.8633" style="stroke:#A80036;stroke-width:1.0;" width="10" x="366.5" y="609.0352"/><rect fill="#FFFFFF" height="87.9316" style="stroke:#A80036;stroke-width:1.0;" width="10" x="518" y="653.6563"/><rect fill="#FFFFFF" height="29.3105" style="stroke:#A80036;stroke-width:1.0;" width="10" x="623" y="682.9668"/><polygon fill="#A80036" points="135.5,146.998,145.5,150.998,135.5,154.998,139.5,150.998" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="34" x2="141.5" y1="150.998" y2="150.998"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="38" x="41" y="146.2559">form()</text><line style="stroke:#A80036;stroke-width:1.0;" x1="157.5" x2="199.5" y1="180.3086" y2="180.3086"/><line style="stroke:#A80036;stroke-width:1.0;" x1="199.5" x2="199.5" y1="180.3086" y2="193.3086"/><line style="stroke:#A80036;stroke-width:1.0;" x1="158.5" x2="199.5" y1="193.3086" y2="193.3086"/><polygon fill="#A80036" points="168.5,189.3086,158.5,193.3086,168.5,197.3086,164.5,193.3086" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="76" x="164.5" y="175.5664">setUpForm()</text><line style="stroke:#A80036;stroke-width:1.0;" x1="157.5" x2="199.5" y1="222.6191" y2="222.6191"/><line style="stroke:#A80036;stroke-width:1.0;" x1="199.5" x2="199.5" y1="222.6191" y2="235.6191"/><line style="stroke:#A80036;stroke-width:1.0;" x1="158.5" x2="199.5" y1="235.6191" y2="235.6191"/><polygon fill="#A80036" points="168.5,231.6191,158.5,235.6191,168.5,239.6191,164.5,235.6191" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="36" x="164.5" y="217.877">bind()</text><polygon fill="#A80036" points="45,260.9297,35,264.9297,45,268.9297,41,264.9297" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="39" x2="151.5" y1="264.9297" y2="264.9297"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="52" x="51" y="260.1875">入力画面</text><line style="stroke:#A80036;stroke-width:1.0;" x1="34" x2="76" y1="294.2402" y2="294.2402"/><line style="stroke:#A80036;stroke-width:1.0;" x1="76" x2="76" y1="294.2402" y2="307.2402"/><line style="stroke:#A80036;stroke-width:1.0;" x1="35" x2="76" y1="307.2402" y2="307.2402"/><polygon fill="#A80036" points="45,303.2402,35,307.2402,45,311.2402,41,307.2402" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="78" x="41" y="289.498">顧客情報入力</text><polygon fill="#A80036" points="135.5,332.5508,145.5,336.5508,135.5,340.5508,139.5,336.5508" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="34" x2="141.5" y1="336.5508" y2="336.5508"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="57" x="41" y="331.8086">confirm()</text><line style="stroke:#A80036;stroke-width:1.0;" x1="157.5" x2="199.5" y1="365.8613" y2="365.8613"/><line style="stroke:#A80036;stroke-width:1.0;" x1="199.5" x2="199.5" y1="365.8613" y2="378.8613"/><line style="stroke:#A80036;stroke-width:1.0;" x1="158.5" x2="199.5" y1="378.8613" y2="378.8613"/><polygon fill="#A80036" points="168.5,374.8613,158.5,378.8613,168.5,382.8613,164.5,378.8613" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="65" x="164.5" y="361.1191">バリデート</text><polygon fill="#A80036" points="45,404.1719,35,408.1719,45,412.1719,41,408.1719" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="39" x2="151.5" y1="408.1719" y2="408.1719"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="52" x="51" y="403.4297">確認画面</text><line style="stroke:#A80036;stroke-width:1.0;" x1="34" x2="76" y1="437.4824" y2="437.4824"/><line style="stroke:#A80036;stroke-width:1.0;" x1="76" x2="76" y1="437.4824" y2="450.4824"/><line style="stroke:#A80036;stroke-width:1.0;" x1="35" x2="76" y1="450.4824" y2="450.4824"/><polygon fill="#A80036" points="45,446.4824,35,450.4824,45,454.4824,41,450.4824" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="78" x="41" y="432.7402">入力内容確認</text><polygon fill="#A80036" points="135.5,475.793,145.5,479.793,135.5,483.793,139.5,479.793" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="34" x2="141.5" y1="479.793" y2="479.793"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="57" x="41" y="475.0508">execute()</text><line style="stroke:#A80036;stroke-width:1.0;" x1="157.5" x2="199.5" y1="509.1035" y2="509.1035"/><line style="stroke:#A80036;stroke-width:1.0;" x1="199.5" x2="199.5" y1="509.1035" y2="522.1035"/><line style="stroke:#A80036;stroke-width:1.0;" x1="158.5" x2="199.5" y1="522.1035" y2="522.1035"/><polygon fill="#A80036" points="168.5,518.1035,158.5,522.1035,168.5,526.1035,164.5,522.1035" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="91" x="164.5" y="504.3613">セッション確認</text><line style="stroke:#A80036;stroke-width:1.0;" x1="157.5" x2="199.5" y1="551.4141" y2="551.4141"/><line style="stroke:#A80036;stroke-width:1.0;" x1="199.5" x2="199.5" y1="551.4141" y2="564.4141"/><line style="stroke:#A80036;stroke-width:1.0;" x1="158.5" x2="199.5" y1="564.4141" y2="564.4141"/><polygon fill="#A80036" points="168.5,560.4141,158.5,564.4141,168.5,568.4141,164.5,564.4141" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="195" x="164.5" y="546.6719">フォームからエンティティに変換</text><polygon fill="#A80036" points="354.5,605.0352,364.5,609.0352,354.5,613.0352,358.5,609.0352" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="157.5" x2="360.5" y1="609.0352" y2="609.0352"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="36" x="164.5" y="588.9824">insert</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="69" x="164.5" y="604.293">(Customer)</text><polygon fill="#A80036" points="506,649.6563,516,653.6563,506,657.6563,510,653.6563" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="376.5" x2="512" y1="653.6563" y2="653.6563"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="36" x="383.5" y="633.6035">insert</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="69" x="383.5" y="648.9141">(Customer)</text><polygon fill="#A80036" points="611,678.9668,621,682.9668,611,686.9668,615,682.9668" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="528" x2="617" y1="682.9668" y2="682.9668"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="57" x="535" y="678.2246">INSERT文</text><polygon fill="#A80036" points="539,708.2773,529,712.2773,539,716.2773,535,712.2773" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="533" x2="627" y1="712.2773" y2="712.2773"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="27" x="545" y="707.5352">void</text><polygon fill="#A80036" points="387.5,737.5879,377.5,741.5879,387.5,745.5879,383.5,741.5879" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="381.5" x2="522" y1="741.5879" y2="741.5879"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="27" x="393.5" y="736.8457">void</text><polygon fill="#A80036" points="168.5,766.8984,158.5,770.8984,168.5,774.8984,164.5,770.8984" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="162.5" x2="370.5" y1="770.8984" y2="770.8984"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="27" x="174.5" y="766.1563">void</text><polygon fill="#A80036" points="45,796.209,35,800.209,45,804.209,41,800.209" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="39" x2="151.5" y1="800.209" y2="800.209"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="78" x="51" y="795.4668">リダイレクト</text><polygon fill="#A80036" points="135.5,825.5195,145.5,829.5195,135.5,833.5195,139.5,829.5195" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="34" x2="141.5" y1="829.5195" y2="829.5195"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="66" x="41" y="824.7773">complete()</text><line style="stroke:#A80036;stroke-width:1.0;" x1="157.5" x2="199.5" y1="858.8301" y2="858.8301"/><line style="stroke:#A80036;stroke-width:1.0;" x1="199.5" x2="199.5" y1="858.8301" y2="871.8301"/><line style="stroke:#A80036;stroke-width:1.0;" x1="158.5" x2="199.5" y1="871.8301" y2="871.8301"/><polygon fill="#A80036" points="168.5,867.8301,158.5,871.8301,168.5,875.8301,164.5,871.8301" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="91" x="164.5" y="854.0879">セッション破棄</text><line style="stroke:#A80036;stroke-width:1.0;" x1="157.5" x2="199.5" y1="901.1406" y2="901.1406"/><line style="stroke:#A80036;stroke-width:1.0;" x1="199.5" x2="199.5" y1="901.1406" y2="914.1406"/><line style="stroke:#A80036;stroke-width:1.0;" x1="158.5" x2="199.5" y1="914.1406" y2="914.1406"/><polygon fill="#A80036" points="168.5,910.1406,158.5,914.1406,168.5,918.1406,164.5,914.1406" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="64" x="164.5" y="896.3984">Model追加</text><polygon fill="#A80036" points="40,939.4512,30,943.4512,40,947.4512,36,943.4512" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="34" x2="151.5" y1="943.4512" y2="943.4512"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="52" x="46" y="938.709">完了画面</text><!--MD5=[2798b4467e80d301e998e98cd05a4d85]
+@startuml
+skin rose
+skinparam shadowing false
+hide empty methods
+hide empty fields
+skin rose
+title UC009: 顧客登録機能 シーケンス図
+skinparam shadowing false
+
+actor ユーザ as user
+activate user
+participant "CustomerAddController" as controller
+participant "CustomerService" as svc2
+participant "CustomerRepository" as repo2
+database DB as db
+
+' 入力画面
+user -> controller ++ : form()
+controller -> controller : setUpForm()
+controller -> controller : bind()
+controller -> user - - : 入力画面
+
+' 確認画面
+user -> user : 顧客情報入力
+user -> controller ++ : confirm()
+controller -> controller : バリデート
+controller - -> user - - : 確認画面
+
+' 完了画面
+user -> user : 入力内容確認
+user -> controller ++ : execute()
+controller -> controller : セッション確認
+' note right: フォームデータが\n空ならシステムエラー
+controller -> controller : フォームからエンティティに変換
+controller -> svc2 ++ : insert\n(Customer)
+svc2 -> repo2 ++ : insert\n(Customer)
+repo2 -> db ++ : INSERT文
+repo2 <- - db - - : void
+svc2 <- - repo2 - - : void
+svc2 -> controller - - : void
+user <- - controller - - : リダイレクト
+user -> controller ++ : complete()
+controller -> controller : セッション破棄
+controller -> controller : Model追加
+controller -> user - - : 完了画面
+deactivate user
+@enduml
+
+@startuml
+skin rose
+skinparam shadowing false
+hide empty methods
+hide empty fields
+skin rose
+title UC009: 顧客登録機能 シーケンス図
+skinparam shadowing false
+
+actor ユーザ as user
+activate user
+participant "CustomerAddController" as controller
+participant "CustomerService" as svc2
+participant "CustomerRepository" as repo2
+database DB as db
+
+user -> controller ++ : form()
+controller -> controller : setUpForm()
+controller -> controller : bind()
+controller -> user - - : 入力画面
+
+user -> user : 顧客情報入力
+user -> controller ++ : confirm()
+controller -> controller : バリデート
+controller - -> user - - : 確認画面
+
+user -> user : 入力内容確認
+user -> controller ++ : execute()
+controller -> controller : セッション確認
+controller -> controller : フォームからエンティティに変換
+controller -> svc2 ++ : insert\n(Customer)
+svc2 -> repo2 ++ : insert\n(Customer)
+repo2 -> db ++ : INSERT文
+repo2 <- - db - - : void
+svc2 <- - repo2 - - : void
+svc2 -> controller - - : void
+user <- - controller - - : リダイレクト
+user -> controller ++ : complete()
+controller -> controller : セッション破棄
+controller -> controller : Model追加
+controller -> user - - : 完了画面
+deactivate user
+@enduml
+
+PlantUML version 1.2022.0(Wed Jan 12 01:16:42 JST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: ja
+Country: JP
+--></g></svg>

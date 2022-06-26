@@ -15,25 +15,18 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
-@SessionAttributes({"productAddForm","categories","imageBytes"})
-@RequestMapping("/admin/product-add")
 @Controller
+@RequestMapping("/admin/product-add")
+@SessionAttributes({"productAddForm","categories","imageBytes"})
 public class ProductAddController {
 
     private static final String TEMPLATE_DIR = "backend/product-add";
-
-    @Autowired
-    private ProductCategoryService productCategoryService;
-
-    @Autowired
-    private ProductService productService;
-
-    @Autowired
-    private ProductFormValidator validator;
+    @Autowired private ProductCategoryService productCategoryService;
+    @Autowired private ProductService productService;
+    @Autowired private ProductFormValidator validator;
 
     @ModelAttribute("productAddForm")
     public ProductForm setupForm(){
@@ -52,10 +45,7 @@ public class ProductAddController {
     }
 
     @PostMapping("/confirm")
-    public String confirm(
-            @Validated @ModelAttribute("productAddForm") ProductForm form,
-            BindingResult result,
-            Model model) throws Exception {
+    public String confirm(@Validated @ModelAttribute("productAddForm") ProductForm form, BindingResult result, Model model) throws Exception {
         if(result.hasErrors()) return "backend/product-add/form";
         model.addAttribute("category",getCategory((List<ProductCategory>)model.getAttribute("categories"),form.getCategory()));
         model.addAttribute("uploadImage",ProductHelper.createBase64ImageString(form.getImage()));
@@ -64,12 +54,7 @@ public class ProductAddController {
     }
 
     @PostMapping("/complete")
-    public String complete(
-            @ModelAttribute("productAddForm") ProductForm form,
-            @ModelAttribute("imageBytes") byte[] data,
-            SessionStatus sessionStatus,
-            Model model
-    ) throws Exception {
+    public String complete(@ModelAttribute("productAddForm") ProductForm form, @ModelAttribute("imageBytes") byte[] data, SessionStatus sessionStatus, Model model) throws Exception {
         if(form.isEmpty()) throw new RuntimeException("フォームのデータがありません");
         String fileName = ProductHelper.uploadFile(form.getImage().getOriginalFilename(),data);
         Product product = ProductHelper.convertEntity(form,productCategoryService.findById(form.getCategory()),null);
@@ -81,13 +66,8 @@ public class ProductAddController {
     }
 
     @GetMapping("/cancel")
-    public String cancel(
-            //@ModelAttribute("productAddForm") ProductForm form,
-            SessionStatus sessionStatus
-            //,RedirectAttributes redirectAttributes
-    ){
+    public String cancel(SessionStatus sessionStatus){
         sessionStatus.setComplete();
-        // redirectAttributes.addFlashAttribute("productAddForm", form);
         return "redirect:/admin/product";
     }
 

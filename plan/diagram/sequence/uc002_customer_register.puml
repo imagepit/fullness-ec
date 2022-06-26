@@ -1,0 +1,43 @@
+@startuml
+skin rose
+title UC009: 顧客登録機能 シーケンス図
+skinparam shadowing false
+
+actor ユーザ as user
+activate user
+participant "CustomerAddController" as controller
+participant "CustomerService" as svc2
+participant "CustomerRepository" as repo2
+database DB as db
+
+' 入力画面
+user -> controller ++ : form()
+controller -> controller : setUpForm()
+controller -> controller : bind()
+controller -> user -- : 入力画面
+
+' 確認画面
+user -> user : 顧客情報入力
+user -> controller ++ : confirm()
+controller -> controller : バリデート
+controller --> user -- : 確認画面
+
+' 完了画面
+user -> user : 入力内容確認
+user -> controller ++ : execute()
+controller -> controller : セッション確認
+' note right: フォームデータが\n空ならシステムエラー
+controller -> controller : フォームからエンティティに変換
+controller -> svc2 ++ : insert\n(Customer)
+svc2 -> repo2 ++ : insert\n(Customer)
+repo2 -> db ++ : INSERT文
+repo2 <-- db -- : void
+svc2 <-- repo2 -- : void
+svc2 -> controller -- : void
+user <-- controller -- : リダイレクト
+user -> controller ++ : complete()
+controller -> controller : セッション破棄
+controller -> controller : Model追加
+controller -> user -- : 完了画面
+deactivate user
+@enduml

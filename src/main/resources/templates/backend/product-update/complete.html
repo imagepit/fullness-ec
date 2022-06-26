@@ -24,11 +24,9 @@
     </header>
     <div id="main">
       <h2>商品修正(完了)</h2>
-      <div class="complete-message" th:text="|商品名${p.name}を修正しました。|"></div>
-      <button>業務終了</button>
-      <a class="botton" href="/admin/product">
-        <button>商品検索へ戻る</button>
-      </a>
+      <div class="complete-message" th:text="|商品名${p.name}を修正しました。|"></div><a class="botton" href="/admin">
+        <button>業務終了</button></a><a class="botton" href="/admin/product">
+        <button>商品検索へ戻る</button></a>
     </div>
     <footer>
       <div id="footer">Fullness Stationary社</div>

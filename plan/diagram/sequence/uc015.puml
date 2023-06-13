@@ -1,0 +1,29 @@
+@startuml
+skin rose
+skinparam shadowing false
+title UC015: 購入履歴閲覧
+
+actor "顧客" as u
+participant "OrderHistoryController" as c
+participant "OrderService" as s
+participant "OrderRepository" as r
+database "DB" as db
+
+u -> c++ : GET\n/order/list
+c -> s++ : getOrderHistory()
+s -> r++ : selectAll()
+r -> db++ : SELECT order
+db --> r-- : List<Order>
+r --> s-- : List<Order>
+s --> c-- : List<Order>
+c -> c : 購入履歴から\n日付を抽出して\nModelに格納
+c --> u-- : 購入履歴\n一覧画面
+u -> c++ : POST\n/order/list
+c -> s++ : getOrderByDate(date)
+s -> r++ : selectByDate(date)
+r -> db++ : SELECT order
+db --> r-- : List<Order>
+r --> s-- : List<Order>
+s --> c-- : List<Order>
+c --> u-- : 購入履歴\n一覧画面
+@enduml

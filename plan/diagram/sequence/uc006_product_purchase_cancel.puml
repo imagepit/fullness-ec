@@ -1,0 +1,13 @@
+@startuml
+skin rose
+skinparam shadowing false
+title UC006: 購入キャンセル
+actor "顧客" as u
+participant "OrderController" as oc
+participant "ProductCart" as pc
+u -> oc: POST\n/order-cancel/{productId}
+oc -> pc: cancel(productId)
+pc -> pc: カートから商品を削除
+pc --> oc: void
+oc --> u: カート一覧画面
+@enduml

@@ -1,5 +1,6 @@
 @startuml
 
+skin rose
 title UC014: カテゴリ登録機能 シーケンス図
 skinparam shadowing false
 
@@ -11,7 +12,7 @@ participant "ProductCategoryRepository" as repo
 database DB as db
 
 ' 入力画面
-user -> ctrl ++ : form()
+user -> ctrl ++ : GET\n/admin/product-category-add/form\nform()
 ctrl -> ctrl : setUpForm()
 note right: セッション生成
 ctrl -> ctrl : bind()
@@ -19,24 +20,24 @@ ctrl -> user -- : 入力画面
 
 ' 確認画面
 user -> user : 商品情報入力
-user -> ctrl ++ : confirm()
+user -> ctrl ++ : POST\n/admin/product-category-add/confirm\nconfirm()
 ctrl -> ctrl : バリデート
 ctrl --> user -- : 確認画面
 
 ' 完了画面
 user -> user : 入力内容確認
-user -> ctrl ++ : execute()
+user -> ctrl ++ : POST\n/admin/product-category-add/execute\nexecute()
 ctrl -> ctrl : セッション確認
 note right: セッションが空なら\nシステムエラー
 ctrl -> ctrl : フォームを\nエンティティに変換
 ctrl -> svc ++ : insert\n(ProductCategory)
 svc -> repo ++ : insert\n(ProductCategory)
-repo -> db ++ : INSERT文
+repo -> db ++ : SQL INSERT
 db --> repo -- : void
 repo --> svc -- : void
 svc -> ctrl -- : void
 user <-- ctrl -- : リダイレクト
-user -> ctrl ++ : complete()
+user -> ctrl ++ : GET\n/admin/product-category-add/complete\ncomplete()
 ctrl -> ctrl : セッション破棄
 ctrl -> ctrl : Modelに追加（商品名）
 ctrl -> user -- : 完了画面

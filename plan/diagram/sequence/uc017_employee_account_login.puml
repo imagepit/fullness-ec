@@ -1,5 +1,6 @@
 @startuml
 
+skin rose
 title UC017: 社員アカウントログイン機能 シーケンス図
 skinparam shadowing false
 actor "user" as user
@@ -12,12 +13,12 @@ participant "EmployeeAccount\nRepository" as repo
 participant "EmployeeAccount\nUserDetails" as ud
 database DB as db
 
-user -> ctrl1 ++ : form()
+user -> ctrl1 ++ : GET\n/admin/login
 ctrl1 -> user -- : ログイン画面
-user -> sec ++ : 認証
+user -> sec ++ : POST\n/admin/auth
 sec -> svc ++ : loadUserByUsername\n(userName)
 svc -> repo ++ : findByUserName\n(userName)
-repo -> db ++ : SELECT文
+repo -> db ++ : SQL SELECT
 db --> repo -- : EmployeeAccount
 repo --> svc -- : EmployeeAccount
 svc -> ud ++ : new
@@ -25,7 +26,7 @@ ud --> svc -- : EmployeeAccount\nUserDetails
 svc --> sec -- : EmployeeAccount\nUserDetails
 sec -> sec : セッションに格納
 sec --> user -- : リダイレクト
-user -> ctrl2 ++ : menu()
+user -> ctrl2 ++ : GET\n/admin/menu\nmenu()
 ctrl2 --> user -- : メニュー画面
 
 deactivate user

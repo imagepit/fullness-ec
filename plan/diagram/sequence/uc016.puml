@@ -1,0 +1,37 @@
+@startuml
+skin rose
+skinparam shadowing false
+title UC016: 注文ステータス更新
+
+actor "顧客" as u
+participant "OrderStatusUpdateController" as c
+participant "OrderService" as s
+participant "OrderRepository" as r1
+participant "OrderStatusRepository" as r2
+database "DB" as db
+
+u -> c++ : GET\n/backend/order
+c -> s++ : getOrderList()
+s -> r1++ : selectAll()
+r1 -> db++ : SELECT\nORDER, ORDER_STATUS
+db --> r1-- : List<Order>
+r1 --> s-- : List<Order>
+s --> c-- : List<Order>
+c --> u-- : 注文ステータス\n一覧画面
+
+u -> u : 注文ステータス更新
+
+u -> c++ : GET\n/backend/order/confirm
+c -> u-- : 確認画面
+
+u -> c++ : POST\n/backend/order/update/execute
+c -> s++ : updateOrderStatus\n(orderId,orderStatus)
+s -> r2++ : update\n(orderId,orderStatus)
+r2 -> db++ : UPDATE ORDER
+db --> r2-- : void
+r2 --> s-- : void
+s --> c-- : void
+c --> u-- : リダイレクト
+u -> c++ : GET\n/backend/order/complete
+c --> u-- : 注文ステータス\n更新完了画面
+@enduml

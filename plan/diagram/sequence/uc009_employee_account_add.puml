@@ -1,5 +1,6 @@
 @startuml
 
+skin rose
 title UC009: 担当者アカウント登録機能 シーケンス図
 skinparam shadowing false
 
@@ -13,7 +14,7 @@ participant "EmployeeAccount\nRepository" as repo2
 database DB as db
 
 ' 入力画面
-user -> controller ++ : form()
+user -> controller ++ : GET\n/admin/emp-add\nform()
 controller -> controller : setUpForm()
 controller -> controller : bind()
 controller -> svc1 ++ : findAll()
@@ -26,13 +27,13 @@ controller -> user -- : 入力画面
 
 ' 確認画面
 user -> user : 商品情報入力
-user -> controller ++ : confirm()
+user -> controller ++ : POST\n/admin/emp-add/confirm\nconfirm()
 controller -> controller : バリデート
 controller --> user -- : 確認画面
 
 ' 完了画面
 user -> user : 入力内容確認
-user -> controller ++ : execute()
+user -> controller ++ : POST\n/admin/emp-add/execute\nexecute()
 controller -> controller : セッション確認
 ' note right: フォームデータが\n空ならシステムエラー
 controller -> controller : フォームから\nエンティティに変換
@@ -42,10 +43,10 @@ repo2 -> db ++ : INSERT文
 repo2 <-- db -- : void
 svc2 <-- repo2 -- : void
 svc2 -> controller -- : void
-user <-- controller : リダイレクト
-user -> controller : complete()
+user <-- controller-- : リダイレクト
+user -> controller++ : GET\n/admin/emp-add/complete
 controller -> controller : セッション破棄
 controller -> controller : Model追加
-controller -> user -- : 完了画面
+controller -> user-- : 完了画面
 deactivate user
 @enduml

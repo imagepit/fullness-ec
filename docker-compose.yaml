@@ -1,0 +1,28 @@
+version: '2'
+services:
+  app:
+    image: openjdk:11
+    ports:
+      - "3333:8080"
+    volumes:
+      - .:/app
+      # - /Users/xxxx/.gradle:/root/.gradle # gradleのキャッシュ設定（Windowsの場合）
+      # - ~/.gradle:/root/.gradle # gradleのキャッシュ設定（Macの場合）
+    # environment:
+    #     GRADLE_USER_HOME: /root/.gradle # gradleのキャッシュ設定用の環境変数
+    working_dir: /app
+    command: ./gradlew bootRun
+    networks:
+      - local
+  db:
+    container_name: postgres
+    image: postgres:12.2
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: fullness_ec
+      POSTGRES_PASSWORD: fullness_ec
+      POSTGRES_DB: fullness_ec
+networks:
+  local:
+    external: true

@@ -1,7 +1,7 @@
 @startuml
 
+skin rose
 title UC010: 新商品登録機能 シーケンス図
-
 skinparam shadowing false
 actor ユーザ as user
 activate user
@@ -14,7 +14,7 @@ participant "ProductStock\nRepository" as repo2
 database DB
 
 ' 入力画面
-user -> controller ++ : form()
+user -> controller ++ : GET\n/admin/product-add/form\nform()
 controller -> controller : setUpForm()
 controller -> controller : bind()
 controller -> svc1 ++ : findAll()
@@ -28,7 +28,7 @@ controller --> user -- : 入力画面
 
 ' 確認画面
 user -> user : 商品情報入力
-user -> controller ++ : confirm()
+user -> controller ++ : POST\n/admin/product-add/confirm\nconfirm()
 controller -> controller : バリデート
 controller -> controller : Model追加\n（選択した商品カテゴリ）
 controller -> controller : Model追加\n（商品画像Base64）
@@ -38,7 +38,7 @@ controller --> user -- : 確認画面
 
 ' 完了画面
 user -> user : 入力内容確認
-user -> controller ++ : execute()
+user -> controller ++ : POST\n/admin/product-add/execute\nexecute()
 controller -> controller : セッション確認
 note right: セッション情報がない場合はシステムエラー
 controller -> controller : 画像保存ファイル名\nをModelに追加
@@ -55,7 +55,7 @@ DB --> repo2 -- : void
 repo2 --> svc2 -- : void
 svc2 --> controller -- : void
 user <-- controller -- : リダイレクト
-user -> controller ++ : complete()
+user -> controller ++ : GET\n/admin/product-add/complete\ncomplete()
 controller -> controller : セッション破棄
 controller -> controller : Modelに追加\n（商品名）
 controller --> user -- : 完了画面

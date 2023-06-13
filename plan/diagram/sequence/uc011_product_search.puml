@@ -1,5 +1,6 @@
 @startuml
 
+skin rose
 title UC011: 商品検索機能 シーケンス図
 skinparam shadowing false
 
@@ -13,7 +14,7 @@ participant "ProductCategory\nRepository" as repo2
 database "DB" as db
 
 ' 検索初期画面
-user -> controller ++ : list()
+user -> controller ++ : GET\n/admin/product-search\nlist()
 controller -> controller : セッション破棄
 note right: 他コントローラで破棄していない\nセッションを一斉破棄
 controller -> controller : setUpForm()
@@ -36,7 +37,7 @@ controller -> user -- : 検索初期画面
 
 ' 検索結果画面
 user -> user : カテゴリ選択
-user -> controller ++ : search()
+user -> controller ++ : POST\n/admin/product-search\nsearch()
 controller -> svc2 ++ : findbyCategoryId()
 svc2 -> repo1 ++ : findbyCategoryId()
 repo1 -> db ++ : SELECT文

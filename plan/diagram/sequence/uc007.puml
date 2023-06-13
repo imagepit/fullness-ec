@@ -1,0 +1,29 @@
+@startuml
+skin rose
+skinparam shadowing false
+title UC007: 購入履歴閲覧
+
+actor "顧客" as u
+participant "OrderHistoryController" as c
+participant "OrderService" as s
+participant "OrderRepository" as r
+database "DB" as db
+
+u -> c++ : GET\n/order/list
+c -> c : セッションから\n顧客IDを取得
+c -> s++ : getOrderByCustomerId\n(customerId)
+s -> r++ : selectByCustomerId\n(customerId)
+r -> db++ : SELECT order
+db --> r-- : List<Order>
+r --> s-- : List<Order>
+s --> c-- : List<Order>
+c --> u-- : 購入履歴\n一覧画面
+u -> c++ : GET\n/order/{orderId}
+c -> s++ : getOrder(orderId)
+s -> r++ : selectById(orderId)
+r -> db++ : SELECT order
+db --> r-- : Order
+r --> s-- : Order
+s --> c-- : Order
+c --> u-- : 購入履歴\n詳細画面
+@enduml

@@ -1,9 +1,10 @@
 @startuml
-
+skin rose
+skinparam shadowing false
 title 概要クラス図
 left to right direction
-
-package com.fullness.ec{
+hide empty members
+package "com.fullness.ec" as ec{
     package repository{
     	interface "Product\nRepository" as ProductRepository
     	interface "ProductCategory\nRepository" as ProductCategoryRepository
@@ -78,6 +79,7 @@ package com.fullness.ec{
         class "CustomerLogin\nForm" as CustomerLoginForm
         class "Order\nForm" as OrderForm
     }
+    
     package security{
         class "EmployeeAccount\nUserDetails" as EmployeeAccountUserDetails
         class "EmployeeAccount\nUserDetailsService" as EmployeeAccountUserDetailsService
@@ -95,13 +97,13 @@ package com.fullness.ec{
         class "BusinessException" as BusinessException
     }
 
-    package config(){
+    package config{
         class "ApplicationConfig" as ApplicationConfig
     }
 }
 
 
-' controller -> service : use
+' controller ---> service : use
 ' controller --> form : use
 ' service --> repository : call
 ' repository --> entity : use

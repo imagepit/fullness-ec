@@ -374,3 +374,17 @@ npm link gulp gulp-sass sass gulp-plumber gulp-notify gulp-pug gulp-autoprefixer
 ```
 gulp
 ```
+
+## Selenide + Allureのテスト
+
+_テストの実行_
+
+```
+./gradlew allureReport --depends-on-tests
+```
+
+_レポートの表示_
+
+```
+./gradlew allureServe
+```

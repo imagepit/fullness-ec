@@ -1,5 +1,6 @@
 @startuml
 
+skin rose
 title UC017: 社員アカウントログアウト機能 シーケンス図
 skinparam shadowing false
 
@@ -8,10 +9,10 @@ participant "LoginController" as ctrl
 participant "SpringSecurity本体" as sec
 activate user
 
-user -> sec ++ : ログアウト
+user -> sec ++ : POST\n/admin/logout
 sec -> sec : セッション破棄
 sec -> user -- : ログイン画面にリダイレクト
-user -> ctrl ++ : login()
+user -> ctrl ++ : GET\n/admin/login\nlogin()
 ctrl --> user -- : ログイン画面
 
 @enduml

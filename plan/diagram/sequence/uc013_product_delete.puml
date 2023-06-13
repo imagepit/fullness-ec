@@ -1,5 +1,6 @@
 @startuml
 
+skin rose
 title UC013: 商品削除機能 シーケンス図
 skinparam shadowing false
 'hide footbox
@@ -8,7 +9,7 @@ actor ユーザ
 
 activate ユーザ
 
-ユーザ -> ProductDeleteController : confirm(productId)
+ユーザ -> ProductDeleteController : GET\n/admin/product-delete/{productId}\nconfirm(productId)
 activate ProductDeleteController
 
 ProductDeleteController -> ProductService : findById(productId)
@@ -37,7 +38,7 @@ note right: セッションには格納しない
 ProductDeleteController --> ユーザ : 確認画面
 deactivate ProductDeleteController
 
-ユーザ -> ProductDeleteController : execute()
+ユーザ -> ProductDeleteController : POST\n/admin/product-delete/execute\nexecute()
 activate ProductDeleteController
 
 ProductDeleteController -> ProductService : delete(Integer no)
@@ -65,7 +66,7 @@ ProductDeleteController --> ユーザ : リダイレクト
 deactivate ProductDeleteController
 note right: PRGパターンにより二重投稿防止
 
-ユーザ -> ProductDeleteController : complete()
+ユーザ -> ProductDeleteController : GET\nadmin/product-delete/complete\ncomplete()
 activate ProductDeleteController
 
 ProductDeleteController --> ユーザ : 完了画面

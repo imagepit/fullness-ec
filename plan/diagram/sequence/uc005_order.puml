@@ -1,7 +1,6 @@
 @startuml
-skin rose
+!include ./config.txt
 title UC005: 購入確定 シーケンス図
-skinparam shadowing false
 actor "ユーザ" as user
 activate user
 participant "OrderController" as ctrl

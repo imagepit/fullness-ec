@@ -1,0 +1,4 @@
+skin rose
+skinparam shadowing false
+left to right direction
+hide empty members

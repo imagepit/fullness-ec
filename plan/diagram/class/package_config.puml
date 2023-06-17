@@ -1,8 +1,6 @@
 @startuml
-
+!include ./config.txt
 title configパッケージ
-left to right direction
-
 package config{
     class AppConfig <<@Configuration>>{
         addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) : void

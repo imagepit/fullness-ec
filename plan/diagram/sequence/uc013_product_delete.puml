@@ -1,12 +1,8 @@
 @startuml
-
-skin rose
+!include ./config.txt
 title UC013: 商品削除機能 シーケンス図
-skinparam shadowing false
-'hide footbox
 
 actor ユーザ
-
 activate ユーザ
 
 ユーザ -> ProductDeleteController : GET\n/admin/product-delete/{productId}\nconfirm(productId)

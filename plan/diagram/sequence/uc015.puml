@@ -1,6 +1,6 @@
 @startuml
-skin rose
-skinparam shadowing false
+!include ./config.txt
+
 title UC015: 購入履歴閲覧
 
 actor "顧客" as u

@@ -1,7 +1,11 @@
 @startuml
 
-title controllerパッケージ
+skin rose
+skinparam shadowing false
 left to right direction
+hide empty members
+
+title controllerパッケージ
 
 package controller{
     class GlobalExceptionAspect{

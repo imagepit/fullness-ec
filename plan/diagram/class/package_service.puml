@@ -1,8 +1,6 @@
 @startuml
-
+!include ./config.txt
 title serviceパッケージ
-left to right direction
-
 package service{
     interface ProductService{
         + {abstract} findAll() : List<Product>

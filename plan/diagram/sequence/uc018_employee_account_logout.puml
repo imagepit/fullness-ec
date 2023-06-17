@@ -1,8 +1,6 @@
 @startuml
-
-skin rose
+!include ./config.txt
 title UC017: 社員アカウントログアウト機能 シーケンス図
-skinparam shadowing false
 
 actor "ユーザ" as user
 participant "LoginController" as ctrl

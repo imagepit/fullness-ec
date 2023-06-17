@@ -1,9 +1,7 @@
 @startuml
+!include ./config.txt
 
-skin rose
 title UC011: 商品検索機能 シーケンス図
-skinparam shadowing false
-
 actor ユーザ as user
 activate user
 participant "ProductSearch\nController" as controller

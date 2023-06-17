@@ -1,8 +1,6 @@
 @startuml
-
+!include ./config.txt
 title securityパッケージ
-left to right direction
-
 package security{
     class EmployeeAccountUserDetails{
         - account : EmployeeAccount

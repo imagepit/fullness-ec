@@ -1,9 +1,6 @@
 @startuml
-
-skin rose
+!include ./config.txt
 title UC009: 担当者アカウント登録機能 シーケンス図
-skinparam shadowing false
-
 actor ユーザ as user
 activate user
 participant "EmployeeAccountAdd\nController" as controller

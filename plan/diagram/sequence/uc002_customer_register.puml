@@ -1,8 +1,7 @@
 @startuml
-
-skin rose
-skinparam shadowing false
+!include ./config.txt
 title UC009: 顧客登録機能 シーケンス図
+
 actor ユーザ as user
 activate user
 participant "CustomerAddController" as controller

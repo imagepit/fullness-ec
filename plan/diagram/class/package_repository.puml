@@ -1,8 +1,6 @@
 @startuml
-
+!include ./config.txt
 title repositoryパッケージ
-left to right direction
-
 package repository{
     interface ProductRepository{
         + {abstract} findAll() : List<Product>

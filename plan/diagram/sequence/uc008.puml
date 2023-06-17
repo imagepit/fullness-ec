@@ -1,18 +1,13 @@
 @startuml
-
-skin rose
+!include ./config.txt
 title UC008: 顧客アカウントログアウト機能 シーケンス図
-skinparam shadowing false
-
 actor "ユーザ" as user
 participant "CustomerLogin\nController" as ctrl
 participant "SpringSecurity" as sec
 activate user
-
 user -> sec ++ : POST\n/logout
 sec -> sec : セッション破棄
 sec -> user -- : ログイン画面にリダイレクト
 user -> ctrl ++ : GET\n/login
 ctrl --> user -- : ログイン画面
-
 @enduml

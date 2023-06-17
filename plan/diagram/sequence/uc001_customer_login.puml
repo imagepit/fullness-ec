@@ -1,10 +1,6 @@
 @startuml
-
+!include ./config.txt
 title UC002: 顧客ログイン機能 シーケンス図
-
-skin rose
-skinparam shadowing false
-
 actor "ユーザ" as user
 activate user
 participant "CustomerLogin\nController" as ctrl1

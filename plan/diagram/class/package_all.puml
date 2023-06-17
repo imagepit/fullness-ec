@@ -1,9 +1,6 @@
 @startuml
-skin rose
-skinparam shadowing false
+!include ./config.txt
 title 概要クラス図
-left to right direction
-hide empty members
 package "com.fullness.ec" as ec{
     package repository{
     	interface "Product\nRepository" as ProductRepository

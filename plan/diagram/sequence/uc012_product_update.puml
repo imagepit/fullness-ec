@@ -1,8 +1,7 @@
 @startuml
+!include ./config.txt
 
-skin rose
 title UC012: 商品修正機能 シーケンス図
-skinparam shadowing false
 actor "ユーザ" as user
 activate user
 participant "ProductUpdate\nController" as ctrl

@@ -1,12 +1,9 @@
 @startuml
-
+!include ./config.txt
 title exceptionパッケージ
-left to right direction
-
 package exception{
     class BusinessException{
         + BusinessException(String msg)
     }
 }
-
 @enduml

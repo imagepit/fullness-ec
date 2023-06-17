@@ -1,8 +1,6 @@
 @startuml
-
+!include ./config.txt
 title aopパッケージ
-left to right direction
-
 package aop{
     class AppAdvice{
         aroundAdvice(ProceedingJoinPoint joinPoint)

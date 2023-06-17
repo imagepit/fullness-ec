@@ -1,6 +1,5 @@
 @startuml
-skin rose
-skinparam shadowing false
+!include ./config.txt
 title UC016: 注文ステータス更新
 
 actor "顧客" as u

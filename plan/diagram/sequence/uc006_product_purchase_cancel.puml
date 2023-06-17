@@ -1,6 +1,5 @@
 @startuml
-skin rose
-skinparam shadowing false
+!include ./config.txt
 title UC006: 購入キャンセル
 actor "顧客" as u
 participant "OrderController" as oc

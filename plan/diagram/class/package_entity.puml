@@ -1,8 +1,6 @@
 @startuml
-
+!include ./config.txt
 title entityパッケージ
-left to right direction
-
 package entity{
     class Product<<@Data>>{
         - id:Integer 

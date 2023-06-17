@@ -1,7 +1,6 @@
 @startuml
-skin rose
+!include ./config.txt
 title UC004: 商品購入 シーケンス図
-skinparam shadowing false
 actor "ユーザ" as user
 participant "PurchaseController" as ctrl
 ' participant "PurchaseForm" as form

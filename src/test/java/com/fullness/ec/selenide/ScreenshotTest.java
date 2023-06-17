@@ -33,25 +33,25 @@ public class ScreenshotTest {
     	SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
     	System.setProperty("chromeoptions.args", "--remote-allow-origins=*");
     	// 匿名クラスを使って実装したイベント補足クラスのインスタンスを登録
-        WebDriverRunner.addListener(new AbstractWebDriverEventListener() {
-          @Override
-          //要素をクリックする直前の処理
-          public void beforeClickOn(WebElement element, WebDriver driver){
-            screenshot();
-            System.out.println("beforeClickOn:" + driver.getCurrentUrl());
-          }
-          @Override
-          //要素をクリックした直後の処理
-          public void afterClickOn(WebElement element, WebDriver driver){
-            screenshot();
-            System.out.println("afterClickOn:" + driver.getCurrentUrl());
-          }
-          @Attachment(type = "image/png")
-          // スクリーンショットを取得
-          public byte[] screenshot() {
-            return Selenide.screenshot(OutputType.BYTES);
-          }
-        });
+      WebDriverRunner.addListener(new AbstractWebDriverEventListener() {
+        @Override
+        //要素をクリックする直前の処理
+        public void beforeClickOn(WebElement element, WebDriver driver){
+          screenshot();
+          System.out.println("beforeClickOn:" + driver.getCurrentUrl());
+        }
+        @Override
+        //要素をクリックした直後の処理
+        public void afterClickOn(WebElement element, WebDriver driver){
+          screenshot();
+          System.out.println("afterClickOn:" + driver.getCurrentUrl());
+        }
+        @Attachment(type = "image/png")
+        // スクリーンショットを取得
+        public byte[] screenshot() {
+          return Selenide.screenshot(OutputType.BYTES);
+        }
+      });
     }
 
     @Test

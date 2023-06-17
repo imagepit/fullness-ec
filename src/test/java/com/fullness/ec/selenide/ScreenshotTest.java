@@ -27,6 +27,7 @@ import io.qameta.allure.selenide.AllureSelenide;
 @ExtendWith(TextReportExtension.class)
 @Epic("Selenide + Allureのテスト")
 public class ScreenshotTest {
+    @SuppressWarnings("deprecation")
 	@BeforeAll
     public static void setUp() {
     	SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));

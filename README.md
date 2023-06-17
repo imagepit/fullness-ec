@@ -228,93 +228,101 @@ P021 | 商品カテゴリ登録(完了)
 
 ### パッケージ全体
 
-![](images/plan/diagram/class/package_all/package_all.svg)
+![](out/plan/diagram/class/package_all/package_all.svg)
 
 ### AOPパッケージ
 
-![](images/plan/diagram/class/package_advice/package_advice.svg)
+![](out/plan/diagram/class/package_advice/package_advice.svg)
 
 ### コンフィグパッケージ
 
-![](images/plan/diagram/class/package_config/package_config.svg)
+![](out/plan/diagram/class/package_config/package_config.svg)
 
 ### コントローラーパッケージ
 
-![](images/plan/diagram/class/package_controller/package_controller.svg)
+![](out/plan/diagram/class/package_controller/package_controller.svg)
 
 ### フォームパッケージ
 
-![](images/plan/diagram/class/package_form/package_form.svg)
+![](out/plan/diagram/class/package_form/package_form.svg)
 
 ### サービスパッケージ
 
-![](images/plan/diagram/class/package_service/package_service.svg)
+![](out/plan/diagram/class/package_service/package_service.svg)
 
 ### リポジトリパッケージ
 
-![](images/plan/diagram/class/package_repository/package_repository.svg)
+![](out/plan/diagram/class/package_repository/package_repository.svg)
 
 ### エンティティパッケージ
 
-![](images/plan/diagram/class/package_entity/package_entity.svg)
+![](out/plan/diagram/class/package_entity/package_entity.svg)
 
 ## シーケンス図
 
-### UC001
+### UC001 顧客ログイン
 
-![](images/plan/diagram/sequence/uc001_customer_login/uc001_customer_login.svg)
+![](out/plan/diagram/sequence/uc001_customer_login/uc001_customer_login.svg)
 
-### UC002
+### UC002 顧客登録
 
-![](images/plan/diagram/sequence/uc002_customer_register/uc002_customer_register.svg)
+![](out/plan/diagram/sequence/uc002_customer_register/uc002_customer_register.svg)
 
-### UC003
+### UC003 商品検索
 
-![](images/plan/diagram/sequence/uc003_product_search/uc003_product_search.svg)
+![](out/plan/diagram/sequence/uc003_product_search/uc003_product_search.svg)
 
-### UC004
+### UC004 商品購入
 
-### UC005
+![](out/plan/diagram/sequence/uc004_product_purchase/uc004_product_purchase.svg)
 
-![](images/plan/diagram/sequence/uc005_order/uc005_order.svg)
+### UC005 購入確定
 
-### UC006
+![](out/plan/diagram/sequence/uc005_order/uc005_order.svg)
 
-### UC007
+### UC006 注文ステータス更新
 
-### UC008
+![](out/plan/diagram/sequence/uc016/uc016.svg)
+
+### UC007 購入履歴閲覧
+
+![](out/plan/diagram/sequence/uc007/uc007.svg)
+
+### UC008 顧客アカウントログアウト
+
+![](out/plan/diagram/sequence/uc008/uc008.svg)
 
 ### UC009 社員アカウント登録機能
 
-![](images/plan/diagram/sequence/uc009_employee_account_add/uc009_employee_account_add.svg)
+![](out/plan/diagram/sequence/uc009_employee_account_add/uc009_employee_account_add.svg)
 
 ### UC010 新商品登録機能
 
-![](images/plan/diagram/sequence/uc010_product_add/uc010_product_add.svg)
+![](out/plan/diagram/sequence/uc010_product_add/uc010_product_add.svg)
 
 ### UC011 商品検索機能
 
-![](images/plan/diagram/sequence/uc011_product_search/uc011_product_search.svg)
+![](out/plan/diagram/sequence/uc011_product_search/uc011_product_search.svg)
 
 ### UC012 商品修正機能
 
-![](images/plan/diagram/sequence/uc012_product_update/uc012_product_update.svg)
+![](out/plan/diagram/sequence/uc012_product_update/uc012_product_update.svg)
 
 ### UC013 商品削除機能
 
-![](images/plan/diagram/sequence/uc013_product_delete/uc013_product_delete.svg)
+![](out/plan/diagram/sequence/uc013_product_delete/uc013_product_delete.svg)
 
 ### UC014 商品カテゴリ登録機能
 
-![](images/plan/diagram/sequence/uc014_product_category_add/uc014_product_category_add.svg)
+![](out/plan/diagram/sequence/uc014_product_category_add/uc014_product_category_add.svg)
 
 ### UC017 社員アカウントログイン機能
 
-![](images/plan/diagram/sequence/uc017_employee_account_login/uc017_employee_account_login.svg)
+![](out/plan/diagram/sequence/uc017_employee_account_login/uc017_employee_account_login.svg)
 
 ### UC018 社員アカウントログアウト機能
 
-![](images/plan/diagram/sequence/uc018_employee_account_logout/uc018_employee_account_logout.svg)
+![](out/plan/diagram/sequence/uc018_employee_account_logout/uc018_employee_account_logout.svg)
 
 ## 設計・開発・納品の流れ
 
@@ -364,14 +372,14 @@ P021 | 商品カテゴリ登録(完了)
 
 gulp関連をグローバルインストールしてリンクを追加する
 
-```
+```bash
 npm i -g gulp gulp-sass sass gulp-plumber gulp-notify gulp-pug gulp-autoprefixer
 npm link gulp gulp-sass sass gulp-plumber gulp-notify gulp-pug gulp-autoprefixer
 ```
 
 下記コマンドを実行したらgulpによる監視が開始される
 
-```
+```bash
 gulp
 ```
 
@@ -379,12 +387,12 @@ gulp
 
 _テストの実行_
 
-```
+```bash
 ./gradlew allureReport --depends-on-tests
 ```
 
 _レポートの表示_
 
-```
+```bash
 ./gradlew allureServe
 ```

@@ -3,17 +3,27 @@ package com.fullness.ec.selenide;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
+import com.codeborne.selenide.conditions.Text;
 import com.codeborne.selenide.junit5.TextReportExtension;
 import com.codeborne.selenide.logevents.SelenideLogger;
 
@@ -25,10 +35,16 @@ import io.qameta.allure.Story;
 import io.qameta.allure.selenide.AllureSelenide;
 
 @ExtendWith(TextReportExtension.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Epic("Selenide + Allureのテスト")
 public class ScreenshotTest {
+    // private static ChromeDriver driver;
+
+    @LocalServerPort
+    private int port;
+
     @SuppressWarnings("deprecation")
-	@BeforeAll
+	  @BeforeAll
     public static void setUp() {
     	SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
     	System.setProperty("chromeoptions.args", "--remote-allow-origins=*");
@@ -54,17 +70,20 @@ public class ScreenshotTest {
       });
     }
 
+    private String url(String path) {
+        return "http://localhost:%d%s".formatted(port, path);
+    }
+
     @Test
-    @Description("Selenide + Allureのテストの説明")
-    @Story("Selenide + Allureのテストのストーリー")
-    @Step("Googleで検索して表示させる")
-    public void Google検索するテスト() {
-        open("https://www.google.co.jp/");
-        screenshot("access-google");
-        $(By.name("q")).val("Selenide").pressEnter();
-        screenshot("search-selenide");
-        $(byText("Selenide: concise UI tests in Java")).click();
-        screenshot("selenide-web-page");
-        $(byText("Blog")).click();
+    @Description("担当者アカウントログインテスト")
+    @Story("担当者アカウントログインテスト")
+    @Step("testユーザでログイン")
+    public void ログインテスト() {
+        open(url("/admin"));
+        $(By.linkText("ログイン")).click();
+        $("input[name='username']").val("test");
+        $("input[name='password']").val("testtest");
+        $("input[type=\"submit\"]").click();
+        $("h1").shouldHave(Text.text("文具/雑貨販売システム"));
     }
 }

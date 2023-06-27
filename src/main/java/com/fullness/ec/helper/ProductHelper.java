@@ -4,7 +4,7 @@ import com.fullness.ec.entity.Product;
 import com.fullness.ec.entity.ProductCategory;
 import com.fullness.ec.entity.ProductStock;
 import com.fullness.ec.form.ProductForm;
-import org.apache.tomcat.util.codec.binary.Base64;
+import java.util.Base64;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -82,7 +82,7 @@ public class ProductHelper {
      */
     public static String createBase64ImageString(MultipartFile file) throws IOException {
         StringBuffer data = new StringBuffer();
-        String base64 = new String(Base64.encodeBase64(file.getBytes()),"ASCII");
+        String base64 = new String(Base64.getEncoder().encodeToString(file.getBytes()));
         data.append("data:image/jpeg;base64,");
         data.append(base64);
         return data.toString();

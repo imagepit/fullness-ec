@@ -14,13 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * アプリケーションコンフィグ設定クラス
  */
 @Configuration
-public class AppConfig implements WebMvcConfigurer {
-
-	@Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
-	
+public class AppConfig implements WebMvcConfigurer {	
     /**
      * ハンドラメソッド引数にページング機能を追加するためのメソッド
      * @param resolvers

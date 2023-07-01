@@ -13,7 +13,7 @@ public interface ProductRepository {
     List<Product> findPage(@Param("pageable")Pageable pageable);
     Integer countAll();
     List<Product> findByCategoryId(int productCategoryId);
-    List<Product> findPageByCategoryId(int productCategoryId,@Param("pageable")Pageable pageable);
+    List<Product> findPageByCategoryId(@Param("productCategoryId")int productCategoryId,@Param("pageable")Pageable pageable);
     Integer countAllByCategoryId(int productCategoryId);
     Product findById(Integer id);
     void insert(Product product);

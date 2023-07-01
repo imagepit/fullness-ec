@@ -14,6 +14,7 @@ public class ProductFormValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         ProductForm form = (ProductForm)target;
+        if(form.getCategory() == null || form.getImage() == null) return;
         // 文房具なら30円〜5000円以内
         if(form.getCategory() == 1){
             if(form.getPrice() < 30 || form.getPrice() > 5000){

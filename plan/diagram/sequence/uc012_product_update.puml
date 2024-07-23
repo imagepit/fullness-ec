@@ -66,6 +66,10 @@ repo3 --> svc2 -- : void
 svc2 --> ctrl -- : void
 ctrl -> ctrl : セッション破棄
 ctrl -> ctrl : Model追加（商品名）
-ctrl -> user -- : 完了画面
+ctrl -> user -- : リダイレクト
+user -> ctrl ++ : GET\n/admin/product-update/complete\ncomplete()
+ctrl -> ctrl : Model追加（商品名）
+note right: RedirectAttributesから取得
+ctrl --> user
 
 @enduml

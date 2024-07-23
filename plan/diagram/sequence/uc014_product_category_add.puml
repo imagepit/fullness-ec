@@ -34,10 +34,11 @@ repo -> db ++ : SQL INSERT
 db --> repo -- : void
 repo --> svc -- : void
 svc -> ctrl -- : void
+ctrl -> ctrl : セッション破棄
 user <-- ctrl -- : リダイレクト
 user -> ctrl ++ : GET\n/admin/product-category-add/complete\ncomplete()
-ctrl -> ctrl : セッション破棄
 ctrl -> ctrl : Modelに追加（商品名）
+note right: RedirectAttributesから取得
 ctrl -> user -- : 完了画面
 
 @enduml

@@ -53,10 +53,11 @@ repo2 -> DB ++ : INSERT文
 DB --> repo2 -- : void
 repo2 --> svc2 -- : void
 svc2 --> controller -- : void
+controller -> controller : セッション破棄
 user <-- controller -- : リダイレクト
 user -> controller ++ : GET\n/admin/product-add/complete\ncomplete()
-controller -> controller : セッション破棄
 controller -> controller : Modelに追加\n（商品名）
+note right: RedirectAttributesから取得
 controller --> user -- : 完了画面
 
 deactivate user

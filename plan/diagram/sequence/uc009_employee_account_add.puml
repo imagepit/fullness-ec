@@ -40,10 +40,11 @@ repo2 -> db ++ : INSERT文
 repo2 <-- db -- : void
 svc2 <-- repo2 -- : void
 svc2 -> controller -- : void
+controller -> controller : セッション破棄
 user <-- controller-- : リダイレクト
 user -> controller++ : GET\n/admin/emp-add/complete
-controller -> controller : セッション破棄
 controller -> controller : Model追加
+note right: RedirectAttributesから取得
 controller -> user-- : 完了画面
 deactivate user
 @enduml

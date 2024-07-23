@@ -47,7 +47,9 @@ public class ScreenshotTest {
 	  @BeforeAll
     public static void setUp() {
     	SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
-    	System.setProperty("chromeoptions.args", "--remote-allow-origins=*");
+      System.setProperty("chromeoptions.args", "--remote-allow-origins=*");
+      System.setProperty("webdriver.chrome.driver", "driver2/chromedriver");
+      Configuration.browser = "chrome";
     	// 匿名クラスを使って実装したイベント補足クラスのインスタンスを登録
       WebDriverRunner.addListener(new AbstractWebDriverEventListener() {
         @Override
@@ -81,8 +83,8 @@ public class ScreenshotTest {
     public void ログインテスト() {
         open(url("/admin"));
         $(By.linkText("ログイン")).click();
-        $("input[name='username']").val("test");
-        $("input[name='password']").val("testtest");
+        $("input[name='username']").val("takahashi");
+        $("input[name='password']").val("takahashi");
         $("input[type=\"submit\"]").click();
         $("h1").shouldHave(Text.text("文具/雑貨販売システム"));
     }

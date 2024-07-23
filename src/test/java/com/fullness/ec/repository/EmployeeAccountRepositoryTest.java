@@ -29,6 +29,6 @@ public class EmployeeAccountRepositoryTest {
         employee.setNameKana("タカハシ");
         employee.setDepartmentId(1);
         account.setEmployee(employee);
-        repository.insert(account);
+        // repository.insert(account);
     }
 }

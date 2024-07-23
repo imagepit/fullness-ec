@@ -4,11 +4,11 @@ title UC009: 顧客登録機能 シーケンス図
 
 actor ユーザ as user
 activate user
-participant "CustomerAddController" as controller
-participant "CustomerForm" as form
-participant "CustomerHelper" as helper
-participant "CustomerService" as svc2
-participant "CustomerRepository" as repo2
+participant "CustomerAdd\nController" as controller
+participant "Customer\nForm" as form
+participant "Customer\nHelper" as helper
+participant "Customer\nService" as svc2
+participant "Customer\nRepository" as repo2
 database DB as db
 
 ' 入力画面
@@ -31,7 +31,7 @@ controller -> controller : セッション確認
 ' note right: フォームデータが\n空ならシステムエラー
 controller -> helper ++ : フォームから\nエンティティに変換
 controller <-- helper -- : Customer
-controller -> svc2 ++ : insert\n(Customer)
+controller -> svc2 ++ : add(Customer)
 svc2 -> repo2 ++ : insert\n(Customer)
 repo2 -> db ++ : INSERT文
 repo2 <-- db -- : void

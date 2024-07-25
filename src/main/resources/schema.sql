@@ -9,6 +9,7 @@ drop table if exists employee;
 drop table if exists customer;
 drop table if exists order_status;
 drop table if exists department;
+drop table if exists payment_method;
 
 -- シーケンスの削除
 drop sequence if exists order_detail_id_seq;
@@ -20,6 +21,7 @@ drop sequence if exists employee_id_seq;
 drop sequence if exists customer_id_seq;
 drop sequence if exists order_status_id_seq;
 drop sequence if exists department_id_seq;
+drop sequence if exists payment_method_id_seq;
 
 -- テーブル作成
 create table department(
@@ -93,4 +95,10 @@ create table order_detail(
   product_id integer not null references product(id),
   count integer not null,
   customer_id integer not null references customer(id)
+);
+
+
+create table payment_method(
+  id serial primary key,
+  name varchar(100) not null
 );

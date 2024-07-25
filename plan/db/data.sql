@@ -9,6 +9,7 @@ insert into employee(name,name_kana,department_id) values('佐藤','サトウ',1
 
 -- employee account data
 insert into employee_account(name,password,employee_id) values('admin','admin',1);
+insert into employee_account(name,password,employee_id) values('takahashi','$2a$10$5IxqebmGc5uZLTdQIpDlPOP8CEUB5K6811b7Qxo8ph44R5cIiJXS2',1); -- takahashi
 
 -- product_category data
 insert into product_category(name) values('文房具');

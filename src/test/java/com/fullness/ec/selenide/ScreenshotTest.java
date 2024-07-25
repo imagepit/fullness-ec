@@ -81,11 +81,16 @@ public class ScreenshotTest {
     @Story("担当者アカウントログインテスト")
     @Step("testユーザでログイン")
     public void ログインテスト() {
-        open(url("/admin"));
+        // LoginPage loginPage = new LoginPage();
+        // loginPage.open(url("/admin"));
+        // loginPage.login("takahashi", "takahashi");
+        // MenuPage menuPage = new MenuPage();
+        // menuPage.shouldHaveTitle();
+        open(url("/admin/login"));
         $(By.linkText("ログイン")).click();
         $("input[name='username']").val("takahashi");
         $("input[name='password']").val("takahashi");
         $("input[type=\"submit\"]").click();
-        $("h1").shouldHave(Text.text("文具/雑貨販売システム"));
+        $("h2").shouldHave(Text.text("メニュー"));
     }
 }

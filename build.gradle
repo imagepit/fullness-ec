@@ -76,7 +76,7 @@ dependencies {
 test {
 	useJUnitPlatform()
 	filter {
-		includeTestsMatching 'com.fullness.ec.selenide.*'
+		excludeTestsMatching 'com.fullness.ec.selenide.*'
 	}
 }
 

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
@@ -12,6 +13,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 public class ProductStockRepositoryTest {
     @Autowired
     ProductStockRepository repository;
+    @Sql("/schema.sql")
+    @Sql("/data.sql")
     @Test
     void testInsert(){
         ProductStock productStock = new ProductStock();
@@ -19,6 +22,8 @@ public class ProductStockRepositoryTest {
         productStock.setProductId(25);
         repository.insert(productStock);
     }
+    @Sql("/schema.sql")
+    @Sql("/data.sql")
     @Test
     void testUpdate(){
         ProductStock productStock = new ProductStock();

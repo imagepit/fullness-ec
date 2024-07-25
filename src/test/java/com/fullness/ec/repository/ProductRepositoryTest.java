@@ -7,6 +7,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.parameters.P;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
@@ -14,10 +15,14 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 public class ProductRepositoryTest {
     @Autowired
     ProductRepository repository;
+    @Sql("/schema.sql")
+    @Sql("/data.sql")
     @Test
     void testFindAll(){
         repository.findAll().forEach(product -> System.out.println(product));
     }
+    @Sql("/schema.sql")
+    @Sql("/data.sql")
     @Test
     void testInsert(){
         Product product = new Product();
@@ -31,6 +36,8 @@ public class ProductRepositoryTest {
         repository.insert(product);
         repository.findAll().forEach(p -> System.out.println(p));
     }
+    @Sql("/schema.sql")
+    @Sql("/data.sql")
     @Test
     void testDelete(){
         repository.delete(1);

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
@@ -17,7 +18,8 @@ public class EmployeeAccountRepositoryTest {
 
     @Autowired
     PasswordEncoder passwordEncoder;
-
+    @Sql("/schema.sql")
+    @Sql("/data.sql")
     @Test
     void insertTest(){
         EmployeeAccount account = new EmployeeAccount();
@@ -29,6 +31,6 @@ public class EmployeeAccountRepositoryTest {
         employee.setNameKana("タカハシ");
         employee.setDepartmentId(1);
         account.setEmployee(employee);
-        // repository.insert(account);
+        repository.insert(account);
     }
 }

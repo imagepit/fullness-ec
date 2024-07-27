@@ -9,7 +9,7 @@ env:
   SRC_PATH: 'build/libs/*.jar'
   DEST_DIR: '/home/ubuntu'
   APP_NAME: 'sboot'
-  SPRING_PROFILES_ACTIVE: prod
+  # SPRING_PROFILES_ACTIVE: prod
   AWS_EC2_PRIVATE_KEY: |
     -----BEGIN RSA PRIVATE KEY-----
     MIIEowIBAAKCAQEAx+vSOqfmCfhWub9k4HWHIDcX7UQ88tH67bGq2IKNW17N/bcB
@@ -72,7 +72,7 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
         env:
-          SPRING_PROFILES_ACTIVE: ${{ env.SPRING_PROFILES_ACTIVE }}
+          SPRING_PROFILES_ACTIVE: prod
       - name: save build artifact
         uses: actions/upload-artifact@v2
         if: always()

@@ -71,7 +71,7 @@ public class ProductHelper {
         System.out.println("filpath:"+filePath);
         // もしfilePathが「/src/main/webapp/img」で始まっている場合、先頭の「/」を削除
         if (filePath.startsWith("/src/main/webapp/img")) {
-            String jarPath = new File(ProductHelper.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParent();
+            String jarPath = ProductHelper.class.getProtectionDomain().getCodeSource().getLocation().getPath();
             filePath = jarPath + File.separator + "img" + File.separator + uuidFileName;
         }
         FileOutputStream fos = new FileOutputStream(filePath);

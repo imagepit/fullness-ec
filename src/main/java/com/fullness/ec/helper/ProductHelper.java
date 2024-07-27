@@ -71,7 +71,7 @@ public class ProductHelper {
         System.out.println("filpath:"+filePath);
         // OSがLinuxの場合は、ファイルパスを変更
         if (System.getProperty("os.name").contains("Linux")) {
-            filePath = "/home/ubuntu/sboot/img" + File.separator + uuidFileName;
+            filePath = "/home/ubuntu/sboot/webapp/img" + File.separator + uuidFileName;
         }
         FileOutputStream fos = new FileOutputStream(filePath);
         fos.write(data);

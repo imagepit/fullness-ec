@@ -67,8 +67,12 @@ public class ProductHelper {
         String uuidFileName = UUID.randomUUID().toString() + "_" + fileName;
         System.out.println("uuidFileName:"+uuidFileName);
         // ファイルパスは相対パスで指定
-        String filePath = new File("./src/main/webapp/img" + File.separator + uuidFileName).getAbsolutePath();
+        String filePath = new File("src/main/webapp/img" + File.separator + uuidFileName).getAbsolutePath();
         System.out.println("filpath:"+filePath);
+        // もしfilePathが「/src/main/webapp/img」で始まっている場合、先頭の「/」を削除
+        if (filePath.startsWith("/")) {
+            filePath = filePath.substring(1);
+        }
         FileOutputStream fos = new FileOutputStream(filePath);
         fos.write(data);
         fos.close();

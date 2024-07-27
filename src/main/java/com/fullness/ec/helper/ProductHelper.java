@@ -69,8 +69,8 @@ public class ProductHelper {
         // ファイルパスは相対パスで指定
         String filePath = new File("src/main/webapp/img" + File.separator + uuidFileName).getAbsolutePath();
         System.out.println("filpath:"+filePath);
-        // profileがprodの場合は、ファイルパスを変更
-        if(System.getProperty("spring.profiles.active","no").equals("prod")){
+        // OSがLinuxの場合は、ファイルパスを変更
+        if (System.getProperty("os.name").contains("Linux")) {
             filePath = "/home/ubuntu/sboot/img" + File.separator + uuidFileName;
         }
         FileOutputStream fos = new FileOutputStream(filePath);

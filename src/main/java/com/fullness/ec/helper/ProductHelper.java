@@ -66,7 +66,8 @@ public class ProductHelper {
         System.out.println("uploadFile:"+fileName+" byte:"+data.length);
         String uuidFileName = UUID.randomUUID().toString() + "_" + fileName;
         System.out.println("uuidFileName:"+uuidFileName);
-        String filePath = new File("src/main/webapp/img").getAbsolutePath() + File.separator + uuidFileName;
+        // ファイルパスは相対パスで指定
+        String filePath = new File("./src/main/webapp/img" + File.separator + uuidFileName).getAbsolutePath();
         System.out.println("filpath:"+filePath);
         FileOutputStream fos = new FileOutputStream(filePath);
         fos.write(data);

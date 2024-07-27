@@ -5,12 +5,40 @@ on:
       - '*'
 env:
   EC2_USER: 'ubuntu'
-  EC2_HOST: ${{ secrets.EC2_HOST }}
+  EC2_HOST: 54.150.233.111
   SRC_PATH: 'build/libs/*.jar'
   DEST_DIR: '/home/ubuntu'
   APP_NAME: 'sboot'
+  SPRING_PROFILES_ACTIVE: prod
+  AWS_EC2_PRIVATE_KEY: |
+    -----BEGIN RSA PRIVATE KEY-----
+    MIIEowIBAAKCAQEAx+vSOqfmCfhWub9k4HWHIDcX7UQ88tH67bGq2IKNW17N/bcB
+    MXWsAsor3juGgO5pIisxNaNJIKZfegXrU657fNXhuYyNZU7GAAIIU5jjjUiuZGL5
+    BYwjOCg9paIHFO5RaSx/ckWJBzOyqOUMRZMF/aWB4SnIbiBIKA2z8AK5KJG0oA2f
+    b7i20NrDTcIGfLDCZE7lnoA8DLGyf2jFAWm/uUHC8N5gZu1yOisIwVeyt3Jen9jw
+    pLNP6ZWkmNvVgPWy9/Sipn2VO/ps0vLHxuv6y2yYCaNG5ptaWtOjqJ2bXxKniWhf
+    E2W3ufw4EmtQrhByk6oSQfInLfDka0FJlIgOjQIDAQABAoIBAQCk7P18mCAlH3Lk
+    P2mH5kz4HZsmiIHDS8i3KDep72GP/BDxenSIievCTWiNKAwY9xVSM9Gfzzm3rqjb
+    MGDnouyKmqNhf/rxlV+wh/y4gktOtaPwetm2Ytp3LHNW3ej7snME0cm9ynF1uIdt
+    368VAmoRyuTvjJmliAoeyNclbAm11a/mxk6siUUnyPgFidaDSvN9bMeVn/fZWaP/
+    YklRKzuo0IsVSgllzdpdNEHvrPsKEewedlu87A5aHhSEAOeyuVufGqtR6FeIxW/a
+    zg/NWhQ9uS3I2TToIP6sCxa+DvAFJNtqWoO74AGOpl6udvdUpuUAcSWVl0UuSecK
+    r6pQtpEhAoGBAPEsSPT4CnKqWWqNNdm90fWRy58nusTOxjU6A14kOqrCisJS18z5
+    OP4ynBZ6FkboPwjqR+g5L5t8SmqCU8rjNLPyOj+FpXj+W0WIc/QozJrivRX6Vuj8
+    NuwLDGzVMdtzaHqHpTzFmW+G8+y7Agb5m3m2DMKzRWSC+yRfpL5eWyAJAoGBANQ2
+    Ss2AuF4VfxRbV2l3ljjvi/psCM4oIulOP9EESITzs9DzTtWHzGvVONHwNjDi45Ya
+    npkLthumZrEfL2EVpkxi0oUMInx62cP9xiD1Nvil6PhYf1JhI1znywbiBAwUHeXG
+    01UIhVSDF8MZ1DmcwJLM3uVMrH3Zzt1M5k5nBdNlAoGAXMlK8GSVsHP1ntbhRvqO
+    0sna60qfwqRDAatmLEwH/jaGqCizOfsQgEv8XXFvLKyhw85PB/soY8u33a5yinZL
+    iofA/Ttv5FMHzoKnCeLAhT6CvPfphA21G69MgnqrieCm661QV0c2tv/WzNdN+l0C
+    AhuWYToTko4KDX52pX8r0/ECgYB7HfyL+W/9da9CmjO+hpjq819crCz3niWTAcjY
+    dQm1yMW8JkzIaX7Z2NycQCbQefHb9hmpZTgEFqhhflw4kRzoGDVW51FissuAf8zg
+    9iMsYuUkoANOQfkIP5p0pc//SfSGiLG3Fbh07ZFtqaCMxDqdcKqokbFJWoI/tguv
+    1Ol2WQKBgA9C2kupqJS9okQ4lzvpyjLr3glpPHA810C+9dWNgQ5JovG3DmrD6rFH
+    UDfHtJeNmxV5Tj0y0lnlbQMySmHgjxKOOmzrFo5+n5nAfI8Cbskt5A5sNU98PcQ+
+    2fsL64Jqjwj5W2OoWR6holJltJE4uYCTScch8TtHTM0sDoR4lynP
+    -----END RSA PRIVATE KEY-----
 jobs:
-
   build:
     runs-on: ubuntu-latest
     services:
@@ -43,9 +71,35 @@ jobs:
           path: build/reports/tests/test
       - name: Build with Gradle
         run: ./gradlew build
+        env:
+          SPRING_PROFILES_ACTIVE: ${{ env.SPRING_PROFILES_ACTIVE }}
       - name: save build artifact
         uses: actions/upload-artifact@v2
         if: always()
         with:
           name: build-artifact
           path: build/libs/demo-0.0.1-SNAPSHOT.jar
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download Build Artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: build-artifact
+        path: build/libs
+    - name: Deploy to EC2 by SCP
+      env:
+        PRIVATE_KEY: ${{ env.AWS_EC2_PRIVATE_KEY }}
+      run: |
+        echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+        ssh -t -o StrictHostKeyChecking=no -i private_key ${EC2_USER}@${EC2_HOST} "sudo mkdir -p ${DEST_DIR}/${APP_NAME} && sudo chmod -R 777 ${DEST_DIR}/${APP_NAME}"
+        scp -i private_key build/libs/demo-0.0.1-SNAPSHOT.jar ${EC2_USER}@${EC2_HOST}:${DEST_DIR}/${APP_NAME}/app.jar
+    - name: SSH EC2 Setup and Deploy
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ env.EC2_HOST }}
+        username: ${{ env.EC2_USER }}
+        key: ${{ env.AWS_EC2_PRIVATE_KEY }}
+        envs: APP_NAME
+        script: sudo systemctl restart $APP_NAME

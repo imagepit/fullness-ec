@@ -70,7 +70,7 @@ public class ProductHelper {
         String filePath = new File("src/main/webapp/img" + File.separator + uuidFileName).getAbsolutePath();
         System.out.println("filpath:"+filePath);
         // もしfilePathが「/src/main/webapp/img」で始まっている場合、先頭の「/」を削除
-        if (filePath.startsWith("/")) {
+        if (filePath.startsWith("/src/main/webapp/img")) {
             filePath = filePath.substring(1);
         }
         FileOutputStream fos = new FileOutputStream(filePath);

@@ -70,7 +70,7 @@ public class ProductHelper {
         String filePath = new File("src/main/webapp/img" + File.separator + uuidFileName).getAbsolutePath();
         System.out.println("filpath:"+filePath);
         // profileがprodの場合は、ファイルパスを変更
-        if(System.getProperty("profile").equals("prod")){
+        if(System.getProperty("spring.profiles.active","no").equals("prod")){
             filePath = "/home/ubuntu/sboot/img" + File.separator + uuidFileName;
         }
         FileOutputStream fos = new FileOutputStream(filePath);

@@ -90,6 +90,7 @@ public class SecurityConfig {
       .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
       .requestMatchers("/admin/login").permitAll()
       .requestMatchers("/admin/**").authenticated()
+      .requestMatchers("/img/**").authenticated()
     );
     return http.build();
   }

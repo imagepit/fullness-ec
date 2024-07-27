@@ -69,11 +69,9 @@ public class ProductHelper {
         // ファイルパスは相対パスで指定
         String filePath = new File("src/main/webapp/img" + File.separator + uuidFileName).getAbsolutePath();
         System.out.println("filpath:"+filePath);
-        // もしfilePathが「/src/main/webapp/img」で始まっている場合、先頭の「/」を削除
-        if (filePath.startsWith("/src/main/webapp/img")) {
-            //String jarPath = ProductHelper.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-            //filePath = jarPath + File.separator + "img" + File.separator + uuidFileName;
-            filePath = "/home/ubuntu/sboot/src/main/webapp/img" + File.separator + uuidFileName;
+        // profileがprodの場合は、ファイルパスを変更
+        if(System.getProperty("profile").equals("prod")){
+            filePath = "/home/ubuntu/sboot/img" + File.separator + uuidFileName;
         }
         FileOutputStream fos = new FileOutputStream(filePath);
         fos.write(data);

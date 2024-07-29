@@ -25,4 +25,13 @@ public class AppConfig implements WebMvcConfigurer {
         resolver.setOneIndexedParameters(true);
         resolvers.add(resolver);
     }
+
+   /**
+   * パスワードエンコード設定メソッド
+   * @return
+   */
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
 }

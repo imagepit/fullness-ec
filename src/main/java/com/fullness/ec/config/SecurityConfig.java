@@ -5,15 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.ProviderManager;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.firewall.DefaultHttpFirewall;
@@ -30,21 +26,12 @@ public class SecurityConfig {
   @Autowired
   private EmployeeAccountUserDetailsService service;
 
-  /**
-   * パスワードエンコード設定メソッド
-   * @return
-   */
-  @Bean
-  public PasswordEncoder passwordEncoder(){
-      return new BCryptPasswordEncoder();
-  }
+  @Autowired
+  private PasswordEncoder passwordEncoder;
 
-  @Bean
-  public AuthenticationManager authenticationManager(UserDetailsService userDetailsService,PasswordEncoder passwordEncoder) {
-    DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-    authenticationProvider.setUserDetailsService(service);
-    authenticationProvider.setPasswordEncoder(passwordEncoder());
-    return new ProviderManager(authenticationProvider);
+  @Autowired
+  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    auth.userDetailsService(service).passwordEncoder(passwordEncoder);
   }
 
   @Bean

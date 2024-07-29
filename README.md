@@ -400,3 +400,323 @@ _レポートの表示_
 ```bash
 ./gradlew allureServe
 ```
+
+# Spring BootアプリをAWSにCI/CDでデプロイする上での注意点
+
+## EC2の作成
+
+1. テキスト通りにVPC、サブネット、ルートテーブル、インターネットゲートウェイを作成する
+2. テキスト通りにEC2インスタンスを作成する
+3. セキュリティグループはSSH、HTTP、HTTPSを許可する
+4. テキスト通りにJDKとNginxをインストールする
+5. サービスファイルを作成してサービス登録する
+   - `sudo vi /etc/systemd/system/sboot.service`にて次のように記述する
+   - テキストに書いてあるのとほぼ同じだが、`ExecStart`の部分を変更する（`--spring.profiles.active=prod`を追加）
+
+_/etc/systemd/system/sboot.service_
+
+```js
+[Unit]
+Description=Spring Boot Application
+After=syslog.target
+[Service]
+User=ubuntu
+//▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼追加▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+ExecStart=/usr/bin/java -jar /home/ubuntu/sboot/app.jar --spring.profiles.active=prod
+//▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲追加▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+SuccessExitStatus=143
+[Install]
+WantedBy=multi-user.target
+```
+
+## RDSの作成
+
+1. テキスト通りにVPCにてサブネットを作成する
+2. テキスト通りにRDSのサブネットグループを作成する
+3. テキスト通りにRDSにてPostgreSQLのインスタンスを作成する
+4. テキスト通りにEC2からRDSに接続できるようにする
+
+## EC2からRDSのPostgreSQLに接続してデータベースを作成する
+
+1. EC2にSSH接続してPostgreSQLに接続してデータベースを作成する
+   - **RDSのPostgreSQLはユーザ作成後にgrantで権限を付与する必要がある。**
+     - `grant fullness_ec to postgres;`を実行する
+
+_EC2インスタンスでコマンド実行_
+
+```bash
+psql -h <RDSインスタンスのエンドポイント> -U postgres -d postgres
+create user fullness_ec with password 'fullness_ec';
+grant fullness_ec to postgres;
+create database fullness_ec owner fullness_ec;
+quit
+psql -h <RDSインスタンスのエンドポイント> -U fullness_ec -d fullness_ec
+（プロジェクトのschema.sqlとdata.sqlを実行）
+```
+
+## Spring Bootアプリケーションの設定追加
+
+### `application-prod.properties`を作成する
+
+- `src/main/resources`に`application-prod.properties`を作成する。
+  - このファイルは、プロファイルが`prod`の場合にこのファイルの設定内容が読み込まれる。
+  - プロファイルとは、アプリケーションの実行環境に応じて設定を変更するための仕組み。
+- AWSのEC2のインスタンスにデプロイして起動する場合にはプロファイルを`prod`にしてこのファイルを読み込むようにする。
+  - DB接続情報や、画像ファイルの保存先などを設定する。
+  - `<RDSデータベースインスタンスのエンドポイント>`はRDSのデータベースインスタンスのエンドポイントに置き換える。
+
+_src/main/resources/application-prod.properties_
+
+```properties
+//▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼追加▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+spring.datasource.driver-class-name: org.postgresql.Driver
+spring.datasource.url=jdbc:postgresql://<RDSデータベースインスタンスのエンドポイント>:5432/fullness_ec
+spring.datasource.username=fullness_ec
+spring.datasource.password=fullness_ec
+# 新商品登録時の画像ファイルの保存先の指定
+spring.web.resources.static-locations=file:/home/ubuntu/sboot/webapp/,classpath:/static/
+//▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲追加▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+```
+
+### Linuxの場合の画像保存先の設定
+
+- 新商品登録や商品修正時に画像ファイルをアップロードする場合、ローカルとは異なる場所に画像ファイルの保存先を指定する必要がある。
+- 次のように画像ファイルの保存先をLinuxの場合に`/home/ubuntu/sboot/webapp/`に変更する。
+
+```java
+    /**
+     * フォームからファイルを保存するメソッド
+     * @param fileName ファイル名前
+     * @param data ファイルのバイトデータ
+     * @return ファイル名
+     * @throws Exception ファイル保存関連の例外
+     */
+    public static String uploadFile(String fileName,byte[] data) throws Exception {
+        String uuidFileName = UUID.randomUUID().toString() + "_" + fileName;
+        String filePath = new File("src/main/webapp/img" + File.separator + uuidFileName).getAbsolutePath();
+        //▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼追加▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+        if (System.getProperty("os.name").contains("Linux")) {
+            filePath = "/home/ubuntu/sboot/webapp/img" + File.separator + uuidFileName;
+        }
+        //▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲追加▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+        FileOutputStream fos = new FileOutputStream(filePath);
+        fos.write(data);
+        fos.close();
+        return uuidFileName;
+    }
+```
+
+## CI/CDの設定
+
+テキストと同様に `.github/workflows`ディレクトリに `cicd.yml`を作成する。
+
+- 内容はテキストとほぼ同じだが、Secretsはチームメンバーでは登録できないので`cicd.yml`に直接記述する。
+- `<EC2インスタンスのグローバルIPアドレス>`はEC2インスタンスのグローバルIPアドレスに置き換える。
+- `AWS_EC2_PRIVATE_KEY`にはEC2インスタンスにSSH接続するための秘密鍵を記述する。
+- データベースを使ったテストが合格するように`service`にてPostgreSQLのコンテナを起動する。
+
+_.github/workflows/cicd.yml_
+
+```yml
+name: cicd
+on:
+  push:
+    branches:
+      - '*'
+env:
+  EC2_USER: 'ubuntu'
+  //▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼追加▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+  EC2_HOST: <EC2インスタンスのグローバルIPアドレス>
+  //▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲追加▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+  SRC_PATH: 'build/libs/*.jar'
+  DEST_DIR: '/home/ubuntu'
+  APP_NAME: 'sboot'
+  //▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼追加▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+  AWS_EC2_PRIVATE_KEY: |
+    -----BEGIN RSA PRIVATE KEY-----
+    MIIEowIBAAKCAQEAx+vSOqfmCfhWub9k4HWHIDcX7UQ88tH67bGq2IKNW17N/bcB
+    MXWsAsor3juGgO5pIisxNaNJIKZfegXrU657fNXhuYyNZU7GAAIIU5jjjUiuZGL5
+    （中略）
+    UDfHtJeNmxV5Tj0y0lnlbQMySmHgjxKOOmzrFo5+n5nAfI8Cbskt5A5sNU98PcQ+
+    2fsL64Jqjwj5W2OoWR6holJltJE4uYCTScch8TtHTM0sDoR4lynP
+    -----END RSA PRIVATE KEY-----
+  //▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲追加▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+jobs:
+  build:
+    runs-on: ubuntu-latest
+//▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼追加▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_DB: fullness_ec
+          POSTGRES_USER: fullness_ec
+          POSTGRES_PASSWORD: fullness_ec
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+//▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲追加▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: 17
+      - name: Test with Gradle
+        run: chmod +x gradlew && ./gradlew test
+      - name: save test reports as artifact
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: test-reports
+          path: build/reports/tests/test
+      - name: Build with Gradle
+        run: ./gradlew build
+      - name: save build artifact
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: build-artifact
+          path: build/libs/ec-0.0.1-SNAPSHOT.jar
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download Build Artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: build-artifact
+        path: build/libs
+    - name: Deploy to EC2 by SCP
+      env:
+        //▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼追加▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+        PRIVATE_KEY: ${{ env.AWS_EC2_PRIVATE_KEY }}
+        //▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲追加▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+      run: |
+        echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+        ssh -t -o StrictHostKeyChecking=no -i private_key ${EC2_USER}@${EC2_HOST} "sudo mkdir -p ${DEST_DIR}/${APP_NAME} && sudo chmod -R 777 ${DEST_DIR}/${APP_NAME}"
+        scp -i private_key build/libs/ec-0.0.1-SNAPSHOT.jar ${EC2_USER}@${EC2_HOST}:${DEST_DIR}/${APP_NAME}/app.jar
+    - name: SSH EC2 Setup and Deploy
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        //▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼追加▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+        host: ${{ env.EC2_HOST }}
+        username: ${{ env.EC2_USER }}
+        key: ${{ env.AWS_EC2_PRIVATE_KEY }}
+        //▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲追加▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+        envs: APP_NAME
+        script: sudo systemctl restart $APP_NAME
+```
+
+これで、Spring BootアプリケーションをCI/CDでデプロイすることができると思います。
+
+## RDSを使わないでEC2にPostgreSQLをインストールする場合
+
+- RDSを使わずにEC2にPostgreSQLをインストールする場合、EC2にPostgreSQLをインストールしてデータベースを作成する必要がある。
+
+### EC2にPostgreSQLをインストールする
+
+1. EC2にSSH接続してPostgreSQLをインストールする
+   - `sudo apt update`を実行してパッケージリストを更新する
+   - `sudo apt install postgresql`を実行してPostgreSQLをインストールする
+   - `sudo systemctl status postgresql`を実行してPostgreSQLが起動していることを確認する
+
+_コマンド実行_
+```bash
+sudo apt update
+sudo apt install postgresql
+sudo systemctl status postgresql
+```
+
+2. PostgreSQLに接続してデータベースを作成する
+    - `sudo su - postgres`を実行してPostgreSQLのユーザに切り替える
+    - `psql`を実行してPostgreSQLに接続する
+    - `create user fullness_ec with password 'fullness_ec';`を実行してユーザを作成する
+    - `create database fullness_ec owner fullness_ec;`を実行してデータベースを作成する
+    - `quit`を実行してPostgreSQLを終了する
+    - `psql -h localhost -U fullness_ec -d fullness_ec`を実行してデータベースに接続する
+    - プロジェクトの`schema.sql`と`data.sql`を実行してテーブルを作成する
+
+_コマンド実行_
+```bash
+sudo su - postgres
+psql
+create user fullness_ec with password 'fullness_ec';
+create database fullness_ec owner fullness_ec;
+quit
+exit <- postgresユーザから抜ける
+```
+
+PostgreSQLの管理者（`postgres`ユーザ）にて`fullness_ec`のデータベースを作成したら、`fullness_ec`ユーザに切り替えてデータベースに接続してテーブルを作成する。Linuxの場合、作成したユーザでパスワードを使ったログインをする場合には設定を変更する必要がある。
+
+_コマンド実行_
+```bash
+sudo vi /etc/postgresql/14/main/pg_hba.conf
+```
+
+_/etc/postgresql/14/main/pg_hba.conf_
+
+```conf
+（省略）
+# Database administrative login by Unix domain socket
+local   all             postgres                                peer
+# TYPE  DATABASE        USER            ADDRESS                 METHOD
+# "local" is for Unix domain socket connections only
+//▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼追加▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+local   all             all                                     md5
+//▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲追加▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+# IPv4 local connections:
+host    all             all             127.0.0.1/32            scram-sha-256
+（省略）
+```
+
+PostgreSQLの設定ファイルを変更したら、PostgreSQLを再起動して設定を反映させる。
+
+_コマンド実行_
+```bash
+sudo systemctl restart postgresql
+```
+
+PostgreSQLの設定ファイルを変更したら、`fullness_ec`ユーザでデータベースに接続してテーブルを作成する。
+
+_コマンド実行_
+```bash
+psql -h localhost -U fullness_ec -d fullness_ec
+（プロジェクトのschema.sqlとdata.sqlを実行）
+```
+
+ローカルにPostgreSQLをインストールしている場合は、ローカルと同じようにデータベースに接続できるので、次のように`sboot.service`にはプロファイルの指定は不要です。
+
+_コマンド実行_
+```bash
+sudo vi /etc/systemd/system/sboot.service
+```
+
+_/etc/systemd/system/sboot.service_
+
+```js
+[Unit]
+Description=Spring Boot Application
+After=syslog.target
+[Service]
+User=ubuntu
+//▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼追加▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+ExecStart=/usr/bin/java -jar /home/ubuntu/sboot/app.jar
+//▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲追加▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+SuccessExitStatus=143
+[Install]
+WantedBy=multi-user.target
+```
+
+ファイルを更新したら、次のコマンドを実行してサービスを再起動する。
+
+_コマンド実行_
+```bash
+sudo systemctl daemon-reload
+sudo systemctl restart sboot
+sudo systemctl status sboot
+```

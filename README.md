@@ -720,3 +720,12 @@ sudo systemctl daemon-reload
 sudo systemctl restart sboot
 sudo systemctl status sboot
 ```
+
+## jarファイルを実行して問題が発生する場合の原因調査方法
+
+`systemctl`コマンドでjarファイルを実行して問題が発生する場合は次のコマンドを実行してログを確認する。
+
+_コマンド実行_
+```bash
+journalctl -n 500 > sboot.log
+```

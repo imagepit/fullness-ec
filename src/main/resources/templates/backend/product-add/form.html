@@ -36,14 +36,14 @@
           <tr>
             <td>単価</td>
             <td>
-              <input type="number" name="price" th:field="*{price}"/>
+              <input type="text" name="price" th:field="*{price}" maxlength="9" pattern="\d*" />
               <div class="error" th:errors="*{price}"></div>
             </td>
           </tr>
           <tr>
             <td>在庫数</td>
             <td>
-              <input type="number" name="stock" th:field="*{stock}"/>
+              <input type="text" name="stock" th:field="*{stock}" maxlength="7" pattern="\d*" />
               <div class="error" th:errors="*{stock}"></div>
             </td>
           </tr>

@@ -10,21 +10,11 @@
   <body>
     <header>
       <h1><a href="/admin">文具/雑貨販売システム</a></h1>
-      <ul id="nav">
-        <li sec:authorize="hasRole('ADMIN')"><a href="/admin/product">商品情報メンテナンス</a></li>
-        <li sec:authorize="hasRole('ADMIN')"><a href="/admin/product-category-add">商品カテゴリ登録</a></li>
-        <li sec:authorize="hasRole('ADMIN')"><a href="/admin/emp-add">アカウント登録</a></li>
-        <li sec:authorize="!isAuthenticated()"><a href="/admin/login">ログイン</a></li>
-        <li sec:authorize="isAuthenticated()">
-          <form th:action="@{/admin/logout}" method="post">
-            <input type="submit" value="ログアウト"/>
-          </form>
-        </li>
-      </ul>
     </header>
     <div id="main">
-      <h3>メニュー</h3>
+      <h3>文具/雑貨販売システム</h3>
       <h4 th:text="${'こんにちは'}"></h4>
+      <a href="/sample">エラー発生！</a>
     </div>
     <footer>
       <div id="footer">Fullness Stationary社</div>

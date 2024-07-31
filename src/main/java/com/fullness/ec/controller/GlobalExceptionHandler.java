@@ -38,15 +38,20 @@ public class GlobalExceptionHandler implements HandlerExceptionResolver {
             Exception ex
     ){
         ex.printStackTrace();
-        StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw);
-        ex.printStackTrace(pw);
-        pw.flush();
-        String str = sw.toString();
-        logger.error(str);
+        // StringWriter sw = new StringWriter();
+        // PrintWriter pw = new PrintWriter(sw);
+        // ex.printStackTrace(pw);
+        // pw.flush();
+        // String str = sw.toString();
+        // logger.error(str);
         ModelAndView model = new ModelAndView();
-        model.addObject("message","エラーが発生しました。システム管理者に連絡してください。");
-        model.setViewName("/error");
+        model.addObject("message",ex.getMessage());
+        // URL毎にエラーページを振り分ける
+        if(request.getRequestURI().startsWith("/admin/")){
+            model.setViewName("/backend/error");
+        }else{
+            model.setViewName("/error");
+        }
         return model;
     }
 }

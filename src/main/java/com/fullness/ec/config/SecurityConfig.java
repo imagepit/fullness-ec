@@ -75,7 +75,7 @@ public class SecurityConfig {
     http.authorizeHttpRequests(authz -> authz
       .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
       .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-      .requestMatchers("/admin/login").permitAll()
+      .requestMatchers("/admin/login","/","/sample").permitAll()
       .requestMatchers("/admin/**").authenticated()
       .requestMatchers("/img/**").authenticated()
     );

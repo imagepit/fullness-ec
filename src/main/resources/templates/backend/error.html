@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="/css/style.css"/>
     <script src="http://localhost:35729/livereload.js"></script>
-    <title>メニュー | Fullness Stationary社 文具/雑貨販売システム</title>
+    <title>システムエラー | Fullness Stationary社 文具/雑貨販売システム</title>
   </head>
   <body>
     <header>
@@ -23,12 +23,8 @@
       </ul>
     </header>
     <div id="main">
-      <h2>メニュー</h2>
-      <img src="img/Shop_Img1.jpeg"/>
-      <br>
-      <a th:href="@{/admin/sample}">
-        エラー発生！
-      </a>
+      <h2>システムエラーバックエンド</h2>
+      <p th:text="${message}"></p>
     </div>
     <footer>
       <div id="footer">Fullness Stationary社</div>

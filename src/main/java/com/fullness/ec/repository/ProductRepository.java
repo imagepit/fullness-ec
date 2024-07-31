@@ -16,6 +16,7 @@ public interface ProductRepository {
     List<Product> findPageByCategoryId(@Param("productCategoryId")int productCategoryId,@Param("pageable")Pageable pageable);
     Integer countAllByCategoryId(int productCategoryId);
     Product findById(Integer id);
+    Product findByName(String name);
     void insert(Product product);
     void update(Product product);
     void delete(Integer id);

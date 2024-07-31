@@ -1,8 +1,11 @@
 package com.fullness.ec.form;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+
+import com.fullness.ec.repository.ProductRepository;
 
 @Component
 public class ProductFormValidator implements Validator {
@@ -11,10 +14,16 @@ public class ProductFormValidator implements Validator {
         return ProductForm.class.isAssignableFrom(clazz);
     }
 
+    @Autowired private ProductRepository productRepository;
+
     @Override
     public void validate(Object target, Errors errors) {
         ProductForm form = (ProductForm)target;
-        if(form.getCategory() == null || form.getImage() == null) return;
+        // 商品名の重複チェック
+        if(productRepository.findByName(form.getName()).getName().equals(form.getName())){
+            errors.rejectValue("name","ProductForm.nameError.duplicate");
+        }
+        if(form.getCategory() == null || form.getImage() == null || form.getPrice() == null) return;
         // 文房具なら30円〜5000円以内
         if(form.getCategory() == 1){
             if(form.getPrice() < 30 || form.getPrice() > 5000){

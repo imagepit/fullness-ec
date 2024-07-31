@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import com.fullness.ec.entity.Product;
 import com.fullness.ec.repository.ProductRepository;
 
 @Component
@@ -20,7 +21,7 @@ public class ProductFormValidator implements Validator {
     public void validate(Object target, Errors errors) {
         ProductForm form = (ProductForm)target;
         // 商品名の重複チェック
-        if(productRepository.findByName(form.getName()).getName().equals(form.getName())){
+        if(isDuplicateName(form)){
             errors.rejectValue("name","ProductForm.nameError.duplicate");
         }
         if(form.getCategory() == null || form.getImage() == null || form.getPrice() == null) return;
@@ -43,11 +44,33 @@ public class ProductFormValidator implements Validator {
             }
         }
         // 画像のチェック
-        if(form.getImage().getSize() == 0){
+        if(!isUpdateImage(form)){
             errors.rejectValue("image","ProductForm.imageFileError.empty");
         }
-        if(!form.getImage().getContentType().startsWith("image")){
+        if(!isImageFile(form)){
             errors.rejectValue("image","ProductForm.imageFileError.contentTypeNotImage");
         }
+    }
+    /**
+     * 商品名が重複しているかどうかを判定する
+     * @param name
+     * @return
+     */
+    protected boolean isDuplicateName(ProductForm form){
+        Product product = productRepository.findByName(form.getName());
+        if(product == null) return false;
+        return product.getName() != form.getName();
+    }
+    /**
+     * 画像の更新有無を判定する
+     */
+    protected boolean isUpdateImage(ProductForm form){
+        return form.getImage().getSize() > 0;
+    }
+    /**
+     * ファイル形式が画像かどうかを判定する
+     */
+    protected boolean isImageFile(ProductForm form){
+        return form.getImage().getSize() > 0 && form.getImage().getContentType().startsWith("image");
     }
 }

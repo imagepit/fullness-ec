@@ -3,6 +3,7 @@ package com.fullness.ec.controller.backend;
 import com.fullness.ec.entity.Product;
 import com.fullness.ec.entity.ProductCategory;
 import com.fullness.ec.form.ProductForm;
+import com.fullness.ec.form.ProductUpdateValidator;
 import com.fullness.ec.helper.ProductHelper;
 import com.fullness.ec.service.ProductCategoryService;
 import com.fullness.ec.service.ProductService;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -25,10 +27,15 @@ public class ProductUpdateController {
     private static final String TEMPLATE_DIR = "backend/product-update";
     @Autowired private ProductCategoryService productCategoryService;
     @Autowired private ProductService productService;
-
+    @Autowired private ProductUpdateValidator productUpdateValidator;
     @ModelAttribute("productUpdateForm")
     public ProductForm setupForm(){
         return new ProductForm();
+    }
+
+    @InitBinder("productUpdateForm")
+    public void initBinder(WebDataBinder binder){
+        binder.addValidators(productUpdateValidator);
     }
 
     @GetMapping("{no}")

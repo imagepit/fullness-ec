@@ -8,6 +8,7 @@ import com.fullness.ec.helper.ProductHelper;
 import com.fullness.ec.service.ProductCategoryService;
 import com.fullness.ec.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,7 +27,9 @@ public class ProductAddController {
     private static final String TEMPLATE_DIR = "backend/product-add";
     @Autowired private ProductCategoryService productCategoryService;
     @Autowired private ProductService productService;
-    @Autowired private ProductFormValidator validator;
+    @Qualifier("productFormValidator")
+    @Autowired 
+    private ProductFormValidator validator;
 
     @ModelAttribute("productAddForm")
     public ProductForm setupForm(){

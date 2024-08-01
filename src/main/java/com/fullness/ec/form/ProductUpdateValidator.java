@@ -1,22 +1,14 @@
 package com.fullness.ec.form;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.fullness.ec.entity.Product;
-import com.fullness.ec.repository.ProductRepository;
 
 @Component
 public class ProductUpdateValidator extends ProductFormValidator {
-  @Autowired private ProductRepository productRepository;
   @Override
   public boolean isDuplicateName(ProductForm form) {
-    // idから商品名を取得
-    String name = productRepository.findById(form.getId()).getName();
-    // 商品名が変更されていない場合は重複チェックを行わない
-    if(name.equals(form.getName())) return false;
-    // 商品名が重複しているかどうかを判定
-    if(productRepository.findByName(form.getName()) != null) return true;
+    String name = productRepository.findById(form.getId()).getName(); // idから商品名を取得
+    if(name.equals(form.getName())) return false; // 商品名が変更されていない場合は重複チェックを行わない
+    if(productRepository.findByName(form.getName()) != null) return true; // 変更した商品名が重複しているかどうかを判定
     return false;
   }
   @Override

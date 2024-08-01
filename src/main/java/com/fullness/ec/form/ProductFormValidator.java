@@ -15,7 +15,7 @@ public class ProductFormValidator implements Validator {
         return ProductForm.class.isAssignableFrom(clazz);
     }
 
-    @Autowired private ProductRepository productRepository;
+    @Autowired protected ProductRepository productRepository;
 
     @Override
     public void validate(Object target, Errors errors) {
